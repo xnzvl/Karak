@@ -1,4 +1,4 @@
-package github.xnzvl.karak.mortals;
+package github.xnzvl.karak.mortals.heroes;
 
 public enum Slot {
     WEAPON_ONE,

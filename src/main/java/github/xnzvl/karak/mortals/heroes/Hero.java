@@ -1,6 +1,7 @@
-package github.xnzvl.karak.mortals;
+package github.xnzvl.karak.mortals.heroes;
 
 import github.xnzvl.karak.items.Item;
+import github.xnzvl.karak.mortals.Mortal;
 import github.xnzvl.karak.utils.Pair;
 
 import java.util.HashMap;
