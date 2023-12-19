@@ -1,6 +1,6 @@
 package github.xnzvl.karak.game;
 
-import github.xnzvl.karak.mortals.heroes.Hero;
+import github.xnzvl.karak.powerfuls.heroes.Hero;
 
 public interface Player {
     String getName();

@@ -1,8 +1,7 @@
-package github.xnzvl.karak.mortals.monsters;
+package github.xnzvl.karak.powerfuls.monsters;
 
 import github.xnzvl.karak.items.Item;
-import github.xnzvl.karak.items.Weapon;
-import github.xnzvl.karak.mortals.Powerful;
+import github.xnzvl.karak.powerfuls.Powerful;
 
 import org.jetbrains.annotations.NotNull;
 

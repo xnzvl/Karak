@@ -1,4 +1,4 @@
-package github.xnzvl.karak.mortals;
+package github.xnzvl.karak.powerfuls;
 
 import github.xnzvl.karak.NamedObject;
 
