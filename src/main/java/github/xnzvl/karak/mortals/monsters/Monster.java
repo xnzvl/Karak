@@ -1,11 +1,12 @@
 package github.xnzvl.karak.mortals.monsters;
 
 import github.xnzvl.karak.items.Item;
-import github.xnzvl.karak.mortals.Mortal;
+import github.xnzvl.karak.items.Weapon;
+import github.xnzvl.karak.mortals.Powerful;
 
 import org.jetbrains.annotations.NotNull;
 
-public enum Monster implements Mortal {
+public enum Monster implements Powerful {
     ;
 
     private final int power;
@@ -26,5 +27,10 @@ public enum Monster implements Mortal {
 
     public Item getDrop() {
         return this.drop;
+    }
+
+    @Override
+    public @NotNull String getName() {
+        return this.toString();
     }
 }

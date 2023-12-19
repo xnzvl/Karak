@@ -1,5 +1,7 @@
 package github.xnzvl.karak.items;
 
-public interface Item {
+import github.xnzvl.karak.NamedObject;
+
+public interface Item extends NamedObject {
     // that's all
 }

@@ -26,7 +26,7 @@ public enum Weapon implements Item {
         return this.strength;
     }
 
-    public @NotNull String getWeaponName() {
+    public @NotNull String getName() {
         return this.weaponName;
     }
 }
