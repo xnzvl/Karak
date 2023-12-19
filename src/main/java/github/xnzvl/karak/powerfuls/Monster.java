@@ -1,4 +1,4 @@
-package github.xnzvl.karak.powerfuls.monsters;
+package github.xnzvl.karak.powerfuls;
 
 import github.xnzvl.karak.items.Chest;
 import github.xnzvl.karak.items.Item;

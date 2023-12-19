@@ -1,4 +1,4 @@
-package github.xnzvl.karak.tiles;
+package github.xnzvl.karak.tiles.featurableTiles;
 
 public enum Feature {
     NONE,
