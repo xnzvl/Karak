@@ -3,7 +3,7 @@ package github.xnzvl.karak.powerfuls.heroes;
 import github.xnzvl.karak.exceptions.HeroInvalidStateException;
 import github.xnzvl.karak.items.Item;
 import github.xnzvl.karak.items.spells.Spell;
-import github.xnzvl.karak.powerfuls.Powerful;
+import github.xnzvl.karak.powerfuls.Power;
 import github.xnzvl.karak.utils.MapUtils;
 import github.xnzvl.karak.utils.Pair;
 
@@ -13,7 +13,7 @@ import java.util.Arrays;
 import java.util.Map;
 import java.util.Random;
 
-public abstract class Hero implements Powerful {
+public abstract class Hero implements Power {
     protected static final int MAX_HIT_POINTS = 5;
 
     private int hitPoints = MAX_HIT_POINTS;
