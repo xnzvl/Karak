@@ -1,5 +1,6 @@
 package github.xnzvl.karak.powerfuls.heroes;
 
+import github.xnzvl.karak.exceptions.HeroInvalidStateException;
 import github.xnzvl.karak.items.Item;
 import github.xnzvl.karak.items.spells.Spell;
 import github.xnzvl.karak.powerfuls.Powerful;
@@ -10,25 +11,35 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.Arrays;
 import java.util.Map;
+import java.util.Random;
 
 public abstract class Hero implements Powerful {
     protected static final int MAX_HIT_POINTS = 5;
 
     private int hitPoints = MAX_HIT_POINTS;
 
-    private Pair<Integer, Integer> position = Pair.of(0, 0);
-    private Pair<Integer, Integer> lastPosition = null;
+    private @NotNull Pair<Integer, Integer> position = Pair.of(0, 0);
+    private Pair<Integer, Integer> previousPosition = null;
 
-    private final Map<Slot, Item> inventory = MapUtils.defaultHashMapFrom(Arrays.asList(Slot.values()), null);
+    protected final @NotNull Random randomGenerator;
+    protected final @NotNull Map<Slot, Item> inventory = MapUtils.defaultHashMapFrom(
+            Arrays.asList(Slot.values()), null
+    );
+
+    public Hero(
+            @NotNull Random randomGenerator
+    ) {
+        this.randomGenerator = randomGenerator;
+    }
 
     protected boolean isValidMove(
-            Pair<Integer, Integer> nextPosition
+            @NotNull Pair<Integer, Integer> nextPosition
     ) {
         return false;
     }
 
     protected void pickUpItem(
-            Slot slot
+            @NotNull Slot slot
     ) {
 
     }
@@ -38,16 +49,23 @@ public abstract class Hero implements Powerful {
     }
 
     protected void retreat() {
-        this.position = this.lastPosition;
-        this.lastPosition = null;
+        if (this.previousPosition != null) {
+            this.position = this.previousPosition;
+            this.previousPosition = null;
+        } else {
+            throw new HeroInvalidStateException("Cannot retreat to an unknown previous position");
+        }
     }
 
     protected @NotNull Pair<Integer, Integer> rollDices() {
-        return null;
+        return Pair.of(
+                this.randomGenerator.nextInt(7),
+                this.randomGenerator.nextInt(7)
+        );
     }
 
     protected void useOffensiveSpell(
-            Spell spell
+            @NotNull Spell spell
     ) {
 
     }
