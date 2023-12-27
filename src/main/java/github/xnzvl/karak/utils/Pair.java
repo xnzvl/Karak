@@ -5,14 +5,17 @@ import java.util.Objects;
 /**
  * Record for pairing two values of any type together.
  *
- * @param x first value
- * @param y second value
+ * @param xValue first value
+ * @param yValue second value
  * @param <X> type of the first value
  * @param <Y> type of the second value
  *
  * @author Jakub Nezval
  */
-public record Pair<X, Y>(X x, Y y) {
+public record Pair<X, Y>(
+        X xValue,
+        Y yValue
+) {
     /**
      * Sugar method for creating instances.
      *
@@ -33,13 +36,14 @@ public record Pair<X, Y>(X x, Y y) {
     public boolean equals(
             Object o
     ) {
-        if (o == null || this.getClass() != o.getClass()) return false;
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
         Pair<?, ?> pair = (Pair<?, ?>) o;
-        return Objects.equals(this.x, pair.x) && Objects.equals(this.y, pair.y);
+        return Objects.equals(this.xValue, pair.xValue) && Objects.equals(this.yValue, pair.yValue);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(x, y);
+        return Objects.hash(this.xValue, this.yValue);
     }
 }
