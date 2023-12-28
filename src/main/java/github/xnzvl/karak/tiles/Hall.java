@@ -14,7 +14,7 @@ import java.util.Collection;
 public class Hall implements Tile {
     private final @NotNull Pair<Integer, Integer> coordinates;
     private final @NotNull TileShape tileShape;
-    private final @NotNull Rotation rotation;
+    private final @NotNull TileRotation rotation;
 
     /**
      * @param coordinates coordinates of the tile
@@ -24,7 +24,7 @@ public class Hall implements Tile {
     public Hall(
             @NotNull Pair<Integer, Integer> coordinates,
             @NotNull TileShape tileShape,
-            @NotNull Rotation rotation
+            @NotNull TileRotation rotation
     ) {
         this.coordinates = coordinates;
         this.tileShape = tileShape;
@@ -54,7 +54,7 @@ public class Hall implements Tile {
     }
 
     @Override
-    public @NotNull Rotation getRotation() {
+    public @NotNull TileRotation getRotation() {
         return rotation;
     }
 }

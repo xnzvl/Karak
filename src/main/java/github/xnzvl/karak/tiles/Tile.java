@@ -30,5 +30,5 @@ public interface Tile {
     /**
      * @return rotation of the tile
      */
-    @NotNull Rotation getRotation();
+    @NotNull TileRotation getRotation();
 }
