@@ -1,7 +1,5 @@
 package github.xnzvl.karak.utils;
 
-import org.jetbrains.annotations.NotNull;
-
 import java.util.function.Consumer;
 import java.util.function.Function;
 
@@ -16,7 +14,7 @@ public abstract class Either<L, R> {
     );
 
     public static <L, R> Either<L, R> fromLeft(
-            @NotNull L value
+            L value
     ) {
         return new Either<>() {
             @Override
@@ -30,7 +28,7 @@ public abstract class Either<L, R> {
     }
 
     public static <L, R> Either<L, R> fromRight(
-            @NotNull R value
+            R value
     ) {
         return new Either<>() {
             @Override

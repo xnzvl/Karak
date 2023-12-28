@@ -7,8 +7,6 @@ import github.xnzvl.karak.powerfuls.Power;
 import github.xnzvl.karak.utils.MapUtils;
 import github.xnzvl.karak.utils.Pair;
 
-import org.jetbrains.annotations.NotNull;
-
 import java.util.Arrays;
 import java.util.Map;
 import java.util.Random;
@@ -18,28 +16,28 @@ public abstract class Hero implements Power {
 
     private int hitPoints = MAX_HIT_POINTS;
 
-    private @NotNull Pair<Integer, Integer> position = Pair.of(0, 0);
+    private Pair<Integer, Integer> position = Pair.of(0, 0);
     private Pair<Integer, Integer> previousPosition = null;
 
-    protected final @NotNull Random randomGenerator;
-    protected final @NotNull Map<Slot, Item> inventory = MapUtils.defaultHashMapFrom(
+    protected final Random randomGenerator;
+    protected final Map<Slot, Item> inventory = MapUtils.defaultHashMapFrom(
             Arrays.asList(Slot.values()), null
     );
 
     public Hero(
-            @NotNull Random randomGenerator
+            Random randomGenerator
     ) {
         this.randomGenerator = randomGenerator;
     }
 
     protected boolean isValidMove(
-            @NotNull Pair<Integer, Integer> nextPosition
+            Pair<Integer, Integer> nextPosition
     ) {
         return false;
     }
 
     protected void pickUpItem(
-            @NotNull Slot slot
+            Slot slot
     ) {
 
     }
@@ -57,7 +55,7 @@ public abstract class Hero implements Power {
         }
     }
 
-    protected @NotNull Pair<Integer, Integer> rollDices() {
+    protected Pair<Integer, Integer> rollDices() {
         return Pair.of(
                 this.randomGenerator.nextInt(7),
                 this.randomGenerator.nextInt(7)
@@ -65,7 +63,7 @@ public abstract class Hero implements Power {
     }
 
     protected void useOffensiveSpell(
-            @NotNull Spell spell
+            Spell spell
     ) {
 
     }

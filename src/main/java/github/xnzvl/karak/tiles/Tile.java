@@ -2,8 +2,6 @@ package github.xnzvl.karak.tiles;
 
 import github.xnzvl.karak.utils.Pair;
 
-import org.jetbrains.annotations.NotNull;
-
 import java.util.Collection;
 
 /**
@@ -15,20 +13,20 @@ public interface Tile {
     /**
      * @return get coordinates of the tile
      */
-    @NotNull Pair<@NotNull Integer, @NotNull Integer> getCoordinates();
+    Pair<Integer, Integer> getCoordinates();
 
     /**
      * @return collection of coordinates that are reachable from this tile
      */
-    @NotNull Collection<@NotNull Pair<@NotNull Integer, @NotNull Integer>> getAccessibleCoordinates();
+    Collection<Pair<Integer, Integer>> getAccessibleCoordinates();
 
     /**
      * @return tile shape of the tile
      */
-    @NotNull TileShape getTileShape();
+    TileShape getTileShape();
 
     /**
      * @return rotation of the tile
      */
-    @NotNull TileRotation getRotation();
+    TileRotation getRotation();
 }

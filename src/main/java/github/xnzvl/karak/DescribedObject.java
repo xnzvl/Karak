@@ -1,7 +1,5 @@
 package github.xnzvl.karak;
 
-import org.jetbrains.annotations.NotNull;
-
 /**
  * Interface for convenient obtaining description of an object.
  *
@@ -14,7 +12,7 @@ public interface DescribedObject {
      *
      * @return short description of the object
      */
-    @NotNull String getTitle();
+    String getTitle();
 
     /**
      * Method for obtaining the detailed description of the object.
@@ -22,5 +20,5 @@ public interface DescribedObject {
      *
      * @return detailed description of the object
      */
-    @NotNull String getDetails();
+    String getDetails();
 }

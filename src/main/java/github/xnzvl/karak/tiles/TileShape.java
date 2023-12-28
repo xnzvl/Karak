@@ -2,8 +2,6 @@ package github.xnzvl.karak.tiles;
 
 import github.xnzvl.karak.utils.Pair;
 
-import org.jetbrains.annotations.NotNull;
-
 import java.util.Collection;
 import java.util.List;
 
@@ -18,10 +16,10 @@ public enum TileShape {
     T (List.of(Pair.of(0, 1), Pair.of(1, 0), Pair.of(0, -1))),
     X (List.of(Pair.of(0, 1), Pair.of(1, 0), Pair.of(0, -1), Pair.of(-1, 0)));
 
-    private final @NotNull List<@NotNull Pair<@NotNull Integer, @NotNull Integer>> doorsTo;
+    private final List<Pair<Integer, Integer>> doorsTo;
 
     TileShape(
-            @NotNull List<@NotNull Pair<@NotNull Integer, @NotNull Integer>> doorsTo
+            List<Pair<Integer, Integer>> doorsTo
     ) {
         this.doorsTo = doorsTo;
     }
@@ -32,7 +30,7 @@ public enum TileShape {
      *
      * @return collection of direction pairs
      */
-    public @NotNull Collection<@NotNull Pair<@NotNull Integer, @NotNull Integer>> getDoorsTo() {
+    public Collection<Pair<Integer, Integer>> getDoorsTo() {
         return this.doorsTo;
     }
 }

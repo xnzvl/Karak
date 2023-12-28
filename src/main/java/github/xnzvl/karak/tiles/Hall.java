@@ -2,8 +2,6 @@ package github.xnzvl.karak.tiles;
 
 import github.xnzvl.karak.utils.Pair;
 
-import org.jetbrains.annotations.NotNull;
-
 import java.util.Collection;
 
 /**
@@ -12,9 +10,9 @@ import java.util.Collection;
  * @author Jakub Nezval
  */
 public class Hall implements Tile {
-    private final @NotNull Pair<Integer, Integer> coordinates;
-    private final @NotNull TileShape tileShape;
-    private final @NotNull TileRotation rotation;
+    private final Pair<Integer, Integer> coordinates;
+    private final TileShape tileShape;
+    private final TileRotation rotation;
 
     /**
      * @param coordinates coordinates of the tile
@@ -22,9 +20,9 @@ public class Hall implements Tile {
      * @param rotation rotation of the tile
      */
     public Hall(
-            @NotNull Pair<Integer, Integer> coordinates,
-            @NotNull TileShape tileShape,
-            @NotNull TileRotation rotation
+            Pair<Integer, Integer> coordinates,
+            TileShape tileShape,
+            TileRotation rotation
     ) {
         this.coordinates = coordinates;
         this.tileShape = tileShape;
@@ -56,12 +54,12 @@ public class Hall implements Tile {
     }
 
     @Override
-    public @NotNull Pair<@NotNull Integer, @NotNull Integer> getCoordinates() {
+    public Pair<Integer, Integer> getCoordinates() {
         return this.coordinates;
     }
 
     @Override
-    public @NotNull Collection<@NotNull Pair<@NotNull Integer, @NotNull Integer>> getAccessibleCoordinates() {
+    public Collection<Pair<Integer, Integer>> getAccessibleCoordinates() {
         return this.tileShape.getDoorsTo().stream()
                 .map(directions -> Pair.of(
                         directions.xValue(),
@@ -75,12 +73,12 @@ public class Hall implements Tile {
     }
 
     @Override
-    public @NotNull TileShape getTileShape() {
+    public TileShape getTileShape() {
         return this.tileShape;
     }
 
     @Override
-    public @NotNull TileRotation getRotation() {
+    public TileRotation getRotation() {
         return this.rotation;
     }
 }

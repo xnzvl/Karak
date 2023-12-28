@@ -3,8 +3,6 @@ package github.xnzvl.karak.game;
 import github.xnzvl.karak.tiles.Tile;
 import github.xnzvl.karak.utils.Pair;
 
-import org.jetbrains.annotations.NotNull;
-
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
@@ -23,7 +21,7 @@ public class Board {
      *
      * @return singleton instance of the class
      */
-    public static @NotNull Board getInstance() {
+    public static Board getInstance() {
         return instance;
     }
 
@@ -35,7 +33,7 @@ public class Board {
     /**
      * @return unmodifiable map of coordinates to tiles
      */
-    public @NotNull Map<@NotNull Pair<@NotNull Integer, @NotNull Integer>, @NotNull Tile> getBoard() {
+    public Map<Pair<Integer, Integer>, Tile> getBoard() {
         return Collections.unmodifiableMap(this.board);
     }
 
@@ -49,8 +47,8 @@ public class Board {
      * @return `true` on success, otherwise `false`
      */
     public boolean placeNewTile(
-            @NotNull Tile tile,
-            @NotNull Pair<@NotNull Integer, @NotNull Integer> coordinates
+            Tile tile,
+            Pair<Integer, Integer> coordinates
     ) {
         if (this.board.containsKey(coordinates)) return false;
 
@@ -63,14 +61,14 @@ public class Board {
     /**
      * @return set of coordinates on which the fountains are located
      */
-    public @NotNull Set<@NotNull Pair<@NotNull Integer, @NotNull Integer>> getFountainCoords() {
+    public Set<Pair<Integer, Integer>> getFountainCoords() {
         return null;
     }
 
     /**
      * @return set of coordinates on which the portals are located
      */
-    public @NotNull Set<@NotNull Pair<@NotNull Integer, @NotNull Integer>> getPortalCoords() {
+    public Set<Pair<Integer, Integer>> getPortalCoords() {
         return null;
     }
 }
