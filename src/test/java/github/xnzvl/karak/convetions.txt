@@ -1,0 +1,8 @@
+  TEST NAMING CONVENTIONS
+===========================
+
+    MethodName_StateUnderTest_ExpectedBehavior
+
+    cons: should be renamed if method change name
+
+    example: isAdult_AgeLessThan18_False
