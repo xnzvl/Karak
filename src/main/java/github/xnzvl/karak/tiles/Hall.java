@@ -31,6 +31,30 @@ public class Hall implements Tile {
         this.rotation = rotation;
     }
 
+    /**
+     * Performs a clockwise shift (turn) of coordinates around the origin.
+     *
+     * @param coords coordinates to shift
+     * @param numberOfShifts non-negative number of shifts
+     * @return shifted coordinates
+     */
+    private Pair<Integer, Integer> clockwiseShift(
+            Pair<Integer, Integer> coords,
+            int numberOfShifts
+    ) {
+        int x = coords.xValue();
+        int y = coords.yValue();
+        int tmp;
+
+        for (int i = 0; i < numberOfShifts; i++) {
+            tmp = x;
+            x = y;
+            y = -tmp;
+        }
+
+        return Pair.of(x, y);
+    }
+
     @Override
     public @NotNull Pair<@NotNull Integer, @NotNull Integer> getCoordinates() {
         return this.coordinates;
@@ -39,22 +63,24 @@ public class Hall implements Tile {
     @Override
     public @NotNull Collection<@NotNull Pair<@NotNull Integer, @NotNull Integer>> getAccessibleCoordinates() {
         return this.tileShape.getDoorsTo().stream()
-                .map(
-                        direction -> Pair.of(
-                                direction.xValue() + this.coordinates.xValue(),
-                                direction.yValue() + this.coordinates.yValue()
-                        )
+                .map(directions -> Pair.of(
+                        directions.xValue(),
+                        directions.yValue())
+                )
+                .map(coords -> Pair.of(
+                        coords.xValue() + this.coordinates.xValue(),
+                        coords.yValue() + this.coordinates.yValue())
                 )
                 .toList();
     }
 
     @Override
     public @NotNull TileShape getTileShape() {
-        return tileShape;
+        return this.tileShape;
     }
 
     @Override
     public @NotNull TileRotation getRotation() {
-        return rotation;
+        return this.rotation;
     }
 }
