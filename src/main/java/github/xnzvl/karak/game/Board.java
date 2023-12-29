@@ -42,7 +42,7 @@ public class Board {
      * If ⟨coordinates⟩ are already occupied, does nothing and returns `false`
      * otherwise returns `true`.
      *
-     * @param tile new tile
+     * @param tile        new tile
      * @param coordinates coordinates where to place the tile
      * @return `true` on success, otherwise `false`
      */

@@ -16,8 +16,8 @@ public class Hall implements Tile {
 
     /**
      * @param coordinates coordinates of the tile
-     * @param tileShape tile shape of the tile
-     * @param rotation rotation of the tile
+     * @param tileShape   tile shape of the tile
+     * @param rotation    rotation of the tile
      */
     public Hall(
             Pair<Integer, Integer> coordinates,
@@ -32,7 +32,7 @@ public class Hall implements Tile {
     /**
      * Performs a clockwise shift (turn) of coordinates around the origin.
      *
-     * @param coords coordinates to shift
+     * @param coords         coordinates to shift
      * @param numberOfShifts non-negative number of shifts
      * @return shifted coordinates
      */
@@ -61,10 +61,7 @@ public class Hall implements Tile {
     @Override
     public Collection<Pair<Integer, Integer>> getAccessibleCoordinates() {
         return this.tileShape.getDoorsTo().stream()
-                .map(directions -> Pair.of(
-                        directions.xValue(),
-                        directions.yValue())
-                )
+                .map(directions -> clockwiseShift(directions, this.rotation.getNumberOfShifts()))
                 .map(coords -> Pair.of(
                         coords.xValue() + this.coordinates.xValue(),
                         coords.yValue() + this.coordinates.yValue())
