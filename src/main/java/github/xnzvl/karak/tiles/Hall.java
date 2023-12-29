@@ -14,11 +14,6 @@ public class Hall implements Tile {
     private final TileShape tileShape;
     private final TileRotation rotation;
 
-    /**
-     * @param coordinates coordinates of the tile
-     * @param shape       tile shape of the tile
-     * @param rotation    rotation of the tile
-     */
     public Hall(
             Pair<Integer, Integer> coordinates,
             TileShape shape,
