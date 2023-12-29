@@ -10,23 +10,12 @@ import java.util.Collection;
  * @author Jakub Nezval
  */
 public interface Tile {
-    /**
-     * @return get coordinates of the tile
-     */
     Pair<Integer, Integer> getCoordinates();
+    TileShape getTileShape();
+    TileRotation getRotation();
 
     /**
      * @return collection of coordinates that are reachable from this tile
      */
     Collection<Pair<Integer, Integer>> getAccessibleCoordinates();
-
-    /**
-     * @return tile shape of the tile
-     */
-    TileShape getTileShape();
-
-    /**
-     * @return rotation of the tile
-     */
-    TileRotation getRotation();
 }

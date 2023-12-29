@@ -6,6 +6,7 @@
 
 Every object variable/attribute/parameter is implicitly `@NotNull`
 unless explicitly stated `@Nullable`.
+However, `@NotNull` annotation should be used to prevent confusion and warnings.
 
 ### Naming tests
 

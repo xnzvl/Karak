@@ -5,7 +5,7 @@ import github.xnzvl.karak.utils.Pair;
 import java.util.Collection;
 
 /**
- * Class for representing hall tile. There's nothing special about the tile.
+ * Hall tile representation. There's nothing special about the tile.
  *
  * @author Jakub Nezval
  */
@@ -16,16 +16,16 @@ public class Hall implements Tile {
 
     /**
      * @param coordinates coordinates of the tile
-     * @param tileShape   tile shape of the tile
+     * @param shape       tile shape of the tile
      * @param rotation    rotation of the tile
      */
     public Hall(
             Pair<Integer, Integer> coordinates,
-            TileShape tileShape,
+            TileShape shape,
             TileRotation rotation
     ) {
         this.coordinates = coordinates;
-        this.tileShape = tileShape;
+        this.tileShape = shape;
         this.rotation = rotation;
     }
 
