@@ -1,5 +1,8 @@
-package github.xnzvl.karak.tiles;
+package github.xnzvl.karak.tiles.impl;
 
+import github.xnzvl.karak.tiles.Tile;
+import github.xnzvl.karak.tiles.TileRotation;
+import github.xnzvl.karak.tiles.TileShape;
 import github.xnzvl.karak.utils.Pair;
 
 import java.util.Collection;

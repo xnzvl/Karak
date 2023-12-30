@@ -1,4 +1,6 @@
-package github.xnzvl.karak.items.weapons;
+package github.xnzvl.karak.items.weapons.impl;
+
+import github.xnzvl.karak.items.weapons.VariousWeapon;
 
 /**
  * Wielder should gain +2 power.

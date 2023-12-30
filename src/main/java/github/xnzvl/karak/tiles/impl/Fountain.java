@@ -1,19 +1,18 @@
-package github.xnzvl.karak.tiles.featureTiles;
+package github.xnzvl.karak.tiles.impl;
 
-import github.xnzvl.karak.tiles.Hall;
+import github.xnzvl.karak.tiles.FeatureTile;
 import github.xnzvl.karak.tiles.TileRotation;
 import github.xnzvl.karak.tiles.TileShape;
 import github.xnzvl.karak.utils.Pair;
 
 /**
- * Representing portal tile.
- * {@link github.xnzvl.karak.powerfuls.heroes.Hero} should be able
- * to reach any other portal tile in one step.
+ * Representing fountain tile.
+ * {@link github.xnzvl.karak.powerfuls.heroes.Hero} should heal here if it ends turn here.
  *
  * @author Jakub Nezval
  */
-public class Portal extends Hall implements FeatureTile {
-    public Portal(
+public class Fountain extends Hall implements FeatureTile {
+    public Fountain(
             Pair<Integer, Integer> coordinates,
             TileShape shape,
             TileRotation rotation

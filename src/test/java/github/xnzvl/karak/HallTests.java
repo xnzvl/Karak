@@ -1,6 +1,6 @@
 package github.xnzvl.karak;
 
-import github.xnzvl.karak.tiles.Hall;
+import github.xnzvl.karak.tiles.impl.Hall;
 import github.xnzvl.karak.tiles.TileRotation;
 import github.xnzvl.karak.tiles.TileShape;
 import github.xnzvl.karak.utils.Pair;

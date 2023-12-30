@@ -7,10 +7,10 @@ import github.xnzvl.karak.description.DescribedObject;
  *
  * @author Jakub Nezval
  */
-public class VariousSpell extends DescribedObject implements Spell {
+public abstract class DescribedSpell extends DescribedObject implements Spell {
     private final SpellType type;
 
-    protected VariousSpell(
+    protected DescribedSpell(
             String title,
             String details,
             SpellType type

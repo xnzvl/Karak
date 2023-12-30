@@ -1,4 +1,6 @@
-package github.xnzvl.karak.items.chests;
+package github.xnzvl.karak.items.chests.impl;
+
+import github.xnzvl.karak.items.chests.VariousChest;
 
 /**
  * Ordinary chest worth 1 point.

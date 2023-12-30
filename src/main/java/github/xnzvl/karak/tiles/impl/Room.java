@@ -1,10 +1,10 @@
-package github.xnzvl.karak.tiles.infestedTiles;
+package github.xnzvl.karak.tiles.impl;
 
 import github.xnzvl.karak.items.Item;
 import github.xnzvl.karak.powerfuls.monsters.Monster;
-import github.xnzvl.karak.tiles.Hall;
 import github.xnzvl.karak.tiles.TileRotation;
 import github.xnzvl.karak.tiles.TileShape;
+import github.xnzvl.karak.tiles.InfestedTile;
 import github.xnzvl.karak.utils.Either;
 import github.xnzvl.karak.utils.Pair;
 

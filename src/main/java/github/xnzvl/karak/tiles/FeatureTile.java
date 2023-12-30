@@ -1,6 +1,4 @@
-package github.xnzvl.karak.tiles.featureTiles;
-
-import github.xnzvl.karak.tiles.Tile;
+package github.xnzvl.karak.tiles;
 
 /**
  * Umbrella interface for grouping tiles with special effects.

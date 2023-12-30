@@ -1,11 +1,15 @@
-package github.xnzvl.karak.items.spells;
+package github.xnzvl.karak.items.spells.impl;
+
+import github.xnzvl.karak.items.spells.SpellType;
+import github.xnzvl.karak.items.spells.DescribedSpell;
+import github.xnzvl.karak.powerfuls.heroes.Hero;
 
 /**
  * Healing Warp spell. See Karak rules for more information.
  *
  * @author Jakub Nezval
  */
-public class HealingWarp extends VariousSpell {
+public class HealingWarp extends DescribedSpell {
     public HealingWarp() {
         super(
                 "Healing Warp",
@@ -15,5 +19,12 @@ public class HealingWarp extends VariousSpell {
                     + "Otherwise the Hero loses all of the remaining steps and their turn is over.",
                 SpellType.UTILITY
         );
+    }
+
+    @Override
+    public void use(
+            Hero hero
+    ) {
+
     }
 }
