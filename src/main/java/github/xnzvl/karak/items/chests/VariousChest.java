@@ -1,13 +1,13 @@
 package github.xnzvl.karak.items.chests;
 
+import github.xnzvl.karak.description.DescribedObject;
+
 /**
  * Class for simplifying {@link Chest} implementations.
  *
  * @author Jakub Nezval
  */
-public class VariousChest implements Chest {
-    private final String title;
-    private final String details;
+public class VariousChest extends DescribedObject implements Chest {
     private final float scoreWorth;
 
     protected VariousChest(
@@ -15,19 +15,8 @@ public class VariousChest implements Chest {
             String details,
             float scoreWorth
     ) {
-        this.title = title;
-        this.details = details;
+        super(title, details);
         this.scoreWorth = scoreWorth;
-    }
-
-    @Override
-    public String getTitle() {
-        return this.title;
-    }
-
-    @Override
-    public String getDetails() {
-        return this.details;
     }
 
     @Override

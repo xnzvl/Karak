@@ -1,11 +1,11 @@
-package github.xnzvl.karak;
+package github.xnzvl.karak.description;
 
 /**
  * Interface for convenient obtaining description of an object.
  *
  * @author Jakub Nezval
  */
-public interface DescribedObject {
+public interface Description {
     /**
      * Method for obtaining the shortest possible description of the object.
      * Returned string should contain only smaller units of words.
