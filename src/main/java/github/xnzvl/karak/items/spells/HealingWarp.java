@@ -15,8 +15,7 @@ public class HealingWarp extends VariousSpell {
                     + "If the spell is used before the first step "
                     + "then the Hero can continue their turn like if nothing happened. "
                     + "Otherwise the Hero loses all of the remaining steps and their turn is over.",
-                SpellType.UTILITY,
-                List.of()
+                SpellType.UTILITY
         );
     }
 }

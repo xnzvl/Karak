@@ -13,18 +13,15 @@ public class VariousSpell implements Spell {
     private final String title;
     private final String details;
     private final SpellType type;
-    private final List<Effect> effects;
 
     protected VariousSpell(
             String title,
             String details,
-            SpellType type,
-            List<Effect> effects
+            SpellType type
     ) {
         this.title = title;
         this.details = details;
         this.type = type;
-        this.effects = effects;
     }
 
     @Override
@@ -40,10 +37,5 @@ public class VariousSpell implements Spell {
     @Override
     public SpellType getType() {
         return this.type;
-    }
-
-    @Override
-    public List<Effect> getEffects() {
-        return this.effects;
     }
 }

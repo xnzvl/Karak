@@ -12,8 +12,7 @@ public class FlamingSword extends VariousSpell {
         super(
                 "Flaming Sword",
                 "Temporary +1 power.",
-                SpellType.OFFENSIVE,
-                List.of()
+                SpellType.OFFENSIVE
         );
     }
 }
