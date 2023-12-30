@@ -1,7 +1,5 @@
 package github.xnzvl.karak.items.spells;
 
-import java.util.List;
-
 /**
  * Healing Warp spell. See Karak rules for more information.
  *

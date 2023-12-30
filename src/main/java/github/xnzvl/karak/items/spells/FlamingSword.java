@@ -1,7 +1,5 @@
 package github.xnzvl.karak.items.spells;
 
-import java.util.List;
-
 /**
  * Flaming Sword spell. See Karak rules for more information.
  *

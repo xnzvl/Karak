@@ -1,9 +1,5 @@
 package github.xnzvl.karak.items.spells;
 
-import github.xnzvl.karak.items.spells.effects.Effect;
-
-import java.util.List;
-
 /**
  * Class for simplifying {@link Spell} implementations.
  *
