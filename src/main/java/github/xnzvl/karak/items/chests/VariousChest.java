@@ -5,12 +5,12 @@ package github.xnzvl.karak.items.chests;
  *
  * @author Jakub Nezval
  */
-public abstract class VariousChest implements Chest {
+public class VariousChest implements Chest {
     private final String title;
     private final String details;
     private final float scoreWorth;
 
-    public VariousChest(
+    protected VariousChest(
             String title,
             String details,
             float scoreWorth
