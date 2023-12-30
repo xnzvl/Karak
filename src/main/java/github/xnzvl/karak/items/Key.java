@@ -1,5 +1,10 @@
 package github.xnzvl.karak.items;
 
+/**
+ * Key for opening chests.
+ *
+ * @author Jakub Nezval
+ */
 public class Key implements Item {
     public Key() {
         // that's all
