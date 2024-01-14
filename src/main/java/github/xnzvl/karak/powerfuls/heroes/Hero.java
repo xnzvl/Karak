@@ -2,8 +2,10 @@ package github.xnzvl.karak.powerfuls.heroes;
 
 import github.xnzvl.karak.exceptions.HeroInvalidStateException;
 import github.xnzvl.karak.items.Item;
-import github.xnzvl.karak.items.spells.Spell;
 import github.xnzvl.karak.powerfuls.Power;
+import github.xnzvl.karak.powerfuls.monsters.Monster;
+import github.xnzvl.karak.tiles.Tile;
+import github.xnzvl.karak.utils.Either;
 import github.xnzvl.karak.utils.MapUtils;
 import github.xnzvl.karak.utils.Pair;
 
@@ -43,16 +45,22 @@ public abstract class Hero implements Power {
     }
 
     protected void recover() {
+        if (this.hitPoints != 0) {
+            throw new HeroInvalidStateException(
+                    "Cannot perform `Hero::recovery` when Hero hit points are above 0"
+            );
+        }
         this.hitPoints += 1;
     }
 
     protected void retreat() {
-        if (this.previousPosition != null) {
-            this.position = this.previousPosition;
-            this.previousPosition = null;
-        } else {
-            throw new HeroInvalidStateException("Cannot retreat to an unknown previous position");
+        if (this.previousPosition == null) {
+            throw new HeroInvalidStateException(
+                    "Cannot retreat to an unknown previous position"
+            );
         }
+        this.position = this.previousPosition;
+        this.previousPosition = null;
     }
 
     protected Pair<Integer, Integer> rollDices() {
@@ -62,13 +70,39 @@ public abstract class Hero implements Power {
         );
     }
 
-    protected void useOffensiveSpell(
-            Spell spell
-    ) {
-
-    }
-
     public void takeTurn() {
+        if (this.hitPoints == 0) {
+            this.recover();
+            return;
+        }
 
+        int steps = 4;
+        Pair<Integer, Integer> nextCoords;
+        Tile currentTile;
+        Either<Monster, Item> tileSubject;
+
+        while (steps > 0) {
+            do {
+                // nextCoords = pickNextCoordinates();
+            } while (!isValidMove(nextCoords));
+
+            // moveThere()
+
+            if (/* there isn't tile */) {
+                // discover new tile
+            }
+
+            // what's on the Tile?
+            //   - how do I obtain this?
+
+            if (tileSubject != null) {
+                tileSubject.consume(
+                        (monster) -> {},
+                        (item) -> {}
+                 );
+            }
+
+            steps -= 1;
+        }
     }
 }
