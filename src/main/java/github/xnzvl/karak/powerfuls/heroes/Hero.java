@@ -1,11 +1,9 @@
 package github.xnzvl.karak.powerfuls.heroes;
 
 import github.xnzvl.karak.exceptions.HeroInvalidStateException;
+import github.xnzvl.karak.players.TurnState;
 import github.xnzvl.karak.items.Item;
 import github.xnzvl.karak.powerfuls.Power;
-import github.xnzvl.karak.powerfuls.monsters.Monster;
-import github.xnzvl.karak.tiles.Tile;
-import github.xnzvl.karak.utils.Either;
 import github.xnzvl.karak.utils.MapUtils;
 import github.xnzvl.karak.utils.Pair;
 
@@ -39,7 +37,8 @@ public abstract class Hero implements Power {
     }
 
     protected void pickUpItem(
-            Slot slot
+            Item item,
+            TurnState turnState
     ) {
 
     }
@@ -68,41 +67,5 @@ public abstract class Hero implements Power {
                 this.randomGenerator.nextInt(7),
                 this.randomGenerator.nextInt(7)
         );
-    }
-
-    public void takeTurn() {
-        if (this.hitPoints == 0) {
-            this.recover();
-            return;
-        }
-
-        int steps = 4;
-        Pair<Integer, Integer> nextCoords;
-        Tile currentTile;
-        Either<Monster, Item> tileSubject;
-
-        while (steps > 0) {
-            do {
-                // nextCoords = pickNextCoordinates();
-            } while (!isValidMove(nextCoords));
-
-            // moveThere()
-
-            if (/* there isn't tile */) {
-                // discover new tile
-            }
-
-            // what's on the Tile?
-            //   - how do I obtain this?
-
-            if (tileSubject != null) {
-                tileSubject.consume(
-                        (monster) -> {},
-                        (item) -> {}
-                 );
-            }
-
-            steps -= 1;
-        }
     }
 }

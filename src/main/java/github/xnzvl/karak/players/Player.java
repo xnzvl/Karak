@@ -1,4 +1,4 @@
-package github.xnzvl.karak.game;
+package github.xnzvl.karak.players;
 
 import github.xnzvl.karak.description.Description;
 import github.xnzvl.karak.powerfuls.heroes.Hero;
