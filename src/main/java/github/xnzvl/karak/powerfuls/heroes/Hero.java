@@ -1,7 +1,6 @@
 package github.xnzvl.karak.powerfuls.heroes;
 
 import github.xnzvl.karak.exceptions.HeroInvalidStateException;
-import github.xnzvl.karak.players.TurnState;
 import github.xnzvl.karak.items.Item;
 import github.xnzvl.karak.powerfuls.Power;
 import github.xnzvl.karak.utils.MapUtils;
@@ -38,7 +37,7 @@ public abstract class Hero implements Power {
 
     protected void pickUpItem(
             Item item,
-            TurnState turnState
+            TurnHeroProxy turnState
     ) {
 
     }
