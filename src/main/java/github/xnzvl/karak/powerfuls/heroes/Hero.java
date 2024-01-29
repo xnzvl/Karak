@@ -26,7 +26,15 @@ public abstract class Hero implements Power {
     public Hero(
             Random randomGenerator
     ) {
-        this.randomGenerator = randomGenerator;
+        this.randomGenerator = randomGenerator;  // TODO: is it necessary?
+    }
+
+    public void startTurn() {
+
+    }
+
+    public void endTurn() {
+
     }
 
     protected boolean isValidMove(
@@ -36,8 +44,7 @@ public abstract class Hero implements Power {
     }
 
     protected void pickUpItem(
-            Item item,
-            TurnHeroProxy turnState
+            Slot slot
     ) {
 
     }
@@ -59,12 +66,5 @@ public abstract class Hero implements Power {
         }
         this.position = this.previousPosition;
         this.previousPosition = null;
-    }
-
-    protected Pair<Integer, Integer> rollDices() {
-        return Pair.of(
-                this.randomGenerator.nextInt(7),
-                this.randomGenerator.nextInt(7)
-        );
     }
 }

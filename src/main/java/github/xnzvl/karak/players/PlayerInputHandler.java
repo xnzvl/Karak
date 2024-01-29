@@ -19,7 +19,10 @@ public abstract class PlayerInputHandler {
         this.hero = hero;
     }
 
-    protected Hero getHero() {
+    /**
+     * @return hero associated with this {@link PlayerInputHandler}
+     */
+    public Hero getHero() {
         return this.hero;
     }
 
