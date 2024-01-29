@@ -14,6 +14,11 @@ public class Player {
     private final Hero hero;
     private final PlayerInputHandler inputHandler;
 
+    /**
+     * @param name name of the {@link Player}
+     * @param hero {@link Player}'s hero
+     * @param inputHandlerCreator handler for user's inputs
+     */
     public Player(
             String name,
             Hero hero,
