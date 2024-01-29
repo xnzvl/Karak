@@ -52,11 +52,15 @@ public class Player {
      * It allows the player to play and to make decisions.
      */
     public final void takeTurn() {
-        // Hero::startTurn or smth
-        while (this.inputHandler.handleInput() != InputResult.END_TURN) {
+        this.hero.startTurn();
 
+        //noinspection StatementWithEmptyBody
+        while (this.inputHandler.handleInput() != InputResult.END_TURN) {
+            // IDEA warning successfully suppressed!
+            // TODO: some counter to prevent infinite loop
         }
-        // Hero::endTurn or smth
+
+        this.hero.endTurn();
     }
 
     /**
