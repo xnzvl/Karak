@@ -1,6 +1,7 @@
 package github.xnzvl.karak.powerfuls.heroes;
 
-import java.util.List;
+import java.util.Collection;
+import java.util.Set;
 
 public enum Slot {
     WEAPON_ONE,
@@ -10,11 +11,19 @@ public enum Slot {
     SPELL_THREE,
     KEY;
 
-    public List<Slot> getWeaponSlots() {
-        return List.of(WEAPON_ONE, WEAPON_TWO);
+    private static final Collection<Slot> weaponSlots;
+    private static final Collection<Slot> spellSlots;
+
+    static {
+        weaponSlots = java.util.Set.copyOf(Set.of(WEAPON_ONE, WEAPON_TWO));
+        spellSlots = java.util.Set.copyOf(Set.of(SPELL_ONE, SPELL_TWO, SPELL_THREE));
     }
 
-    public List<Slot> getSpellSlots() {
-        return List.of(SPELL_ONE, SPELL_TWO, SPELL_THREE);
+    public static Collection<Slot> getWeaponSlots() {
+        return Slot.weaponSlots;
+    }
+
+    public static Collection<Slot> getSpellSlots() {
+        return Slot.spellSlots;
     }
 }
