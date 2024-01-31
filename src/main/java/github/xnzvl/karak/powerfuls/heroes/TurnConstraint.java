@@ -1,6 +1,6 @@
 package github.xnzvl.karak.powerfuls.heroes;
 
-public class TurnConstraint {
+public class TurnConstraint {  // TODO: maybe package private?
     private int steps;
     private HeroState heroState;
 

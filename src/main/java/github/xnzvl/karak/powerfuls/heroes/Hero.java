@@ -6,7 +6,6 @@ import github.xnzvl.karak.items.weapons.Weapon;
 import github.xnzvl.karak.powerfuls.Power;
 import github.xnzvl.karak.utils.MapUtils;
 import github.xnzvl.karak.utils.Pair;
-import github.xnzvl.karak.utils.Result;
 
 import org.jetbrains.annotations.Nullable;
 
@@ -19,7 +18,7 @@ public class Hero implements Power {
 
     private int hitPoints = MAX_HIT_POINTS;
     private Pair<Integer, Integer> position = Pair.of(0, 0);
-    private final Map<Slot, Item> inventory = MapUtils.defaultHashMapFrom(
+    private final Map<Slot, @Nullable Item> inventory = MapUtils.defaultHashMapFrom(
             Arrays.asList(Slot.values()), null
     );
 
@@ -41,53 +40,59 @@ public class Hero implements Power {
     public Result move(
             Pair<Integer, Integer> newPosition
     ) {
-        if (!isValidMove(newPosition)) return Result.FAILURE;
+        if (!isValidMove(newPosition)) return Result.withFailure(Result.Failure.INVALID_CHOICE);
 
         // TODO: change position + remember last position
 
-        return Result.SUCCESS;
-    }
-
-    public Result pickUpItem() {
-
+        return Result.withSuccess();
     }
 
     public Result pickUpItem(
-            @Nullable Slot slot
+            Slot slot
     ) {
-
+        // TODO: get item
+        // TODO: RECREATE *ITEM* (to be more like Either-ish)
+        // return pickUpItem(slot, item);
     }
 
     private Result pickUpItem(
             Slot slot,
             Weapon weapon
     ) {
+        if (!Slot.isWeaponSlot(slot)) return Result.withFailure(Result.Failure.INVALID_CHOICE);
 
+        return Result.withSuccess();
     }
 
     private Result pickUpItem(
             Slot slot,
             Spell spell
     ) {
+        if (!Slot.isSpellSlot(slot)) return Result.withFailure(Result.Failure.INVALID_CHOICE);
 
+        return Result.withSuccess();
     }
 
     public Result useItem(
             Slot slot
     ) {
+        if (Slot.isWeaponSlot(slot))          return Result.withFailure(Result.Failure.INVALID_CHOICE);
+        if (this.inventory.get(slot) == null) return Result.withFailure(Result.Failure.NULL);
+        // key unlocks a chest! don't forget it
 
+        return Result.withSuccess();
     }
 
     public int getPower() {
-
+        return -1;
     }
 
     public String getTitle() {
-
+        return null;
     }
 
     public String getDetails() {
-
+        return null;
     }
 
     protected boolean isValidMove(

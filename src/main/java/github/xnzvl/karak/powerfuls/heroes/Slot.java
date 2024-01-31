@@ -26,4 +26,16 @@ public enum Slot {
     public static Collection<Slot> getSpellSlots() {
         return Slot.spellSlots;
     }
+
+    public static boolean isWeaponSlot(
+            Slot slot
+    ) {
+        return weaponSlots.contains(slot);
+    }
+
+    public static boolean isSpellSlot(
+            Slot slot
+    ) {
+        return spellSlots.contains(slot);
+    }
 }
