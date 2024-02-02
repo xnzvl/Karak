@@ -1,6 +1,5 @@
 package github.xnzvl.karak.tiles;
 
-import github.xnzvl.karak.items.Item;
 import github.xnzvl.karak.powerfuls.monsters.Monster;
 import github.xnzvl.karak.utils.Either;
 

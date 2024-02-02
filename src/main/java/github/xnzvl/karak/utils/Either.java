@@ -5,7 +5,7 @@ import java.util.function.Function;
 
 public abstract class Either<L, R> {
     private Either() {
-        // not meant for instantiation
+        // on purpose
     }
 
     abstract public <T> T apply(

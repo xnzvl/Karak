@@ -1,6 +1,6 @@
 package github.xnzvl.karak.items.weapons;
 
-import github.xnzvl.karak.items.Item;
+import github.xnzvl.karak.description.Description;
 
 /**
  * Weapons provide a power boost to the wielder.
@@ -8,6 +8,6 @@ import github.xnzvl.karak.items.Item;
  *
  * @author Jakub Nezval
  */
-public interface Weapon extends Item {
+public interface Weapon extends Description {
     int getStrength();
 }

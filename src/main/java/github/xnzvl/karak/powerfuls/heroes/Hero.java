@@ -1,6 +1,5 @@
 package github.xnzvl.karak.powerfuls.heroes;
 
-import github.xnzvl.karak.items.Item;
 import github.xnzvl.karak.items.spells.Spell;
 import github.xnzvl.karak.items.weapons.Weapon;
 import github.xnzvl.karak.powerfuls.Power;

@@ -1,7 +1,6 @@
 package github.xnzvl.karak.powerfuls.monsters;
 
 import github.xnzvl.karak.description.DescribedObject;
-import github.xnzvl.karak.items.Item;
 
 /**
  * Class for simplifying {@link Monster} implementations.

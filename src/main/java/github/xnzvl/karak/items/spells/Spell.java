@@ -1,6 +1,6 @@
 package github.xnzvl.karak.items.spells;
 
-import github.xnzvl.karak.items.Item;
+import github.xnzvl.karak.description.Description;
 import github.xnzvl.karak.powerfuls.heroes.Hero;
 
 /**
@@ -9,7 +9,7 @@ import github.xnzvl.karak.powerfuls.heroes.Hero;
  *
  * @author Jakub Nezval
  */
-public interface Spell extends Item {
+public interface Spell extends Description {
     /**
      * @param hero the hero on whom the spell is used
      */

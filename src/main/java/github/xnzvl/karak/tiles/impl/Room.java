@@ -1,6 +1,5 @@
 package github.xnzvl.karak.tiles.impl;
 
-import github.xnzvl.karak.items.Item;
 import github.xnzvl.karak.powerfuls.monsters.Monster;
 import github.xnzvl.karak.tiles.TileRotation;
 import github.xnzvl.karak.tiles.TileShape;

@@ -1,12 +1,9 @@
 package github.xnzvl.karak.items;
 
-import github.xnzvl.karak.description.Description;
+public abstract class Item {
+    private Item() {
+        // on purpose
+    }
 
-/**
- * Umbrella interface for grouping items together.
- *
- * @author Jakub Nezval
- */
-public interface Item extends Description {
-    // that's all
+    // TODO: Either like class
 }

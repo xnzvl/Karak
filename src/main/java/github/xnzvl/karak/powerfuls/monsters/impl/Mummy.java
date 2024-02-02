@@ -1,6 +1,5 @@
 package github.xnzvl.karak.powerfuls.monsters.impl;
 
-import github.xnzvl.karak.items.Item;
 import github.xnzvl.karak.items.spells.impl.FlamingSword;
 import github.xnzvl.karak.powerfuls.monsters.VariousMonster;
 
