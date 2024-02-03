@@ -1,5 +1,8 @@
 package github.xnzvl.karak.powerfuls.heroes;
 
+import github.xnzvl.karak.items.Item;
+import github.xnzvl.karak.items.Key;
+import github.xnzvl.karak.items.chests.Chest;
 import github.xnzvl.karak.items.spells.Spell;
 import github.xnzvl.karak.items.weapons.Weapon;
 import github.xnzvl.karak.powerfuls.Power;
@@ -10,6 +13,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.Arrays;
 import java.util.Map;
+import java.util.function.Predicate;
 
 public class Hero implements Power {
     public static final int MAX_HIT_POINTS = 5;
@@ -49,26 +53,52 @@ public class Hero implements Power {
     public Result pickUpItem(
             Slot slot
     ) {
+        // TODO: what if you don't want to pick up the item
         // TODO: get item
-        // TODO: RECREATE *ITEM* (to be more like Either-ish)
-        // return pickUpItem(slot, item);
+        Item item;
+        return item.apply(
+                weapon -> pickUpWeapon(slot, weapon),
+                spell  -> pickUpSpell(slot, spell),
+                key    -> pickUpKey(slot, key),
+                this::pickUpChest
+        );
     }
 
     private Result pickUpItem(
             Slot slot,
-            Weapon weapon
+            Predicate<Slot> isSlotValid,
+            Item item
     ) {
-        if (!Slot.isWeaponSlot(slot)) return Result.withFailure(Result.Failure.INVALID_CHOICE);
-
+        if (!isSlotValid.test(slot)) return Result.withFailure(Result.Failure.INVALID_CHOICE);
+        this.inventory.put(slot, item);
         return Result.withSuccess();
     }
 
-    private Result pickUpItem(
+    protected Result pickUpWeapon(
+            Slot slot,
+            Weapon weapon
+    ) {
+        return pickUpItem(slot, Slot::isWeaponSlot, Item.from(weapon));
+    }
+
+    protected Result pickUpSpell(
             Slot slot,
             Spell spell
     ) {
-        if (!Slot.isSpellSlot(slot)) return Result.withFailure(Result.Failure.INVALID_CHOICE);
+        return pickUpItem(slot, Slot::isSpellSlot, Item.from(spell));
+    }
 
+    protected Result pickUpKey(
+            Slot slot,
+            Key key
+    ) {
+        return pickUpItem(slot, (slotArg -> slotArg != Slot.KEY), Item.from(key));
+    }
+
+    protected Result pickUpChest(
+            Chest chest
+    ) {
+        // TODO - Hero::pickUpChest
         return Result.withSuccess();
     }
 
@@ -77,8 +107,8 @@ public class Hero implements Power {
     ) {
         if (Slot.isWeaponSlot(slot))          return Result.withFailure(Result.Failure.INVALID_CHOICE);
         if (this.inventory.get(slot) == null) return Result.withFailure(Result.Failure.NULL);
-        // key unlocks a chest! don't forget it
-
+        // TODO: key unlocks a chest! don't forget it
+        // TODO: check if spell is usable in the situation
         return Result.withSuccess();
     }
 
