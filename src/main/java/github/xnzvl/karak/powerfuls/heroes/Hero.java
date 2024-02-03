@@ -113,7 +113,19 @@ public class Hero implements Power {
     }
 
     public int getPower() {
-        return -1;
+        int power = 0;
+        Item item;
+
+        for (var weaponSlot : Slot.getWeaponSlots()) {
+            item = this.inventory.get(weaponSlot);
+            if (item != null) {
+                power += item.apply(
+                        Weapon::getStrength, x -> 0, x -> 0, x -> 0
+                );
+            }
+        }
+
+        return power;
     }
 
     public String getTitle() {
