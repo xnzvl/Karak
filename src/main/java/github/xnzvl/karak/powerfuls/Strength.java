@@ -1,15 +1,13 @@
 package github.xnzvl.karak.powerfuls;
 
-import github.xnzvl.karak.description.Description;
-
 /**
  * Interface for classes that represent units - Monsters/Heroes - in game.
  *
  * @author Jakub Nezval
  */
-public interface Power extends Description {
+public interface Strength {
     /**
      * @return power of the unit
      */
-    int getPower();
+    int getStrength();
 }

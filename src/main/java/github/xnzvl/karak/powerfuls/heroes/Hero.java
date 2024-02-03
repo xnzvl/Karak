@@ -1,11 +1,12 @@
 package github.xnzvl.karak.powerfuls.heroes;
 
+import github.xnzvl.karak.description.DescribedObject;
 import github.xnzvl.karak.items.Item;
 import github.xnzvl.karak.items.Key;
 import github.xnzvl.karak.items.chests.Chest;
 import github.xnzvl.karak.items.spells.Spell;
 import github.xnzvl.karak.items.weapons.Weapon;
-import github.xnzvl.karak.powerfuls.Power;
+import github.xnzvl.karak.powerfuls.Strength;
 import github.xnzvl.karak.utils.MapUtils;
 import github.xnzvl.karak.utils.Pair;
 
@@ -15,7 +16,7 @@ import java.util.Arrays;
 import java.util.Map;
 import java.util.function.Predicate;
 
-public class Hero implements Power {
+public class Hero extends DescribedObject implements Strength {
     public static final int MAX_HIT_POINTS = 5;
     public static final int DEFAULT_NUMBER_OF_STEPS = 4;
 
@@ -29,7 +30,7 @@ public class Hero implements Power {
     private TurnConstraint turnConstraint = null;
 
     protected Hero() {
-        // nothing so far
+        super(null, null);
     }
 
     public void startTurn() {
@@ -112,28 +113,20 @@ public class Hero implements Power {
         return Result.withSuccess();
     }
 
-    public int getPower() {
-        int power = 0;
+    public int getStrength() {
+        int strength = 0;
         Item item;
 
         for (var weaponSlot : Slot.getWeaponSlots()) {
             item = this.inventory.get(weaponSlot);
             if (item != null) {
-                power += item.apply(
+                strength += item.apply(
                         Weapon::getStrength, x -> 0, x -> 0, x -> 0
                 );
             }
         }
 
-        return power;
-    }
-
-    public String getTitle() {
-        return null;
-    }
-
-    public String getDetails() {
-        return null;
+        return strength;
     }
 
     protected boolean isValidMove(

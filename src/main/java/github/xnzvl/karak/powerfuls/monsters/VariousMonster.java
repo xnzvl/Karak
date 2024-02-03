@@ -8,17 +8,17 @@ import github.xnzvl.karak.description.DescribedObject;
  * @author Jakub Nezval
  */
 public class VariousMonster extends DescribedObject implements Monster {
-    private final int power;
+    private final int strength;
     private final Item drop;
 
     protected VariousMonster(
             String title,
             String details,
-            int power,
+            int strength,
             Item drop
     ) {
         super(title, details);
-        this.power = power;
+        this.strength = strength;
         this.drop = drop;
     }
 
@@ -27,8 +27,8 @@ public class VariousMonster extends DescribedObject implements Monster {
     }
 
     @Override
-    public int getPower() {
-        return this.power;
+    public int getStrength() {
+        return this.strength;
     }
 
     @Override
