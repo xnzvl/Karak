@@ -1,5 +1,6 @@
 package github.xnzvl.karak.powerfuls.monsters.impl;
 
+import github.xnzvl.karak.items.Item;
 import github.xnzvl.karak.items.chests.impl.RubyChest;
 import github.xnzvl.karak.powerfuls.monsters.VariousMonster;
 
@@ -14,7 +15,7 @@ public class Dragon extends VariousMonster {
                 "Dragon",
                 "",
                 15,
-                new RubyChest()
+                Item.from(new RubyChest())
         );
     }
 }

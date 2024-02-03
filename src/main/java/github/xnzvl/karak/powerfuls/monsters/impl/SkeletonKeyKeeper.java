@@ -1,5 +1,6 @@
 package github.xnzvl.karak.powerfuls.monsters.impl;
 
+import github.xnzvl.karak.items.Item;
 import github.xnzvl.karak.items.Key;
 import github.xnzvl.karak.powerfuls.monsters.VariousMonster;
 
@@ -14,7 +15,7 @@ public class SkeletonKeyKeeper extends VariousMonster {
                 "Skeleton Key Keeper",
                 "",
                 8,
-                new Key()
+                Item.from(new Key())
         );
     }
 }

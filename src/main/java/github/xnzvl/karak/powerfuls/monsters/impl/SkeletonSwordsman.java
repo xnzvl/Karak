@@ -1,5 +1,6 @@
 package github.xnzvl.karak.powerfuls.monsters.impl;
 
+import github.xnzvl.karak.items.Item;
 import github.xnzvl.karak.items.weapons.impl.Sword;
 import github.xnzvl.karak.powerfuls.monsters.VariousMonster;
 
@@ -14,7 +15,7 @@ public class SkeletonSwordsman extends VariousMonster {
                 "Skeleton Swordsman",
                 "",
                 9,
-                new Sword()
+                Item.from(new Sword())
         );
     }
 }

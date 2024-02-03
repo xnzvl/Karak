@@ -1,5 +1,6 @@
 package github.xnzvl.karak.powerfuls.monsters.impl;
 
+import github.xnzvl.karak.items.Item;
 import github.xnzvl.karak.items.chests.impl.OrdinaryChest;
 import github.xnzvl.karak.powerfuls.monsters.VariousMonster;
 
@@ -14,7 +15,7 @@ public class FallenOne extends VariousMonster {
                 "Fallen One",
                 "",
                 12,
-                new OrdinaryChest()
+                Item.from(new OrdinaryChest())
         );
     }
 }

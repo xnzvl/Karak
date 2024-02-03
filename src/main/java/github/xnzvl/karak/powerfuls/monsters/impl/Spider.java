@@ -1,5 +1,6 @@
 package github.xnzvl.karak.powerfuls.monsters.impl;
 
+import github.xnzvl.karak.items.Item;
 import github.xnzvl.karak.items.spells.impl.HealingWarp;
 import github.xnzvl.karak.powerfuls.monsters.VariousMonster;
 
@@ -14,7 +15,7 @@ public class Spider extends VariousMonster {
                 "Huge Spider",
                 "",
                 6,
-                new HealingWarp()
+                Item.from(new HealingWarp())
         );
     }
 }

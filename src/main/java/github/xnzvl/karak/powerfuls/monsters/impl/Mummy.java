@@ -1,5 +1,6 @@
 package github.xnzvl.karak.powerfuls.monsters.impl;
 
+import github.xnzvl.karak.items.Item;
 import github.xnzvl.karak.items.spells.impl.FlamingSword;
 import github.xnzvl.karak.powerfuls.monsters.VariousMonster;
 
@@ -15,14 +16,14 @@ public class Mummy extends VariousMonster {
                 "Mummy",
                 "",
                 7,
-                new FlamingSword()
+                Item.from(new FlamingSword())
         );
     }
 
     @Override
-    public Item defeat() {
+    public Item getDrop() {
         // TODO: apply Curse
         System.out.println("APPLY CURSE HERE");
-        return this.getDrop();
+        return super.getDrop();
     }
 }

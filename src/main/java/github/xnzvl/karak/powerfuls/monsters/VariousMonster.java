@@ -1,6 +1,7 @@
 package github.xnzvl.karak.powerfuls.monsters;
 
 import github.xnzvl.karak.description.DescribedObject;
+import github.xnzvl.karak.items.Item;
 
 /**
  * Class for simplifying {@link Monster} implementations.
@@ -22,17 +23,12 @@ public class VariousMonster extends DescribedObject implements Monster {
         this.drop = drop;
     }
 
-    protected Item getDrop() {
-        return this.drop;
-    }
-
     @Override
     public int getStrength() {
         return this.strength;
     }
 
-    @Override
-    public Item defeat() {
+    public Item getDrop() {
         return this.drop;
     }
 }
