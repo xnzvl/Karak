@@ -1,4 +1,4 @@
-package github.xnzvl.karak.powerfuls.heroes;
+package github.xnzvl.karak.strengthfuls.heroes;
 
 import github.xnzvl.karak.description.DescribedObject;
 import github.xnzvl.karak.items.Item;
@@ -6,7 +6,7 @@ import github.xnzvl.karak.items.Key;
 import github.xnzvl.karak.items.chests.Chest;
 import github.xnzvl.karak.items.spells.Spell;
 import github.xnzvl.karak.items.weapons.Weapon;
-import github.xnzvl.karak.powerfuls.Strength;
+import github.xnzvl.karak.strengthfuls.Strength;
 import github.xnzvl.karak.utils.MapUtils;
 import github.xnzvl.karak.utils.Pair;
 

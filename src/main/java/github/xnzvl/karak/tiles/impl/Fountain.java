@@ -7,7 +7,7 @@ import github.xnzvl.karak.utils.Pair;
 
 /**
  * Representing fountain tile.
- * {@link github.xnzvl.karak.powerfuls.heroes.Hero} should heal here if it ends turn here.
+ * {@link github.xnzvl.karak.strengthfuls.heroes.Hero} should heal here if it ends turn here.
  *
  * @author Jakub Nezval
  */

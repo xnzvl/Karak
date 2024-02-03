@@ -1,4 +1,4 @@
-package github.xnzvl.karak.powerfuls.monsters;
+package github.xnzvl.karak.strengthfuls.monsters;
 
 import github.xnzvl.karak.description.DescribedObject;
 import github.xnzvl.karak.items.Item;

@@ -1,6 +1,6 @@
 package github.xnzvl.karak.tiles;
 
-import github.xnzvl.karak.powerfuls.monsters.Monster;
+import github.xnzvl.karak.strengthfuls.monsters.Monster;
 import github.xnzvl.karak.utils.Either;
 
 import org.jetbrains.annotations.Nullable;

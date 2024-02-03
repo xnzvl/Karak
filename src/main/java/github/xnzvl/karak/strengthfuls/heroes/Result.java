@@ -1,4 +1,4 @@
-package github.xnzvl.karak.powerfuls.heroes;
+package github.xnzvl.karak.strengthfuls.heroes;
 
 import org.jetbrains.annotations.Nullable;
 

@@ -1,6 +1,6 @@
 package github.xnzvl.karak.players;
 
-import github.xnzvl.karak.powerfuls.heroes.Hero;
+import github.xnzvl.karak.strengthfuls.heroes.Hero;
 
 import java.util.function.Function;
 

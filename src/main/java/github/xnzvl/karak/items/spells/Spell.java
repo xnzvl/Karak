@@ -1,7 +1,7 @@
 package github.xnzvl.karak.items.spells;
 
 import github.xnzvl.karak.description.Description;
-import github.xnzvl.karak.powerfuls.heroes.Hero;
+import github.xnzvl.karak.strengthfuls.heroes.Hero;
 
 /**
  * Interface for spell items. Spell items have type.

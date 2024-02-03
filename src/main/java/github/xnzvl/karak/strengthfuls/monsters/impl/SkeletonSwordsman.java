@@ -1,8 +1,8 @@
-package github.xnzvl.karak.powerfuls.monsters.impl;
+package github.xnzvl.karak.strengthfuls.monsters.impl;
 
 import github.xnzvl.karak.items.Item;
 import github.xnzvl.karak.items.weapons.impl.Sword;
-import github.xnzvl.karak.powerfuls.monsters.VariousMonster;
+import github.xnzvl.karak.strengthfuls.monsters.VariousMonster;
 
 /**
  * Skeleton Swordsman monster unit. Drops {@link Sword}.

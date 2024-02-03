@@ -7,7 +7,7 @@ import github.xnzvl.karak.utils.Pair;
 
 /**
  * Representing portal tile.
- * {@link github.xnzvl.karak.powerfuls.heroes.Hero} should be able
+ * {@link github.xnzvl.karak.strengthfuls.heroes.Hero} should be able
  * to reach any other portal tile in one step.
  *
  * @author Jakub Nezval

@@ -1,8 +1,8 @@
-package github.xnzvl.karak.powerfuls.monsters.impl;
+package github.xnzvl.karak.strengthfuls.monsters.impl;
 
 import github.xnzvl.karak.items.Item;
 import github.xnzvl.karak.items.weapons.impl.Axe;
-import github.xnzvl.karak.powerfuls.monsters.VariousMonster;
+import github.xnzvl.karak.strengthfuls.monsters.VariousMonster;
 
 /**
  * King of Skeletons monster unit. Drops {@link Axe}.

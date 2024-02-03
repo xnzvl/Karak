@@ -1,8 +1,8 @@
-package github.xnzvl.karak.powerfuls.monsters.impl;
+package github.xnzvl.karak.strengthfuls.monsters.impl;
 
 import github.xnzvl.karak.items.Item;
 import github.xnzvl.karak.items.spells.impl.HealingWarp;
-import github.xnzvl.karak.powerfuls.monsters.VariousMonster;
+import github.xnzvl.karak.strengthfuls.monsters.VariousMonster;
 
 /**
  * Huge Spider monster unit. Drops {@link HealingWarp}.

@@ -2,7 +2,7 @@ package github.xnzvl.karak.items.spells.impl;
 
 import github.xnzvl.karak.items.spells.SpellType;
 import github.xnzvl.karak.items.spells.DescribedSpell;
-import github.xnzvl.karak.powerfuls.heroes.Hero;
+import github.xnzvl.karak.strengthfuls.heroes.Hero;
 
 /**
  * Flaming Sword spell. See Karak rules for more information.

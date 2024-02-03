@@ -1,4 +1,4 @@
-package github.xnzvl.karak.powerfuls;
+package github.xnzvl.karak.strengthfuls;
 
 /**
  * Interface for classes that represent units - Monsters/Heroes - in game.

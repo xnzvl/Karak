@@ -1,7 +1,7 @@
-package github.xnzvl.karak.powerfuls.monsters;
+package github.xnzvl.karak.strengthfuls.monsters;
 
 import github.xnzvl.karak.items.Item;
-import github.xnzvl.karak.powerfuls.Strength;
+import github.xnzvl.karak.strengthfuls.Strength;
 
 /**
  * Interface for monster units.
