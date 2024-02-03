@@ -8,7 +8,7 @@ import java.util.function.Consumer;
 import java.util.function.Function;
 
 public abstract class Item {
-    public static Item fromWeapon(
+    public static Item from(
             Weapon weapon
     ) {
         return new Item() {
@@ -24,7 +24,7 @@ public abstract class Item {
         };
     }
 
-    public static Item fromSpell(
+    public static Item from(
             Spell spell
     ) {
         return new Item() {
@@ -40,7 +40,7 @@ public abstract class Item {
         };
     }
 
-    public static Item fromKey(
+    public static Item from(
             Key key
     ) {
         return new Item() {
@@ -56,7 +56,7 @@ public abstract class Item {
         };
     }
 
-    public static Item fromChest(
+    public static Item from(
             Chest chest
     ) {
         return new Item() {
