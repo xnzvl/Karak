@@ -4,15 +4,6 @@ import java.util.function.Consumer;
 import java.util.function.Function;
 
 public abstract class Either<L, R> {
-    private Either() {
-        // on purpose
-    }
-
-    abstract public <T> T apply(
-            Function<? super L, ? extends T> ltFunction,
-            Function<? super R, ? extends T> rtFunction
-    );
-
     public static <L, R> Either<L, R> fromLeft(
             L value
     ) {
@@ -40,6 +31,15 @@ public abstract class Either<L, R> {
             }
         };
     }
+
+    private Either() {
+        // on purpose
+    }
+
+    abstract public <T> T apply(
+            Function<? super L, ? extends T> ltFunction,
+            Function<? super R, ? extends T> rtFunction
+    );
 
     private <T> Function<T, Void> createConsumerFunction(
             Consumer<T> consumer

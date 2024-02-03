@@ -1,9 +1,108 @@
 package github.xnzvl.karak.items;
 
+import github.xnzvl.karak.items.chests.Chest;
+import github.xnzvl.karak.items.spells.Spell;
+import github.xnzvl.karak.items.weapons.Weapon;
+
+import java.util.function.Consumer;
+import java.util.function.Function;
+
 public abstract class Item {
+    public static Item fromWeapon(
+            Weapon weapon
+    ) {
+        return new Item() {
+            @Override
+            public <T> T apply(
+                    Function<? super Weapon, ? extends T> weaponFunction,
+                    Function<? super Spell,  ? extends T> spellFunction,
+                    Function<? super Key,    ? extends T> keyFunction,
+                    Function<? super Chest,  ? extends T> chestFunction
+            ) {
+                return weaponFunction.apply(weapon);
+            }
+        };
+    }
+
+    public static Item fromSpell(
+            Spell spell
+    ) {
+        return new Item() {
+            @Override
+            public <T> T apply(
+                    Function<? super Weapon, ? extends T> weaponFunction,
+                    Function<? super Spell,  ? extends T> spellFunction,
+                    Function<? super Key,    ? extends T> keyFunction,
+                    Function<? super Chest,  ? extends T> chestFunction
+            ) {
+                return spellFunction.apply(spell);
+            }
+        };
+    }
+
+    public static Item fromKey(
+            Key key
+    ) {
+        return new Item() {
+            @Override
+            public <T> T apply(
+                    Function<? super Weapon, ? extends T> weaponFunction,
+                    Function<? super Spell,  ? extends T> spellFunction,
+                    Function<? super Key,    ? extends T> keyFunction,
+                    Function<? super Chest,  ? extends T> chestFunction
+            ) {
+                return keyFunction.apply(key);
+            }
+        };
+    }
+
+    public static Item fromChest(
+            Chest chest
+    ) {
+        return new Item() {
+            @Override
+            public <T> T apply(
+                    Function<? super Weapon, ? extends T> weaponFunction,
+                    Function<? super Spell,  ? extends T> spellFunction,
+                    Function<? super Key,    ? extends T> keyFunction,
+                    Function<? super Chest,  ? extends T> chestFunction
+            ) {
+                return chestFunction.apply(chest);
+            }
+        };
+    }
+
     private Item() {
         // on purpose
     }
 
-    // TODO: Either like class
+    public abstract <T> T apply(
+            Function<? super Weapon, ? extends T> weaponFunction,
+            Function<? super Spell,  ? extends T> spellFunction,
+            Function<? super Key,    ? extends T> keyFunction,
+            Function<? super Chest,  ? extends T> chestFunction
+    );
+
+    private <T> Function<T, Void> createConsumerFunction(
+            Consumer<T> consumer
+    ) {
+        return (T t) -> {
+            consumer.accept(t);
+            return null;
+        };
+    }
+
+    public void consume(
+            Consumer<? super Weapon> weaponConsumer,
+            Consumer<? super Spell>  spellConsumer,
+            Consumer<? super Key>    keyConsumer,
+            Consumer<? super Chest>  chestConsumer
+    ) {
+        this.apply(
+                createConsumerFunction(weaponConsumer),
+                createConsumerFunction(spellConsumer),
+                createConsumerFunction(keyConsumer),
+                createConsumerFunction(chestConsumer)
+        );
+    }
 }
