@@ -63,7 +63,9 @@ class HallTests {
             TileShape shape,
             TileRotation rotation
     ) {
-        VariousTile hall = new VariousTile(coordinates, shape, rotation, null, null);
+        VariousTile hall = new VariousTile
+                .Builder(coordinates, shape, rotation)
+                .build();
 
         var expected = shape.getDoorsTo().stream()
                 .map(directions -> clockwiseShift(directions, rotation.getNumberOfShifts()))

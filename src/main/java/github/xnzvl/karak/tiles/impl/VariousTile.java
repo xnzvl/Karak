@@ -19,24 +19,74 @@ import java.util.Collection;
  * @author Jakub Nezval
  */
 public class VariousTile implements Tile {
+    public static class Builder {
+        private final Pair<Integer, Integer> coordinates;
+        private final TileShape shape;
+        private final TileRotation rotation;
+        private @Nullable TileFeature feature = null;
+        private @Nullable Either<Monster, Item> subject = null;
+
+        public Builder(
+                Pair<Integer, Integer> coordinates,
+                TileShape shape,
+                TileRotation rotation
+        ) {
+            this.coordinates = coordinates;
+            this.shape = shape;
+            this.rotation = rotation;
+        }
+
+        public Pair<Integer, Integer> getCoordinates() {
+            return coordinates;
+        }
+
+        public TileShape getShape() {
+            return shape;
+        }
+
+        public TileRotation getRotation() {
+            return rotation;
+        }
+
+        public @Nullable TileFeature getFeature() {
+            return feature;
+        }
+
+        public @Nullable Either<Monster, Item> getSubject() {
+            return subject;
+        }
+
+        public void addFeature(
+                TileFeature feature
+        ) {
+            this.feature = feature;
+        }
+
+        public void addSubject(
+                Either<Monster, Item> subject
+        ) {
+            this.subject = subject;
+        }
+
+        public VariousTile build() {
+            return new VariousTile(this);
+        }
+    }
+
     private final Pair<Integer, Integer> coordinates;
     private final TileShape shape;
     private final TileRotation rotation;
-    private final TileFeature feature;
+    private final @Nullable TileFeature feature;
     private @Nullable Either<Monster, Item> subject;
 
-    public VariousTile(  // TODO: builder perhaps?
-            Pair<Integer, Integer> coordinates,
-            TileShape shape,
-            TileRotation rotation,
-            @Nullable Either<Monster, Item> subject,
-            @Nullable TileFeature feature
+    private VariousTile(
+            Builder builder
     ) {
-        this.coordinates = coordinates;
-        this.shape = shape;
-        this.rotation = rotation;
-        this.subject = subject;
-        this.feature = feature;
+        this.coordinates = builder.getCoordinates();
+        this.shape       = builder.getShape();
+        this.rotation    = builder.getRotation();
+        this.subject     = builder.getSubject();
+        this.feature     = builder.getFeature();
     }
 
     /**
