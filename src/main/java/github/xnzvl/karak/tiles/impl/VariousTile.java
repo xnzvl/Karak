@@ -1,30 +1,42 @@
 package github.xnzvl.karak.tiles.impl;
 
+import github.xnzvl.karak.items.Item;
+import github.xnzvl.karak.strengthfuls.monsters.Monster;
 import github.xnzvl.karak.tiles.Tile;
+import github.xnzvl.karak.tiles.TileFeature;
 import github.xnzvl.karak.tiles.TileRotation;
 import github.xnzvl.karak.tiles.TileShape;
+import github.xnzvl.karak.utils.Either;
 import github.xnzvl.karak.utils.Pair;
+
+import org.jetbrains.annotations.Nullable;
 
 import java.util.Collection;
 
 /**
- * Hall tile representation. There's nothing special about the tile.
+ * Class for representing various tiles.
  *
  * @author Jakub Nezval
  */
-public class Hall implements Tile {
+public class VariousTile implements Tile {
     private final Pair<Integer, Integer> coordinates;
-    private final TileShape tileShape;
+    private final TileShape shape;
     private final TileRotation rotation;
+    private final TileFeature feature;
+    private @Nullable Either<Monster, Item> subject;
 
-    public Hall(
+    public VariousTile(  // TODO: builder perhaps?
             Pair<Integer, Integer> coordinates,
             TileShape shape,
-            TileRotation rotation
+            TileRotation rotation,
+            @Nullable Either<Monster, Item> subject,
+            @Nullable TileFeature feature
     ) {
         this.coordinates = coordinates;
-        this.tileShape = shape;
+        this.shape = shape;
         this.rotation = rotation;
+        this.subject = subject;
+        this.feature = feature;
     }
 
     /**
@@ -58,7 +70,7 @@ public class Hall implements Tile {
 
     @Override
     public Collection<Pair<Integer, Integer>> getAccessibleCoordinates() {
-        return this.tileShape.getDoorsTo().stream()
+        return this.shape.getDoorsTo().stream()
                 .map(directions -> clockwiseShift(directions, this.rotation.getNumberOfShifts()))
                 .map(coords -> Pair.of(
                         coords.xValue() + this.coordinates.xValue(),
@@ -68,12 +80,29 @@ public class Hall implements Tile {
     }
 
     @Override
-    public TileShape getTileShape() {
-        return this.tileShape;
+    public TileShape getShape() {
+        return this.shape;
     }
 
     @Override
     public TileRotation getRotation() {
         return this.rotation;
+    }
+
+    @Override
+    public @Nullable Either<Monster, Item> getTileSubject() {
+        return this.subject;
+    }
+
+    @Override
+    public void setTileSubject(
+            @Nullable Either<Monster, Item> subject
+    ) {
+        this.subject = subject;
+    }
+
+    @Override
+    public @Nullable TileFeature getFeature() {
+        return this.feature;
     }
 }

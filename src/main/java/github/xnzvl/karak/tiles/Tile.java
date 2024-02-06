@@ -1,6 +1,11 @@
 package github.xnzvl.karak.tiles;
 
+import github.xnzvl.karak.items.Item;
+import github.xnzvl.karak.strengthfuls.monsters.Monster;
+import github.xnzvl.karak.utils.Either;
 import github.xnzvl.karak.utils.Pair;
+
+import org.jetbrains.annotations.Nullable;
 
 import java.util.Collection;
 
@@ -11,11 +16,17 @@ import java.util.Collection;
  */
 public interface Tile {
     Pair<Integer, Integer> getCoordinates();
-    TileShape getTileShape();
+    TileShape getShape();
     TileRotation getRotation();
 
+    @Nullable Either<Monster, Item> getTileSubject();
+    void setTileSubject(@Nullable Either<Monster, Item> roomSubject);
+
+    @Nullable TileFeature getFeature();
+
     /**
-     * @return collection of coordinates that are reachable from this tile
+     * @return {@link Collection} of coordinates that are reachable from this {@link Tile}
+     * @see Pair
      */
     Collection<Pair<Integer, Integer>> getAccessibleCoordinates();
 }

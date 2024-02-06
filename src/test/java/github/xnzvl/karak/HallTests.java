@@ -1,6 +1,6 @@
 package github.xnzvl.karak;
 
-import github.xnzvl.karak.tiles.impl.Hall;
+import github.xnzvl.karak.tiles.impl.VariousTile;
 import github.xnzvl.karak.tiles.TileRotation;
 import github.xnzvl.karak.tiles.TileShape;
 import github.xnzvl.karak.utils.Pair;
@@ -63,7 +63,7 @@ class HallTests {
             TileShape shape,
             TileRotation rotation
     ) {
-        Hall hall = new Hall(coordinates, shape, rotation);
+        VariousTile hall = new VariousTile(coordinates, shape, rotation, null, null);
 
         var expected = shape.getDoorsTo().stream()
                 .map(directions -> clockwiseShift(directions, rotation.getNumberOfShifts()))
