@@ -57,16 +57,18 @@ public class VariousTile implements Tile {
             return subject;
         }
 
-        public void addFeature(
+        public Builder addFeature(
                 TileFeature feature
         ) {
             this.feature = feature;
+            return this;
         }
 
-        public void addSubject(
+        public Builder addSubject(
                 Either<Monster, Item> subject
         ) {
             this.subject = subject;
+            return this;
         }
 
         public VariousTile build() {
