@@ -47,6 +47,7 @@ public class Hero extends DescribedObject implements Strength {
         if (!isValidMove(newPosition)) return Result.withFailure(Result.Failure.INVALID_CHOICE);
 
         // TODO: change position + remember last position
+        //       place a new Tile if needed
 
         return Result.withSuccess();
     }
