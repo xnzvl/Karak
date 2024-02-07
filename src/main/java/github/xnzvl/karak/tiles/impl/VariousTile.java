@@ -6,6 +6,7 @@ import github.xnzvl.karak.tiles.Tile;
 import github.xnzvl.karak.tiles.TileFeature;
 import github.xnzvl.karak.tiles.TileRotation;
 import github.xnzvl.karak.tiles.TileShape;
+import github.xnzvl.karak.utils.Buildable;
 import github.xnzvl.karak.utils.Either;
 import github.xnzvl.karak.utils.Pair;
 
@@ -19,7 +20,7 @@ import java.util.Collection;
  * @author Jakub Nezval
  */
 public class VariousTile implements Tile {
-    public static class Builder {
+    public static class Builder implements Buildable<VariousTile> {
         private final Pair<Integer, Integer> coordinates;
         private final TileShape shape;
         private final TileRotation rotation;
