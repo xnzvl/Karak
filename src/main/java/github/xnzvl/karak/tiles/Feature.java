@@ -1,6 +1,6 @@
 package github.xnzvl.karak.tiles;
 
-public enum TileFeature {
+public enum Feature {
     FOUNTAIN,
     PORTAL;
 }

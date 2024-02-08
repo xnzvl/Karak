@@ -1,8 +1,9 @@
 package github.xnzvl.karak;
 
+import github.xnzvl.karak.tiles.Type;
 import github.xnzvl.karak.tiles.impl.VariousTile;
-import github.xnzvl.karak.tiles.TileRotation;
-import github.xnzvl.karak.tiles.TileShape;
+import github.xnzvl.karak.tiles.Rotation;
+import github.xnzvl.karak.tiles.Shape;
 import github.xnzvl.karak.utils.Pair;
 
 import org.junit.jupiter.params.ParameterizedTest;
@@ -27,10 +28,10 @@ class HallTests {
 
     private static Stream<Arguments> tileConfigurations() {
         List<Arguments> configs = new ArrayList<>(
-                variousCoords.size() * TileShape.values().length * TileRotation.values().length
+                variousCoords.size() * Shape.values().length * Rotation.values().length
         );
-        for (var tileShape : TileShape.values()) {
-            for (var rotation : TileRotation.values()) {
+        for (var tileShape : Shape.values()) {
+            for (var rotation : Rotation.values()) {
                 for (var coords : variousCoords) {
                     configs.add(Arguments.of(coords, tileShape, rotation));
                 }
@@ -60,11 +61,12 @@ class HallTests {
     @MethodSource("tileConfigurations")
     void getAccessibleCoordinates_allConfigurations_isCorrect(
             Pair<Integer, Integer> coordinates,
-            TileShape shape,
-            TileRotation rotation
+            Shape shape,
+            Rotation rotation
     ) {
         VariousTile hall = new VariousTile
-                .Builder(coordinates, shape, rotation)
+                .Builder(coordinates, shape, Type.HALL)
+                .setRotation(rotation)
                 .build();
 
         var expected = shape.getDoorsTo().stream()

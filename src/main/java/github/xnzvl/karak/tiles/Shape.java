@@ -10,7 +10,7 @@ import java.util.List;
  *
  * @author Jakub Nezval
  */
-public enum TileShape {
+public enum Shape {
     I (List.of(Pair.of(0, 1), Pair.of(0, -1))),
     L (List.of(Pair.of(0, 1), Pair.of(1, 0))),
     T (List.of(Pair.of(0, 1), Pair.of(1, 0), Pair.of(0, -1))),
@@ -18,7 +18,7 @@ public enum TileShape {
 
     private final List<Pair<Integer, Integer>> doorsTo;
 
-    TileShape(
+    Shape(
             List<Pair<Integer, Integer>> doorsTo
     ) {
         this.doorsTo = doorsTo;

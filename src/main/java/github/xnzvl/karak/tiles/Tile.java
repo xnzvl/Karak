@@ -16,13 +16,14 @@ import java.util.Collection;
  */
 public interface Tile {
     Pair<Integer, Integer> getCoordinates();
-    TileShape getShape();
-    TileRotation getRotation();
+    Shape getShape();
+    Rotation getRotation();
+    Type getType();
 
-    @Nullable Either<Monster, Item> getTileSubject();
-    void setTileSubject(@Nullable Either<Monster, Item> roomSubject);
+    @Nullable Feature getFeature();
+    @Nullable Either<Monster, Item> getSubject();
 
-    @Nullable TileFeature getFeature();
+    void setSubject(@Nullable Either<Monster, Item> roomSubject);
 
     /**
      * @return {@link Collection} of coordinates that are reachable from this {@link Tile}

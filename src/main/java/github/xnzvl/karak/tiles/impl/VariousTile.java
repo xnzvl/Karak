@@ -3,9 +3,10 @@ package github.xnzvl.karak.tiles.impl;
 import github.xnzvl.karak.items.Item;
 import github.xnzvl.karak.strengthfuls.monsters.Monster;
 import github.xnzvl.karak.tiles.Tile;
-import github.xnzvl.karak.tiles.TileFeature;
-import github.xnzvl.karak.tiles.TileRotation;
-import github.xnzvl.karak.tiles.TileShape;
+import github.xnzvl.karak.tiles.Feature;
+import github.xnzvl.karak.tiles.Rotation;
+import github.xnzvl.karak.tiles.Shape;
+import github.xnzvl.karak.tiles.Type;
 import github.xnzvl.karak.utils.Buildable;
 import github.xnzvl.karak.utils.Either;
 import github.xnzvl.karak.utils.Pair;
@@ -22,34 +23,39 @@ import java.util.Collection;
 public class VariousTile implements Tile {
     public static class Builder implements Buildable<VariousTile> {
         private final Pair<Integer, Integer> coordinates;
-        private final TileShape shape;
-        private final TileRotation rotation;
-        private @Nullable TileFeature feature = null;
+        private final Shape shape;
+        private final Type type;
+        private Rotation rotation = Rotation.ONE;
+        private @Nullable Feature feature = null;
         private @Nullable Either<Monster, Item> subject = null;
 
         public Builder(
                 Pair<Integer, Integer> coordinates,
-                TileShape shape,
-                TileRotation rotation
+                Shape shape,
+                Type type
         ) {
             this.coordinates = coordinates;
             this.shape = shape;
-            this.rotation = rotation;
+            this.type = type;
         }
 
         public Pair<Integer, Integer> getCoordinates() {
             return coordinates;
         }
 
-        public TileShape getShape() {
-            return shape;
-        }
-
-        public TileRotation getRotation() {
+        public Rotation getRotation() {
             return rotation;
         }
 
-        public @Nullable TileFeature getFeature() {
+        public Shape getShape() {
+            return shape;
+        }
+
+        public Type getType() {
+            return this.type;
+        }
+
+        public @Nullable Feature getFeature() {
             return feature;
         }
 
@@ -57,8 +63,15 @@ public class VariousTile implements Tile {
             return subject;
         }
 
+        public Builder setRotation(
+                Rotation rotation
+        ) {
+            this.rotation = rotation;
+            return this;
+        }
+
         public Builder addFeature(
-                TileFeature feature
+                Feature feature
         ) {
             this.feature = feature;
             return this;
@@ -77,17 +90,19 @@ public class VariousTile implements Tile {
     }
 
     private final Pair<Integer, Integer> coordinates;
-    private final TileShape shape;
-    private final TileRotation rotation;
-    private final @Nullable TileFeature feature;
+    private final Shape shape;
+    private final Rotation rotation;
+    private final Type type;
+    private final @Nullable Feature feature;
     private @Nullable Either<Monster, Item> subject;
 
     private VariousTile(
             Builder builder
     ) {
-        this.coordinates = builder.getCoordinates();
+        this.coordinates = builder.coordinates;
         this.shape       = builder.getShape();
         this.rotation    = builder.getRotation();
+        this.type        = builder.getType();
         this.subject     = builder.getSubject();
         this.feature     = builder.getFeature();
     }
@@ -99,7 +114,7 @@ public class VariousTile implements Tile {
      * @param numberOfShifts non-negative number of shifts
      * @return shifted coordinates
      */
-    private Pair<Integer, Integer> clockwiseShift(
+    private static Pair<Integer, Integer> clockwiseShift(
             Pair<Integer, Integer> coords,
             int numberOfShifts
     ) {
@@ -117,11 +132,6 @@ public class VariousTile implements Tile {
     }
 
     @Override
-    public Pair<Integer, Integer> getCoordinates() {
-        return this.coordinates;
-    }
-
-    @Override
     public Collection<Pair<Integer, Integer>> getAccessibleCoordinates() {
         return this.shape.getDoorsTo().stream()
                 .map(directions -> clockwiseShift(directions, this.rotation.getNumberOfShifts()))
@@ -133,29 +143,39 @@ public class VariousTile implements Tile {
     }
 
     @Override
-    public TileShape getShape() {
-        return this.shape;
+    public Pair<Integer, Integer> getCoordinates() {
+        return this.coordinates;
     }
 
     @Override
-    public TileRotation getRotation() {
+    public Rotation getRotation() {
         return this.rotation;
     }
 
     @Override
-    public @Nullable Either<Monster, Item> getTileSubject() {
+    public Shape getShape() {
+        return this.shape;
+    }
+
+    @Override
+    public Type getType() {
+        return this.type;
+    }
+
+    @Override
+    public @Nullable Either<Monster, Item> getSubject() {
         return this.subject;
     }
 
     @Override
-    public void setTileSubject(
+    public void setSubject(
             @Nullable Either<Monster, Item> subject
     ) {
         this.subject = subject;
     }
 
     @Override
-    public @Nullable TileFeature getFeature() {
+    public @Nullable Feature getFeature() {
         return this.feature;
     }
 }

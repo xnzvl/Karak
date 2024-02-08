@@ -5,7 +5,7 @@ package github.xnzvl.karak.tiles;
  *
  * @author Jakub Nezval
  */
-public enum TileRotation {
+public enum Rotation {
     ONE   (0),
     TWO   (1),
     THREE (2),
@@ -13,7 +13,7 @@ public enum TileRotation {
 
     private final int numberOfShifts;
 
-    TileRotation(
+    Rotation(
             int numberOfShifts
     ) {
         this.numberOfShifts = numberOfShifts;
