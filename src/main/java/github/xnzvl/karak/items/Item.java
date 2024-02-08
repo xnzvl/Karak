@@ -3,6 +3,7 @@ package github.xnzvl.karak.items;
 import github.xnzvl.karak.items.chests.Chest;
 import github.xnzvl.karak.items.spells.Spell;
 import github.xnzvl.karak.items.weapons.Weapon;
+import github.xnzvl.karak.utils.Either;
 
 import java.util.function.Consumer;
 import java.util.function.Function;
@@ -83,15 +84,6 @@ public abstract class Item {
             Function<? super Chest,  ? extends T> chestFunction
     );
 
-    private <T> Function<T, Void> createConsumerFunction(
-            Consumer<T> consumer
-    ) {
-        return (T t) -> {
-            consumer.accept(t);
-            return null;
-        };
-    }
-
     public void consume(
             Consumer<? super Weapon> weaponConsumer,
             Consumer<? super Spell>  spellConsumer,
@@ -99,10 +91,10 @@ public abstract class Item {
             Consumer<? super Chest>  chestConsumer
     ) {
         this.apply(
-                createConsumerFunction(weaponConsumer),
-                createConsumerFunction(spellConsumer),
-                createConsumerFunction(keyConsumer),
-                createConsumerFunction(chestConsumer)
+                Either.createConsumerFunction(weaponConsumer),
+                Either.createConsumerFunction(spellConsumer),
+                Either.createConsumerFunction(keyConsumer),
+                Either.createConsumerFunction(chestConsumer)
         );
     }
 }
