@@ -85,6 +85,10 @@ public class VariousTile implements Tile {
         }
 
         public VariousTile build() {
+            if (this.type == Type.HALL && this.subject != null) {
+                throw new RuntimeException("Invalid Tile configuration"); // TODO: better exception
+            }
+
             return new VariousTile(this);
         }
     }
