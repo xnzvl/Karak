@@ -2,6 +2,7 @@ package github.xnzvl.karak.game;
 
 import github.xnzvl.karak.tiles.Tile;
 import github.xnzvl.karak.utils.Pair;
+import github.xnzvl.karak.utils.Result;
 
 import java.util.Collections;
 import java.util.HashMap;
@@ -19,7 +20,7 @@ public class Board {
     /**
      * Method for obtaining singleton instance of this class.
      *
-     * @return singleton instance of the class
+     * @return singleton instance of {@link Board}
      */
     public static Board getInstance() {
         return instance;
@@ -31,20 +32,21 @@ public class Board {
     }
 
     /**
-     * @return unmodifiable map of coordinates to tiles
+     * @return unmodifiable {@link Map} of coordinates to {@link Tile}s
      */
     public Map<Pair<Integer, Integer>, Tile> getBoard() {
         return Collections.unmodifiableMap(this.board);
     }
 
     /**
-     * Places new ⟨tile⟩ at ⟨coordinates⟩.
-     * If ⟨coordinates⟩ are already occupied, does nothing and returns `false`
-     * otherwise returns `true`.
+     * Places new {@link Tile} at coordinates.
+     * If coordinates are already occupied, does nothing and results with {@link Result#withFailure(Result.Failure)}
+     * otherwise results with {@link Result#withSuccess()}
      *
      * @param tile        new tile
      * @param coordinates coordinates where to place the tile
-     * @return `true` on success, otherwise `false`
+     * @return result
+     * @see Result
      */
     public boolean placeNewTile(
             Tile tile,
@@ -59,14 +61,14 @@ public class Board {
     // TODO: FEATURE TILES
 
     /**
-     * @return set of coordinates on which the fountains are located
+     * @return {@link Set} of coordinates on which {@link github.xnzvl.karak.tiles.Feature#FOUNTAIN}s are located
      */
     public Set<Pair<Integer, Integer>> getFountainCoords() {
         return null;
     }
 
     /**
-     * @return set of coordinates on which the portals are located
+     * @return {@link Set} of coordinates on which {@link github.xnzvl.karak.tiles.Feature#PORTAL}s are located
      */
     public Set<Pair<Integer, Integer>> getPortalCoords() {
         return null;
