@@ -1,5 +1,6 @@
 package github.xnzvl.karak.game;
 
+import github.xnzvl.karak.tiles.Feature;
 import github.xnzvl.karak.tiles.Tile;
 import github.xnzvl.karak.utils.Pair;
 import github.xnzvl.karak.utils.Result;
@@ -8,6 +9,7 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 /**
  * Class for representing board of {@link Tile}s.
@@ -58,19 +60,19 @@ public class Board {
         return true;
     }
 
-    // TODO: FEATURE TILES
-
     /**
-     * @return {@link Set} of coordinates on which {@link github.xnzvl.karak.tiles.Feature#FOUNTAIN}s are located
+     * Obtain coordinates of existing tiles (at the moment of calling this method)
+     * that have the desired {@link Feature}.
+     *
+     * @param feature looking for tiles with this {@link Feature}
+     * @return unmodifiable {@link Set} of coordinates with the desired {@link Tile}s
      */
-    public Set<Pair<Integer, Integer>> getFountainCoords() {
-        return null;
-    }
-
-    /**
-     * @return {@link Set} of coordinates on which {@link github.xnzvl.karak.tiles.Feature#PORTAL}s are located
-     */
-    public Set<Pair<Integer, Integer>> getPortalCoords() {
-        return null;
+    public Set<Pair<Integer, Integer>> getTilesWith(
+            Feature feature
+    ) {
+        return this.board.keySet()
+                .stream()
+                .filter((coords) -> this.board.get(coords).getFeature() == feature)
+                .collect(Collectors.toUnmodifiableSet());
     }
 }
