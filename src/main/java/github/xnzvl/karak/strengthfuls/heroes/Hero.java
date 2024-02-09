@@ -1,12 +1,14 @@
 package github.xnzvl.karak.strengthfuls.heroes;
 
 import github.xnzvl.karak.description.DescribedObject;
+import github.xnzvl.karak.game.Board;
 import github.xnzvl.karak.items.Item;
 import github.xnzvl.karak.items.Key;
 import github.xnzvl.karak.items.chests.Chest;
 import github.xnzvl.karak.items.spells.Spell;
 import github.xnzvl.karak.items.weapons.Weapon;
 import github.xnzvl.karak.strengthfuls.Strength;
+import github.xnzvl.karak.tiles.Tile;
 import github.xnzvl.karak.utils.MapUtils;
 import github.xnzvl.karak.utils.Pair;
 import github.xnzvl.karak.utils.Result;
@@ -21,12 +23,13 @@ public class Hero extends DescribedObject implements Strength {
     public static final int MAX_HIT_POINTS = 5;
     public static final int DEFAULT_NUMBER_OF_STEPS = 4;
 
-    private int hitPoints = MAX_HIT_POINTS;
-    private Pair<Integer, Integer> position = Pair.of(0, 0);
+    private final Board board = Board.getInstance();
     private final Map<Slot, @Nullable Item> inventory = MapUtils.defaultHashMapFrom(
             Arrays.asList(Slot.values()), null
     );
 
+    private int hitPoints = MAX_HIT_POINTS;
+    private Pair<Integer, Integer> position = Pair.of(0, 0);
     @Nullable
     private TurnConstraint turnConstraint = null;
 
@@ -47,8 +50,8 @@ public class Hero extends DescribedObject implements Strength {
     ) {
         if (!isValidMove(newPosition)) return Result.withFailure(Result.Failure.INVALID_CHOICE);
 
-        // TODO: change position + remember last position
-        //       place a new Tile if needed
+        // TODO: - change position + remember last position
+        //       - place a new Tile if needed
 
         return Result.withSuccess();
     }
@@ -56,8 +59,8 @@ public class Hero extends DescribedObject implements Strength {
     public Result pickUpItem(
             Slot slot
     ) {
-        // TODO: what if you don't want to pick up the item
-        // TODO: get item
+        // TODO: - what if you don't want to pick up the item?
+        //       - get Item (do I need that? ... it could be a parameter)
         Item item;
         return item.apply(
                 weapon -> pickUpWeapon(slot, weapon),
@@ -110,8 +113,8 @@ public class Hero extends DescribedObject implements Strength {
     ) {
         if (Slot.isWeaponSlot(slot))          return Result.withFailure(Result.Failure.INVALID_CHOICE);
         if (this.inventory.get(slot) == null) return Result.withFailure(Result.Failure.NULL);
-        // TODO: key unlocks a chest! don't forget it
-        // TODO: check if spell is usable in the situation
+        // TODO: - key unlocks a chest! don't forget it
+        //       - check if spell is usable in the situation
         return Result.withSuccess();
     }
 
