@@ -2,7 +2,10 @@ package github.xnzvl.karak.players;
 
 import github.xnzvl.karak.strengthfuls.heroes.Hero;
 
+import org.jetbrains.annotations.Nullable;
+
 import java.util.function.Function;
+import java.util.function.Supplier;
 
 /**
  * Class representing a player.
@@ -11,40 +14,57 @@ import java.util.function.Function;
  */
 public class Player {
     private final String name;
-    private final Hero hero;
-    private final PlayerInputHandler inputHandler;
+    private final Function<Hero, PlayerInputHandler> inputHandlerConstructor;
+
+    private Hero hero;
+    private PlayerInputHandler inputHandler;
 
     /**
      * @param name name of the {@link Player}
-     * @param hero {@link Player}'s hero
-     * @param inputHandlerCreator handler for user's inputs
+     * @param inputHandlerConstructor creates {@link PlayerInputHandler} for user's inputs
+     *                                (after calling {@link Player#assignHero})
+     * @see Player#assignHero(Hero)
+     * @see PlayerInputHandler
      */
     public Player(
             String name,
-            Hero hero,
-            Function<Hero, PlayerInputHandler> inputHandlerCreator
+            Function<Hero, PlayerInputHandler> inputHandlerConstructor
     ) {
         this.name = name;
-        this.hero = hero;
-        this.inputHandler = inputHandlerCreator.apply(hero);
-
-        if (this.inputHandler.getHero() != hero) {
-            // throw error
-        }
+        this.inputHandlerConstructor = inputHandlerConstructor;
     }
 
     /**
-     * @return {@link PlayerInputHandler} associated with this player
+     * @return {@link PlayerInputHandler} associated with this {@link Player}
      */
-    protected PlayerInputHandler getInputHandler() {
+    protected @Nullable PlayerInputHandler getInputHandler() {
         return this.inputHandler;
     }
 
     /**
-     * @return Player's hero
+     * @return {@link Player}'s hero
      */
-    public Hero getHero() {
+    public @Nullable Hero getHero() {
         return this.hero;
+    }
+
+    /**
+     * @return name of the {@link Player}
+     */
+    public String getName() {
+        return this.name;
+    }
+
+    // TODO: - Picker for the Hero
+    //       - fix Player#Player javadoc
+    /**
+     * @param heroConstructor {@link Function} for constructing a desired {@link Hero}
+     */
+    public void assignHero(
+            Function<Object, Hero> heroConstructor  // fix type
+    ) {
+        this.hero = null; // use constructor here
+        this.inputHandler = this.inputHandlerConstructor.apply(hero);
     }
 
     /**
@@ -61,12 +81,5 @@ public class Player {
         }
 
         this.hero.endTurn();
-    }
-
-    /**
-     * @return name of the Player
-     */
-    public String getName() {
-        return this.name;
     }
 }

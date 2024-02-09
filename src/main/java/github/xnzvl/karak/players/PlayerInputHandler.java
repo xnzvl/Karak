@@ -3,7 +3,7 @@ package github.xnzvl.karak.players;
 import github.xnzvl.karak.strengthfuls.heroes.Hero;
 
 /**
- * Abstract class for classes that provide input to the game logic.
+ * Abstract root class for classes that provide input to the game logic.
  *
  * @author Jakub Nezval
  */
