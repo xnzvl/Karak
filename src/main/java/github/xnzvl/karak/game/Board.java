@@ -2,10 +2,12 @@ package github.xnzvl.karak.game;
 
 import github.xnzvl.karak.tiles.Feature;
 import github.xnzvl.karak.tiles.Tile;
+import github.xnzvl.karak.tiles.impl.TileFactory;
 import github.xnzvl.karak.utils.Pair;
 import github.xnzvl.karak.utils.Result;
 
-import java.util.Collections;
+import org.jetbrains.annotations.Nullable;
+
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
@@ -29,15 +31,19 @@ public class Board {
     }
 
     private final Map<Pair<Integer, Integer>, Tile> board = new HashMap<>();
+
     private Board() {
-        // TODO: place fountain tiles at [0, 0]
+        this.placeNewTile(TileFactory.createOrigin(), Pair.of(0,0));
     }
 
     /**
-     * @return unmodifiable {@link Map} of coordinates to {@link Tile}s
+     * @param coordinates coordinates that should be associated with {@link Tile}
+     * @return {@link Tile} located at given coordinates (null if there isn't any)
      */
-    public Map<Pair<Integer, Integer>, Tile> getBoard() {
-        return Collections.unmodifiableMap(this.board);
+    public @Nullable Tile getTileAt(
+            Pair<Integer, Integer> coordinates
+    ) {
+        return this.board.get(coordinates);
     }
 
     /**
@@ -50,14 +56,14 @@ public class Board {
      * @return result
      * @see Result
      */
-    public boolean placeNewTile(
+    public Result placeNewTile(
             Tile tile,
             Pair<Integer, Integer> coordinates
     ) {
-        if (this.board.containsKey(coordinates)) return false;
+        if (this.board.containsKey(coordinates)) return Result.withFailure(Result.Failure.INVALID_CHOICE);
 
         this.board.put(coordinates, tile);
-        return true;
+        return Result.withSuccess();
     }
 
     /**
