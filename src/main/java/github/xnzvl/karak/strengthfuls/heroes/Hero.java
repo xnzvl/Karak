@@ -7,8 +7,8 @@ import github.xnzvl.karak.items.Key;
 import github.xnzvl.karak.items.chests.Chest;
 import github.xnzvl.karak.items.spells.Spell;
 import github.xnzvl.karak.items.weapons.Weapon;
+import github.xnzvl.karak.players.Picker;
 import github.xnzvl.karak.strengthfuls.Strength;
-import github.xnzvl.karak.tiles.Tile;
 import github.xnzvl.karak.utils.MapUtils;
 import github.xnzvl.karak.utils.Pair;
 import github.xnzvl.karak.utils.Result;
@@ -27,14 +27,19 @@ public class Hero extends DescribedObject implements Strength {
     private final Map<Slot, @Nullable Item> inventory = MapUtils.defaultHashMapFrom(
             Arrays.asList(Slot.values()), null
     );
+    private final Picker picker;
 
     private int hitPoints = MAX_HIT_POINTS;
     private Pair<Integer, Integer> position = Pair.of(0, 0);
     @Nullable
     private TurnConstraint turnConstraint = null;
 
-    protected Hero() {
+    // TODO: javadoc
+    protected Hero(
+            Picker picker
+    ) {
         super(null, null);
+        this.picker = picker;
     }
 
     public void startTurn() {
@@ -43,6 +48,10 @@ public class Hero extends DescribedObject implements Strength {
 
     public void endTurn() {
         this.turnConstraint = null;
+    }
+
+    private Slot pickInventorySlot() {
+        return this.picker.pick(Picker.Context.INVENTORY_SLOT, Slot.values());
     }
 
     public Result move(
@@ -57,11 +66,9 @@ public class Hero extends DescribedObject implements Strength {
     }
 
     public Result pickUpItem(
-            Slot slot
+            Item item
     ) {
-        // TODO: - what if you don't want to pick up the item?
-        //       - get Item (do I need that? ... it could be a parameter)
-        Item item;
+        Slot slot = this.pickInventorySlot();
         return item.apply(
                 weapon -> pickUpWeapon(slot, weapon),
                 spell  -> pickUpSpell(slot, spell),
@@ -71,9 +78,9 @@ public class Hero extends DescribedObject implements Strength {
     }
 
     private Result pickUpItem(
+            Item item,
             Slot slot,
-            Predicate<Slot> isSlotValid,
-            Item item
+            Predicate<Slot> isSlotValid
     ) {
         if (!isSlotValid.test(slot)) return Result.withFailure(Result.Failure.INVALID_CHOICE);
         this.inventory.put(slot, item);
@@ -84,21 +91,21 @@ public class Hero extends DescribedObject implements Strength {
             Slot slot,
             Weapon weapon
     ) {
-        return pickUpItem(slot, Slot::isWeaponSlot, Item.from(weapon));
+        return pickUpItem(Item.from(weapon), slot, Slot::isWeaponSlot);
     }
 
     protected Result pickUpSpell(
             Slot slot,
             Spell spell
     ) {
-        return pickUpItem(slot, Slot::isSpellSlot, Item.from(spell));
+        return pickUpItem(Item.from(spell), slot, Slot::isSpellSlot);
     }
 
     protected Result pickUpKey(
             Slot slot,
             Key key
     ) {
-        return pickUpItem(slot, (slotArg -> slotArg != Slot.KEY), Item.from(key));
+        return pickUpItem(Item.from(key), slot, (slotArg -> slotArg != Slot.KEY));
     }
 
     protected Result pickUpChest(
@@ -108,13 +115,15 @@ public class Hero extends DescribedObject implements Strength {
         return Result.withSuccess();
     }
 
-    public Result useItem(
-            Slot slot
-    ) {
+    public Result useItem() {
+        Slot slot = this.pickInventorySlot();
+
         if (Slot.isWeaponSlot(slot))          return Result.withFailure(Result.Failure.INVALID_CHOICE);
         if (this.inventory.get(slot) == null) return Result.withFailure(Result.Failure.NULL);
+
         // TODO: - key unlocks a chest! don't forget it
         //       - check if spell is usable in the situation
+
         return Result.withSuccess();
     }
 

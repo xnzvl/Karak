@@ -11,7 +11,7 @@ public abstract class Picker {
      * @see Picker#pick(Context, Object...) Picker.pick(Context, T...)
      */
     public enum Context {
-        // TODO
+        INVENTORY_SLOT;
     }
 
     /**
