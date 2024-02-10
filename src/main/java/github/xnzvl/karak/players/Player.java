@@ -5,7 +5,6 @@ import github.xnzvl.karak.strengthfuls.heroes.Hero;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.function.Function;
-import java.util.function.Supplier;
 
 /**
  * Class representing a player.
@@ -15,6 +14,7 @@ import java.util.function.Supplier;
 public class Player {
     private final String name;
     private final Function<Hero, PlayerInputHandler> inputHandlerConstructor;
+    private final Picker picker;
 
     private Hero hero;
     private PlayerInputHandler inputHandler;
@@ -23,15 +23,19 @@ public class Player {
      * @param name name of the {@link Player}
      * @param inputHandlerConstructor creates {@link PlayerInputHandler} for user's inputs
      *                                (after calling {@link Player#assignHero})
-     * @see Player#assignHero(Hero)
+     * @param picker additional handler for user inputs
+     * @see Player#assignHero(Function)
+     * @see Picker
      * @see PlayerInputHandler
      */
     public Player(
             String name,
-            Function<Hero, PlayerInputHandler> inputHandlerConstructor
+            Function<Hero, PlayerInputHandler> inputHandlerConstructor,
+            Picker picker
     ) {
         this.name = name;
         this.inputHandlerConstructor = inputHandlerConstructor;
+        this.picker = picker;
     }
 
     /**
@@ -54,16 +58,15 @@ public class Player {
     public String getName() {
         return this.name;
     }
-
-    // TODO: - Picker for the Hero
-    //       - fix Player#Player javadoc
+    
     /**
      * @param heroConstructor {@link Function} for constructing a desired {@link Hero}
+     * @see Picker
      */
     public void assignHero(
-            Function<Object, Hero> heroConstructor  // fix type
+            Function<Picker, Hero> heroConstructor
     ) {
-        this.hero = null; // use constructor here
+        this.hero = heroConstructor.apply(this.picker);
         this.inputHandler = this.inputHandlerConstructor.apply(hero);
     }
 
