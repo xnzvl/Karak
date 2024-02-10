@@ -4,7 +4,7 @@ package github.xnzvl.karak.players;
  * Enumeration for possible outcomes of handling an input from a player.
  * Options are {@link InputResult#CONTINUE_TURN} and {@link InputResult#END_TURN}.
  *
- * @see PlayerInputHandler#handleInput()
+ * @see InputHandler#handleInput()
  * @author Jakub Nezval
  */
 public enum InputResult {

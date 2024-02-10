@@ -1,10 +1,7 @@
 package github.xnzvl.karak.players.impl;
 
-import github.xnzvl.karak.players.PlayerInputHandler;
+import github.xnzvl.karak.players.InputHandler;
 import github.xnzvl.karak.players.Player;
-import github.xnzvl.karak.strengthfuls.heroes.Hero;
-
-import java.util.function.Function;
 
 /**
  * Class representing a human player.
@@ -13,13 +10,12 @@ import java.util.function.Function;
  */
 public class HumanPlayer extends Player {
     /**
-     * @see Player#Player(String, Hero, Function) Player constructor
+     * @see Player#Player(String, InputHandler)
      */
-    public HumanPlayer(
+    public HumanPlayer(  // TODO: maybe this class is useless
             String name,
-            Hero hero,
-            Function<Hero, PlayerInputHandler> inputHandlerCreator
+            InputHandler inputHandler
     ) {
-        super(name, hero, inputHandlerCreator);
+        super(name, inputHandler);
     }
 }

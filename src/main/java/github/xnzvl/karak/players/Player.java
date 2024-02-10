@@ -12,62 +12,57 @@ import java.util.function.Function;
  * @author Jakub Nezval
  */
 public class Player {
+    private final InputHandler inputHandler;
     private final String name;
-    private final Function<Hero, PlayerInputHandler> inputHandlerConstructor;
-    private final Picker picker;
 
     private Hero hero;
-    private PlayerInputHandler inputHandler;
 
     /**
      * @param name name of the {@link Player}
-     * @param inputHandlerConstructor creates {@link PlayerInputHandler} for user's inputs
-     *                                (after calling {@link Player#assignHero})
-     * @param picker additional handler for user inputs
+     * @param inputHandler intermediary for {@link Player}'s input
      * @see Player#assignHero(Function)
+     * @see InputHandler
      * @see Picker
-     * @see PlayerInputHandler
      */
     public Player(
             String name,
-            Function<Hero, PlayerInputHandler> inputHandlerConstructor,
-            Picker picker
+            InputHandler inputHandler
     ) {
         this.name = name;
-        this.inputHandlerConstructor = inputHandlerConstructor;
-        this.picker = picker;
+        this.inputHandler = inputHandler;
     }
 
     /**
-     * @return {@link PlayerInputHandler} associated with this {@link Player}
+     * @return {@link InputHandler} associated with this {@link Player}
      */
-    protected @Nullable PlayerInputHandler getInputHandler() {
+    protected final InputHandler getInputHandler() {
         return this.inputHandler;
     }
 
     /**
      * @return {@link Player}'s hero
      */
-    public @Nullable Hero getHero() {
+    public final @Nullable Hero getHero() {
         return this.hero;
     }
 
     /**
      * @return name of the {@link Player}
      */
-    public String getName() {
+    public final String getName() {
         return this.name;
     }
-    
+
     /**
-     * @param heroConstructor {@link Function} for constructing a desired {@link Hero}
-     * @see Picker
+     * Assigns {@link Hero} to this {@link Player}.
+     *
+     * @param heroConstructor function for creating a {@link Hero} instance
      */
-    public void assignHero(
+    public final void assignHero(
             Function<Picker, Hero> heroConstructor
     ) {
-        this.hero = heroConstructor.apply(this.picker);
-        this.inputHandler = this.inputHandlerConstructor.apply(hero);
+        this.inputHandler.assignHero(heroConstructor);
+        this.hero = inputHandler.getHero();
     }
 
     /**
@@ -79,7 +74,6 @@ public class Player {
 
         //noinspection StatementWithEmptyBody
         while (this.inputHandler.handleInput() != InputResult.END_TURN) {
-            // IDEA warning successfully suppressed!
             // TODO: some counter to prevent infinite loop
         }
 
