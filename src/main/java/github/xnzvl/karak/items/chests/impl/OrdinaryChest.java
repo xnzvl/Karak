@@ -8,11 +8,14 @@ import github.xnzvl.karak.items.chests.VariousChest;
  * @author Jakub Nezval
  */
 public class OrdinaryChest extends VariousChest {
-    public OrdinaryChest() {
+    public OrdinaryChest(
+            boolean isLocked
+    ) {
         super(
                 "Chest",
                 "Ordinary chest worth 1 point.",
-                1
+                1,
+                isLocked
         );
     }
 }

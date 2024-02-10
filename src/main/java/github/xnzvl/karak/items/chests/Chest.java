@@ -12,4 +12,9 @@ public interface Chest extends Description {
      * @return worth of the chest in points
      */
     float getScoreWorth();
+
+    /**
+     * @return boolean whether the {@link Chest} is locked
+     */
+    boolean isLocked();
 }

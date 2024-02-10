@@ -12,7 +12,8 @@ public class RubyChest extends VariousChest {
         super(
                 "Ruby Chest",
                 "Ruby chest worth 1.5 points.",
-                1.5F
+                1.5F,
+                false
         );
     }
 }

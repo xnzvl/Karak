@@ -15,7 +15,7 @@ public class FallenOne extends VariousMonster {
                 "Fallen One",
                 "",
                 12,
-                Item.from(new OrdinaryChest())
+                Item.from(new OrdinaryChest(false))
         );
     }
 }
