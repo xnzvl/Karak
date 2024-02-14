@@ -2,6 +2,7 @@ package github.xnzvl.karak.strengthfuls.heroes;
 
 import github.xnzvl.karak.description.DescribedObject;
 import github.xnzvl.karak.game.Board;
+import github.xnzvl.karak.game.GameState;
 import github.xnzvl.karak.items.Item;
 import github.xnzvl.karak.items.Key;
 import github.xnzvl.karak.items.chests.Chest;
@@ -40,6 +41,14 @@ public class Hero extends DescribedObject implements Strength {
     ) {
         super(null, null);
         this.picker = picker;
+    }
+
+    public void acceptCurse() {
+
+    }
+
+    public void cleanseCurse() {
+
     }
 
     public void startTurn() {
