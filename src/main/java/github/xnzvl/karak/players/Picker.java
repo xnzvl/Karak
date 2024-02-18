@@ -1,5 +1,7 @@
 package github.xnzvl.karak.players;
 
+import java.util.List;
+
 /**
  * Abstract class for providing additional form of {@link Player} input.
  *
@@ -8,7 +10,7 @@ package github.xnzvl.karak.players;
 public abstract class Picker {
     /**
      * Context in which the {@link Picker} is used.
-     * @see Picker#pick(Context, Object...) Picker.pick(Context, T...)
+     * @see Picker#pick(Context, List)
      */
     public enum Context {
         INVENTORY_SLOT;
@@ -23,5 +25,5 @@ public abstract class Picker {
      * @param <T> type variable
      * @see Picker.Context
      */
-    public abstract <T> T pick(Context context, T... options);
+    public abstract <T> T pick(Context context, List<T> options);
 }

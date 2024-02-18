@@ -2,7 +2,6 @@ package github.xnzvl.karak.strengthfuls.heroes;
 
 import github.xnzvl.karak.description.DescribedObject;
 import github.xnzvl.karak.game.Board;
-import github.xnzvl.karak.game.GameState;
 import github.xnzvl.karak.items.Item;
 import github.xnzvl.karak.items.Key;
 import github.xnzvl.karak.items.chests.Chest;
@@ -10,6 +9,7 @@ import github.xnzvl.karak.items.spells.Spell;
 import github.xnzvl.karak.items.weapons.Weapon;
 import github.xnzvl.karak.players.Picker;
 import github.xnzvl.karak.strengthfuls.Strength;
+import github.xnzvl.karak.utils.Holder;
 import github.xnzvl.karak.utils.MapUtils;
 import github.xnzvl.karak.utils.Pair;
 import github.xnzvl.karak.utils.Result;
@@ -17,8 +17,10 @@ import github.xnzvl.karak.utils.Result;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.Arrays;
+import java.util.List;
 import java.util.Map;
 import java.util.function.Predicate;
+import java.util.function.Supplier;
 
 public class Hero extends DescribedObject implements Strength {
     public static final int MAX_HIT_POINTS = 5;
@@ -39,7 +41,7 @@ public class Hero extends DescribedObject implements Strength {
     protected Hero(
             Picker picker
     ) {
-        super(null, null);
+        super(null, null);  // TODO: title + details
         this.picker = picker;
     }
 
@@ -60,7 +62,7 @@ public class Hero extends DescribedObject implements Strength {
     }
 
     private Slot pickInventorySlot() {
-        return this.picker.pick(Picker.Context.INVENTORY_SLOT, Slot.values());
+        return this.picker.pick(Picker.Context.INVENTORY_SLOT, Arrays.asList(Slot.values()));
     }
 
     public Result move(
