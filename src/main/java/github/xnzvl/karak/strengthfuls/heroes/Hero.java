@@ -24,20 +24,21 @@ import java.util.function.Supplier;
 
 public class Hero extends DescribedObject implements Strength {
     public static class Params {
-        private Picker picker;
-        private Holder<Hero> curseHolder;
         private Supplier<List<Hero>> allHeroesSupplier;
+        private Board board;
+        private Holder<Hero> curseHolder;
+        private Picker picker;
 
-        public boolean isComplete() {
-            return this.picker != null
-                    & this.curseHolder != null
-                    & this.allHeroesSupplier != null;
+        public void setAllHeroesSupplier(
+                Supplier<List<Hero>> allHeroesSupplier
+        ) {
+            this.allHeroesSupplier = allHeroesSupplier;
         }
 
-        public void setPicker(
-                Picker picker
+        public void setBoard(
+                Board board
         ) {
-            this.picker = picker;
+            this.board = board;
         }
 
         public void setCurseHolder(
@@ -46,22 +47,17 @@ public class Hero extends DescribedObject implements Strength {
             this.curseHolder = curseHolder;
         }
 
-        public void setAllHeroesSupplier(
-                Supplier<List<Hero>> allHeroesSupplier
+        public void setPicker(
+                Picker picker
         ) {
-            this.allHeroesSupplier = allHeroesSupplier;
+            this.picker = picker;
         }
 
-        private Picker getPicker() {
-            return this.picker;
-        }
-
-        private Holder<Hero> getCurseHolder() {
-            return this.curseHolder;
-        }
-
-        private Supplier<List<Hero>> getAllHeroesSupplier() {
-            return this.allHeroesSupplier;
+        public boolean isComplete() {
+            return this.allHeroesSupplier != null
+                    & this.board != null
+                    & this.curseHolder != null
+                    & this.picker != null;
         }
     }
 
@@ -69,7 +65,7 @@ public class Hero extends DescribedObject implements Strength {
     public static final int DEFAULT_NUMBER_OF_STEPS = 4;
 
     private final Supplier<List<Hero>> allHeroesSupplier;
-    private final Board board = Board.getInstance();
+    private final Board board;
     private final Holder<Hero> curseHolder;
     private final Map<Slot, @Nullable Item> inventory = MapUtils.defaultHashMapFrom(
             Arrays.asList(Slot.values()), null
@@ -89,9 +85,10 @@ public class Hero extends DescribedObject implements Strength {
 
         if (!paramObject.isComplete()) throw new IllegalArgumentException("paramObject isn't complete");
 
-        this.picker = paramObject.getPicker();
-        this.curseHolder = paramObject.getCurseHolder();
-        this.allHeroesSupplier = paramObject.getAllHeroesSupplier();
+        this.allHeroesSupplier = paramObject.allHeroesSupplier;
+        this.board = paramObject.board;
+        this.curseHolder = paramObject.curseHolder;
+        this.picker = paramObject.picker;
     }
 
     public void startTurn() {
