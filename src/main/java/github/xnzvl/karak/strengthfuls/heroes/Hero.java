@@ -26,7 +26,9 @@ public class Hero extends DescribedObject implements Strength {
     public static final int MAX_HIT_POINTS = 5;
     public static final int DEFAULT_NUMBER_OF_STEPS = 4;
 
+    private final Supplier<List<Hero>> allHeroes;
     private final Board board = Board.getInstance();
+    private final Holder<Hero> cursedOne;
     private final Map<Slot, @Nullable Item> inventory = MapUtils.defaultHashMapFrom(
             Arrays.asList(Slot.values()), null
     );
@@ -39,14 +41,14 @@ public class Hero extends DescribedObject implements Strength {
 
     // TODO: javadoc
     protected Hero(
-            Picker picker
+            Picker picker,
+            Holder<Hero> cursedOne,
+            Supplier<List<Hero>> allHeroes
     ) {
         super(null, null);  // TODO: title + details
         this.picker = picker;
-    }
-
-    public void acceptCurse() {
-
+        this.cursedOne = cursedOne;
+        this.allHeroes = allHeroes;
     }
 
     public void cleanseCurse() {
