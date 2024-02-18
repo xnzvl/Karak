@@ -23,12 +23,54 @@ import java.util.function.Predicate;
 import java.util.function.Supplier;
 
 public class Hero extends DescribedObject implements Strength {
+    public static class Params {
+        private Picker picker;
+        private Holder<Hero> curseHolder;
+        private Supplier<List<Hero>> allHeroesSupplier;
+
+        public boolean isComplete() {
+            return this.picker != null
+                    & this.curseHolder != null
+                    & this.allHeroesSupplier != null;
+        }
+
+        public void setPicker(
+                Picker picker
+        ) {
+            this.picker = picker;
+        }
+
+        public void setCurseHolder(
+                Holder<Hero> curseHolder
+        ) {
+            this.curseHolder = curseHolder;
+        }
+
+        public void setAllHeroesSupplier(
+                Supplier<List<Hero>> allHeroesSupplier
+        ) {
+            this.allHeroesSupplier = allHeroesSupplier;
+        }
+
+        private Picker getPicker() {
+            return this.picker;
+        }
+
+        private Holder<Hero> getCurseHolder() {
+            return this.curseHolder;
+        }
+
+        private Supplier<List<Hero>> getAllHeroesSupplier() {
+            return this.allHeroesSupplier;
+        }
+    }
+
     public static final int MAX_HIT_POINTS = 5;
     public static final int DEFAULT_NUMBER_OF_STEPS = 4;
 
-    private final Supplier<List<Hero>> allHeroes;
+    private final Supplier<List<Hero>> allHeroesSupplier;
     private final Board board = Board.getInstance();
-    private final Holder<Hero> cursedOne;
+    private final Holder<Hero> curseHolder;
     private final Map<Slot, @Nullable Item> inventory = MapUtils.defaultHashMapFrom(
             Arrays.asList(Slot.values()), null
     );
@@ -41,14 +83,15 @@ public class Hero extends DescribedObject implements Strength {
 
     // TODO: javadoc
     protected Hero(
-            Picker picker,
-            Holder<Hero> cursedOne,
-            Supplier<List<Hero>> allHeroes
+            Hero.Params paramObject
     ) {
         super(null, null);  // TODO: title + details
-        this.picker = picker;
-        this.cursedOne = cursedOne;
-        this.allHeroes = allHeroes;
+
+        if (!paramObject.isComplete()) throw new IllegalArgumentException("paramObject isn't complete");
+
+        this.picker = paramObject.getPicker();
+        this.curseHolder = paramObject.getCurseHolder();
+        this.allHeroesSupplier = paramObject.getAllHeroesSupplier();
     }
 
     public void startTurn() {
@@ -60,7 +103,7 @@ public class Hero extends DescribedObject implements Strength {
     }
 
     public void cleanseCurse() {
-        this.cursedOne.setInstance(null);
+        this.curseHolder.setInstance(null);
     }
 
     private Slot pickInventorySlot() {
