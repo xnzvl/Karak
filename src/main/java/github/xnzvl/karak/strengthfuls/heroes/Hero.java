@@ -51,16 +51,16 @@ public class Hero extends DescribedObject implements Strength {
         this.allHeroes = allHeroes;
     }
 
-    public void cleanseCurse() {
-
-    }
-
     public void startTurn() {
         this.turnConstraint = new TurnConstraint(Hero.DEFAULT_NUMBER_OF_STEPS);
     }
 
     public void endTurn() {
         this.turnConstraint = null;
+    }
+
+    public void cleanseCurse() {
+        this.cursedOne.setInstance(null);
     }
 
     private Slot pickInventorySlot() {
