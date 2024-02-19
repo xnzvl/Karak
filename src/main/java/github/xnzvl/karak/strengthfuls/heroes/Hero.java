@@ -29,28 +29,32 @@ public class Hero extends DescribedObject implements Strength {
         private Holder<Hero> curseHolder;
         private Picker picker;
 
-        public void setAllHeroesSupplier(
+        public Params setAllHeroesSupplier(
                 Supplier<List<Hero>> allHeroesSupplier
         ) {
             this.allHeroesSupplier = allHeroesSupplier;
+            return this;
         }
 
-        public void setBoard(
+        public Params setBoard(
                 Board board
         ) {
             this.board = board;
+            return this;
         }
 
-        public void setCurseHolder(
+        public Params setCurseHolder(
                 Holder<Hero> curseHolder
         ) {
             this.curseHolder = curseHolder;
+            return this;
         }
 
-        public void setPicker(
+        public Params setPicker(
                 Picker picker
         ) {
             this.picker = picker;
+            return this;
         }
 
         public boolean isComplete() {
@@ -58,6 +62,14 @@ public class Hero extends DescribedObject implements Strength {
                     & this.board != null
                     & this.curseHolder != null
                     & this.picker != null;
+        }
+
+        public Params copy() {
+            return new Params()
+                .setAllHeroesSupplier(this.allHeroesSupplier)
+                .setBoard(this.board)
+                .setCurseHolder(this.curseHolder)
+                .setPicker(this.picker);
         }
     }
 
