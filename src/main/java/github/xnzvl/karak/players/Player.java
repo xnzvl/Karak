@@ -20,7 +20,7 @@ public class Player {
     /**
      * @param name name of the {@link Player}
      * @param inputHandler intermediary for {@link Player}'s input
-     * @see Player#assignHero(Function)
+     * @see Player#assignHero(Function, Hero.Params)
      * @see InputHandler
      * @see Picker
      */
@@ -54,15 +54,24 @@ public class Player {
     }
 
     /**
-     * Assigns {@link Hero} to this {@link Player}.
+     * Manages assignment of a new {@link Hero} to the {@link Player}.
+     * It is expected that `paramObject` is missing only a {@link Picker} to be complete
+     * ({@link Hero.Params#isComplete()}) - the {@link Picker} is added to the `paramObject` during execution.
      *
-     * @param heroConstructor function for creating a {@link Hero} instance
+     * @param heroConstructor {@link Function} for creating a desired {@link Hero} instance
+     * @param paramObject {@link Hero.Params} object for creating a {@link Hero} instance
+     * @return new {@link Hero} instance
      */
-    public final void assignHero(
-            Function<Picker, Hero> heroConstructor
+    public final Hero assignHero(
+            Function<Hero.Params, Hero> heroConstructor,
+            Hero.Params paramObject
     ) {
-        this.inputHandler.assignHero(heroConstructor);
-        this.hero = inputHandler.getHero();
+        paramObject.setPicker(this.inputHandler.getPicker());
+
+        this.hero = heroConstructor.apply(paramObject);
+
+        inputHandler.setHero(this.hero);
+        return this.hero;
     }
 
     /**

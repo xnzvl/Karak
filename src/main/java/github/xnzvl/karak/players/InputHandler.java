@@ -4,8 +4,6 @@ import github.xnzvl.karak.strengthfuls.heroes.Hero;
 
 import org.jetbrains.annotations.Nullable;
 
-import java.util.function.Function;
-
 /**
  * Abstract root class for classes that provide input to the game logic.
  *
@@ -16,9 +14,8 @@ public abstract class InputHandler {
 
     /**
      * @return {@link Picker} instance
-     * @see InputHandler#assignHero(Function) 
      */
-    protected abstract Picker getPicker();
+    public abstract Picker getPicker();
 
     /**
      * This function should handle the input and call an adequate method on the {@link Hero} instance.
@@ -37,13 +34,15 @@ public abstract class InputHandler {
     }
 
     /**
-     * @param heroConstructor {@link Function} for constructing a desired {@link Hero}
-     * @see Hero
-     * @see Picker
+     * Sets {@link Hero} for the {@link InputHandler}.
+     * Namely for {@link InputHandler#handleInput()} method.
+     *
+     * @param hero hero instance
+     * @see InputHandler#handleInput()
      */
-    public final void assignHero(
-            Function<Picker, Hero> heroConstructor
+    public void setHero(
+            Hero hero
     ) {
-        this.hero = heroConstructor.apply(this.getPicker());
+        this.hero = hero;
     }
 }
