@@ -87,7 +87,7 @@ public class Hero extends DescribedObject implements Strength {
     private int hitPoints = MAX_HIT_POINTS;
     private Pair<Integer, Integer> position = Pair.of(0, 0);
     @Nullable
-    private TurnConstraint turnConstraint = null;
+    private TurnState turnState = null;
 
     // TODO: javadoc
     protected Hero(
@@ -104,11 +104,11 @@ public class Hero extends DescribedObject implements Strength {
     }
 
     public void startTurn() {
-        this.turnConstraint = new TurnConstraint(Hero.DEFAULT_NUMBER_OF_STEPS);
+        this.turnState = new TurnState();
     }
 
     public void endTurn() {
-        this.turnConstraint = null;
+        this.turnState = null;
     }
 
     public void cleanseCurse() {
