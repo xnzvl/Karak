@@ -4,7 +4,18 @@ import github.xnzvl.karak.utils.Pair;
 
 import org.jetbrains.annotations.Nullable;
 
+/**
+ * Class for holding additional state variables during {@link Hero}'s turn.
+ *
+ * @see Hero#startTurn()
+ * @see Hero#endTurn()
+ * @author Jakub Nezval
+ */
 public class TurnState {  // TODO: maybe package private?
+    /**
+     * Auxiliary enumeration for holding {@link Hero}'s state.
+     * It is better than {@link Boolean} values.
+     */
     private enum HeroState {
         WANDERING,
         FIGHTING;
@@ -35,10 +46,16 @@ public class TurnState {  // TODO: maybe package private?
         this.prevPosition = prevPosition;
     }
 
+    /**
+     * @return boolean value whether the {@link Hero} is able to move and has steps at the same time
+     */
     public boolean canMove() {
         return this.steps > 0 && this.heroState == HeroState.WANDERING;
     }
 
+    /**
+     * Safely subtracts one step.
+     */
     public void lowerSteps() {
         if (this.steps < 1 || this.heroState == HeroState.FIGHTING) {
             // TODO: throw error
@@ -54,10 +71,22 @@ public class TurnState {  // TODO: maybe package private?
         return this.heroState == HeroState.FIGHTING;
     }
 
+    /**
+     * Sets {@link Hero} into wandering state.
+     * In wandering state {@link Hero} can use only utility spells and can move freely.
+     *
+     * @see TurnState#setHeroFighting()
+     */
     public void setHeroWandering() {
         this.heroState = HeroState.WANDERING;
     }
 
+    /**
+     * Sets {@link Hero} into fighting state.
+     * In fighting state {@link Hero} can use only offensive spells and cannot move until the fight is over.
+     *
+     * @see TurnState#setHeroWandering()
+     */
     public void setHeroFighting() {
         this.heroState = HeroState.FIGHTING;
     }
