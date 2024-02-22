@@ -1,4 +1,4 @@
-name: main-CI-skeleton
+name: Testing pipeline (Ubuntu)
 on:
   workflow_dispatch:
   push:
@@ -10,14 +10,16 @@ on:
       - dev
 jobs:
   ubuntu_build:
+    name: Build & test
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Setup Java JDK  # https://github.com/marketplace/actions/setup-java-jdk
+      - name: Setup Java JDK
         uses: actions/setup-java@v4.0.0
         with:
           distribution: 'oracle'
           java-version: '21'
           cache: maven
-      - name: Build with Maven
-        run: mvn -B package --file pom.xml
+      - run: mvn clean
+      - run: mvn install
+      - run: mvn test
