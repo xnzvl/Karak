@@ -1,0 +1,23 @@
+name: main-CI-skeleton
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+      - dev
+jobs:
+  ubuntu_build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Setup Java JDK  # https://github.com/marketplace/actions/setup-java-jdk
+        uses: actions/setup-java@v4.0.0
+        with:
+          distribution: 'oracle'
+          java-version: '21'
+          cache: maven
+      - name: Build with Maven
+        run: mvn -B package --file pom.xml
