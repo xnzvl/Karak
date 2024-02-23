@@ -13,7 +13,8 @@ public abstract class Picker {
      * @see Picker#pick(Context, List)
      */
     public enum Context {
-        INVENTORY_SLOT;
+        INVENTORY_SLOT,
+        FOUNTAIN_PORT;
     }
 
     /**
