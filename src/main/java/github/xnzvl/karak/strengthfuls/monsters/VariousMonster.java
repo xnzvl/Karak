@@ -12,7 +12,7 @@ public class VariousMonster extends DescribedObject implements Monster {
     private final int strength;
     private final Item drop;
 
-    protected VariousMonster(
+    public VariousMonster(
             String title,
             String details,
             int strength,
