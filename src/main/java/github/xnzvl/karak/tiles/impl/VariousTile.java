@@ -25,7 +25,7 @@ public class VariousTile implements Tile {
         private final Pair<Integer, Integer> coordinates;
         private final Shape shape;
         private final Type type;
-        private Rotation rotation = Rotation.ONE;
+        private Rotation rotation = Rotation.NONE;
         private @Nullable Feature feature = null;
         private @Nullable Either<Monster, Item> subject = null;
 

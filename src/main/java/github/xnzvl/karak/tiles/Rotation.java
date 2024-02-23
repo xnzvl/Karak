@@ -6,10 +6,10 @@ package github.xnzvl.karak.tiles;
  * @author Jakub Nezval
  */
 public enum Rotation {
-    ONE   (0),
-    TWO   (1),
-    THREE (2),
-    FOUR  (3);
+    NONE          (0),
+    QUARTER       (1),
+    HALF          (2),
+    THREE_QUARTER (3);
 
     private final int numberOfShifts;
 
