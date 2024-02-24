@@ -1,7 +1,6 @@
 package github.xnzvl.karak.items.spells.impl;
 
-import github.xnzvl.karak.items.spells.SpellType;
-import github.xnzvl.karak.items.spells.DescribedSpell;
+import github.xnzvl.karak.items.spells.Spell;
 import github.xnzvl.karak.strengthfuls.heroes.Hero;
 
 /**
@@ -9,7 +8,7 @@ import github.xnzvl.karak.strengthfuls.heroes.Hero;
  *
  * @author Jakub Nezval
  */
-public class HealingWarp extends DescribedSpell {
+public class HealingWarp extends Spell {
     public HealingWarp() {
         super(
                 "Healing Warp",
@@ -17,7 +16,8 @@ public class HealingWarp extends DescribedSpell {
                     + "If the spell is used before the first step "
                     + "then the Hero can continue their turn like if nothing happened. "
                     + "Otherwise the Hero loses all of the remaining steps and their turn is over.",
-                SpellType.UTILITY
+                Type.UTILITY,
+                Target.SELF
         );
     }
 

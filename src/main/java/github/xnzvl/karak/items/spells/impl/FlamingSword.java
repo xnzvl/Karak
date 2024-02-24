@@ -1,7 +1,6 @@
 package github.xnzvl.karak.items.spells.impl;
 
-import github.xnzvl.karak.items.spells.SpellType;
-import github.xnzvl.karak.items.spells.DescribedSpell;
+import github.xnzvl.karak.items.spells.Spell;
 import github.xnzvl.karak.strengthfuls.heroes.Hero;
 
 /**
@@ -9,12 +8,13 @@ import github.xnzvl.karak.strengthfuls.heroes.Hero;
  *
  * @author Jakub Nezval
  */
-public class FlamingSword extends DescribedSpell {
+public class FlamingSword extends Spell {
     public FlamingSword() {
         super(
                 "Flaming Sword",
                 "Temporary +1 power.",
-                SpellType.OFFENSIVE
+                Type.OFFENSIVE,
+                Target.SELF
         );
     }
 
