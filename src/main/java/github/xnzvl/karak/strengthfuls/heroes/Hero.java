@@ -10,6 +10,7 @@ import github.xnzvl.karak.items.weapons.Weapon;
 import github.xnzvl.karak.players.Picker;
 import github.xnzvl.karak.strengthfuls.Strength;
 import github.xnzvl.karak.strengthfuls.monsters.Monster;
+import github.xnzvl.karak.tiles.Feature;
 import github.xnzvl.karak.tiles.Tile;
 import github.xnzvl.karak.utils.Either;
 import github.xnzvl.karak.utils.Holder;
@@ -26,6 +27,8 @@ import java.util.function.Predicate;
 import java.util.function.Supplier;
 
 public class Hero extends DescribedObject implements Strength {
+    // TODO: hashCode() & equals()
+
     public static class Params {
         private Supplier<List<Hero>> allHeroesSupplier;
         private Board board;
@@ -118,9 +121,13 @@ public class Hero extends DescribedObject implements Strength {
         return this.picker.pick(Picker.Context.INVENTORY_SLOT, Arrays.asList(Slot.values()));
     }
 
+    protected Tile getCurrentTile() {
+        return this.board.getTileAt(this.position);
+    }
+
     @Nullable
     protected Either<Monster, Item> getCurrentSubject() {
-        Tile currentTile = this.board.getTileAt(this.position);
+        Tile currentTile = getCurrentTile();
         assert currentTile != null : "Hero is outside of the Board";
         return currentTile.getSubject();
     }
@@ -137,7 +144,14 @@ public class Hero extends DescribedObject implements Strength {
     }
 
     public Result heal() {
-        // TODO: impl
+        if (!this.board.getTilesWith(Feature.FOUNTAIN).contains(this.position)) {
+            return Result.withFailure(Result.Failure.NOT_ALLOWED);
+        }
+
+        this.hitPoints = Hero.MAX_HIT_POINTS;
+        if (this.curseHolder.getInstance().equals(this)) {
+            this.curseHolder.setInstance(null);
+        }
         return Result.withSuccess();
     }
 
