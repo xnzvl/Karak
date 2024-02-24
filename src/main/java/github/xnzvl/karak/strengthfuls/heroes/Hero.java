@@ -9,6 +9,9 @@ import github.xnzvl.karak.items.spells.Spell;
 import github.xnzvl.karak.items.weapons.Weapon;
 import github.xnzvl.karak.players.Picker;
 import github.xnzvl.karak.strengthfuls.Strength;
+import github.xnzvl.karak.strengthfuls.monsters.Monster;
+import github.xnzvl.karak.tiles.Tile;
+import github.xnzvl.karak.utils.Either;
 import github.xnzvl.karak.utils.Holder;
 import github.xnzvl.karak.utils.MapUtils;
 import github.xnzvl.karak.utils.Pair;
@@ -111,12 +114,15 @@ public class Hero extends DescribedObject implements Strength {
         this.turnState = null;
     }
 
-    public void cleanseCurse() {
-        this.curseHolder.setInstance(null);
+    protected Slot pickInventorySlot() {
+        return this.picker.pick(Picker.Context.INVENTORY_SLOT, Arrays.asList(Slot.values()));
     }
 
-    private Slot pickInventorySlot() {
-        return this.picker.pick(Picker.Context.INVENTORY_SLOT, Arrays.asList(Slot.values()));
+    @Nullable
+    protected Either<Monster, Item> getCurrentSubject() {
+        Tile currentTile = this.board.getTileAt(this.position);
+        assert currentTile != null : "Hero is outside of the Board";
+        return currentTile.getSubject();
     }
 
     public Result move(
@@ -130,9 +136,21 @@ public class Hero extends DescribedObject implements Strength {
         return Result.withSuccess();
     }
 
-    public Result pickUpItem(
-            Item item
-    ) {
+    public Result heal() {
+        // TODO: impl
+        return Result.withSuccess();
+    }
+
+    public Result pickUpItem() {
+        Either<Monster, Item> subject = this.getCurrentSubject();
+        if (subject == null) return Result.withFailure(Result.Failure.NULL);
+
+        Item item = subject.apply(
+                monsterOption -> null,
+                itemOption -> itemOption
+        );
+        if (item == null) return Result.withFailure(Result.Failure.NOT_ALLOWED);
+
         Slot slot = this.pickInventorySlot();
         return item.apply(
                 weapon -> pickUpWeapon(slot, weapon),
@@ -184,6 +202,7 @@ public class Hero extends DescribedObject implements Strength {
         Slot slot = this.pickInventorySlot();
 
         if (Slot.isWeaponSlot(slot))          return Result.withFailure(Result.Failure.INVALID_CHOICE);
+        // TODO: do I want to use Weapons?
         if (this.inventory.get(slot) == null) return Result.withFailure(Result.Failure.NULL);
 
         // TODO: - key unlocks a chest! don't forget it
@@ -212,28 +231,5 @@ public class Hero extends DescribedObject implements Strength {
             Pair<Integer, Integer> newPosition
     ) {
         return false;
-    }
-
-    protected void recover() {
-        /*
-        if (this.hitPoints != 0) {
-            throw new HeroInvalidStateException(
-                    "Cannot perform `Hero::recovery` when Hero hit points are above 0"
-            );
-        }
-        this.hitPoints += 1;
-        */
-    }
-
-    protected void retreat() {
-        /*
-        if (this.previousPosition == null) {
-            throw new HeroInvalidStateException(
-                    "Cannot retreat to an unknown previous position"
-            );
-        }
-        this.position = this.previousPosition;
-        this.previousPosition = null;
-        */
     }
 }

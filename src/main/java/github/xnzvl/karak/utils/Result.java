@@ -5,6 +5,7 @@ import org.jetbrains.annotations.Nullable;
 public class Result {
     public enum Failure {
         INVALID_CHOICE,
+        NOT_ALLOWED,
         NULL;
     }
 
