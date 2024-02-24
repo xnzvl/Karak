@@ -28,8 +28,6 @@ import java.util.function.Predicate;
 import java.util.function.Supplier;
 
 public class Hero extends DescribedObject implements Strength {
-    // TODO: hashCode() & equals()
-
     public static class Params {
         private Supplier<List<Hero>> allHeroesSupplier;
         private Board board;
@@ -134,6 +132,23 @@ public class Hero extends DescribedObject implements Strength {
         return currentTile.getSubject();
     }
 
+    @Nullable Monster getMonster() {
+        Either<Monster, Item> subject = this.getCurrentSubject();
+        return subject == null ? null : subject.apply(
+                monster -> monster,
+                item    -> null
+        );
+    }
+
+    @Nullable
+    protected Item getItem() {
+        Either<Monster, Item> subject = this.getCurrentSubject();
+        return subject == null ? null : subject.apply(
+                monster -> null,
+                item    -> item
+        );
+    }
+
     @Nullable
     protected Chest getChest() {
         return null;  // TODO: impl
@@ -163,14 +178,8 @@ public class Hero extends DescribedObject implements Strength {
     }
 
     public Result pickUpItem() {
-        Either<Monster, Item> subject = this.getCurrentSubject();
-        if (subject == null) return Result.withFailure(Result.Failure.NULL);
-
-        Item item = subject.apply(
-                monsterOption -> null,
-                itemOption -> itemOption
-        );
-        if (item == null) return Result.withFailure(Result.Failure.NOT_ALLOWED);
+        Item item = this.getItem();
+        if (item == null) return Result.withFailure(Result.Failure.NULL);
 
         Slot slot = this.pickInventorySlot();
         return item.apply(
@@ -181,7 +190,7 @@ public class Hero extends DescribedObject implements Strength {
         );
     }
 
-    private Result pickUpItem(
+    private Result pickUpItem(  // TODO: visibility?
             Item item,
             Slot slot,
             Predicate<Slot> isSlotValid
