@@ -134,6 +134,11 @@ public class Hero extends DescribedObject implements Strength {
         return currentTile.getSubject();
     }
 
+    @Nullable
+    protected Chest getChest() {
+        return null;  // TODO: impl
+    }
+
     public Result move(
             Pair<Integer, Integer> newPosition
     ) {
@@ -172,7 +177,7 @@ public class Hero extends DescribedObject implements Strength {
                 weapon -> pickUpWeapon(slot, weapon),
                 spell  -> pickUpSpell(slot, spell),
                 key    -> pickUpKey(slot, key),
-                this::pickUpChest
+                chest  -> Result.withFailure(Result.Failure.NEEDS_KEY)  // TODO: think about this
         );
     }
 
@@ -182,6 +187,7 @@ public class Hero extends DescribedObject implements Strength {
             Predicate<Slot> isSlotValid
     ) {
         if (!isSlotValid.test(slot)) return Result.withFailure(Result.Failure.INVALID_CHOICE);
+        // TODO: replace item - this only rewrites current inventory slot
         this.inventory.put(slot, item);
         return Result.withSuccess();
     }
@@ -207,28 +213,38 @@ public class Hero extends DescribedObject implements Strength {
         return pickUpItem(Item.from(key), slot, (slotArg -> slotArg != Slot.KEY));
     }
 
-    protected Result pickUpChest(
-            Chest chest
-    ) {
+    public Result useItem() {
+        Slot slot = this.pickInventorySlot();
+
+        Item item = this.inventory.get(slot);
+        if (item == null) return Result.withFailure(Result.Failure.NULL);
+
+        return item.apply(
+                weapon -> Result.withFailure(Result.Failure.INVALID_CHOICE),
+                spell  -> useSpell(slot, spell),
+                key    -> useKey(),
+                chest  -> Result.withFailure(Result.Failure.INVALID_CHOICE)  // TODO: questionable
+        );
+    }
+
+    protected Result useKey() {
+        Chest chest = this.getChest();
+        if (chest == null) return Result.withFailure(Result.Failure.MISSING_CHEST);
+
         if (chest.isLocked()) {
             if (this.inventory.get(Slot.KEY) == null) return Result.withFailure(Result.Failure.NOT_ALLOWED);
             this.inventory.put(Slot.KEY, null);
         }
+
         this.points += chest.getScoreWorth();
         return Result.withSuccess();
     }
 
-    public Result useItem() {
-        Slot slot = this.pickInventorySlot();
-
-        if (Slot.isWeaponSlot(slot))          return Result.withFailure(Result.Failure.INVALID_CHOICE);
-        // TODO: do I want to use Weapons?
-        if (this.inventory.get(slot) == null) return Result.withFailure(Result.Failure.NULL);
-
-        // TODO: - key unlocks a chest! don't forget it
-        //       - check if spell is usable in the situation
-
-        return Result.withSuccess();
+    protected Result useSpell(
+            Slot slot,
+            Spell spell
+    ) {
+        return Result.withSuccess();  // TODO: impl
     }
 
     public int getStrength() {
