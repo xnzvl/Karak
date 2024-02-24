@@ -132,7 +132,7 @@ public class Hero extends DescribedObject implements Strength {
         return currentTile.getSubject();
     }
 
-    @Nullable Monster getMonster() {
+    @Nullable Monster getTileMonster() {
         Either<Monster, Item> subject = this.getCurrentSubject();
         return subject == null ? null : subject.apply(
                 monster -> monster,
@@ -141,7 +141,7 @@ public class Hero extends DescribedObject implements Strength {
     }
 
     @Nullable
-    protected Item getItem() {
+    protected Item getTileItem() {
         Either<Monster, Item> subject = this.getCurrentSubject();
         return subject == null ? null : subject.apply(
                 monster -> null,
@@ -150,8 +150,8 @@ public class Hero extends DescribedObject implements Strength {
     }
 
     @Nullable
-    protected Chest getChest() {
-        Item item = this.getItem();
+    protected Chest getTileChest() {
+        Item item = this.getTileItem();
         return item == null ? null : item.apply(
                 weapon -> null,
                 spell  -> null,
@@ -184,7 +184,7 @@ public class Hero extends DescribedObject implements Strength {
     }
 
     public Result pickUpItem() {
-        Item item = this.getItem();
+        Item item = this.getTileItem();
         if (item == null) return Result.withFailure(Result.Failure.NULL);
 
         Slot slot = this.pickInventorySlot();
@@ -243,7 +243,7 @@ public class Hero extends DescribedObject implements Strength {
     }
 
     protected Result useKey() {
-        Chest chest = this.getChest();
+        Chest chest = this.getTileChest();
         if (chest == null) return Result.withFailure(Result.Failure.MISSING_CHEST);
 
         if (chest.isLocked()) {
