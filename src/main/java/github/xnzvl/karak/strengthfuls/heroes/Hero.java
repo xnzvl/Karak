@@ -151,7 +151,13 @@ public class Hero extends DescribedObject implements Strength {
 
     @Nullable
     protected Chest getChest() {
-        return null;  // TODO: impl
+        Item item = this.getItem();
+        return item == null ? null : item.apply(
+                weapon -> null,
+                spell  -> null,
+                key    -> null,
+                chest  -> chest
+        );
     }
 
     public Result move(
