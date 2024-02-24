@@ -250,7 +250,7 @@ public class Hero extends DescribedObject implements Strength {
     protected boolean isValidMove(
             Pair<Integer, Integer> newPosition
     ) {
-        return false;
+        return this.getCurrentTile().getAccessibleCoordinates().contains(newPosition);
     }
 
     @Override
