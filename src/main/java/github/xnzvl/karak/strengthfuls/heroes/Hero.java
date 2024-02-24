@@ -23,6 +23,7 @@ import org.jetbrains.annotations.Nullable;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.function.Predicate;
 import java.util.function.Supplier;
 
@@ -250,5 +251,20 @@ public class Hero extends DescribedObject implements Strength {
             Pair<Integer, Integer> newPosition
     ) {
         return false;
+    }
+
+    @Override
+    public boolean equals(
+            Object o
+    ) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Hero hero = (Hero) o;
+        return Objects.equals(this.getTitle(), hero.getTitle());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(this.getTitle());
     }
 }
