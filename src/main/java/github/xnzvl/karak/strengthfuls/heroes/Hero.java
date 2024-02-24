@@ -90,6 +90,7 @@ public class Hero extends DescribedObject implements Strength {
     );
     private final Picker picker;
 
+    private float points = 0;
     private int hitPoints = MAX_HIT_POINTS;
     private Pair<Integer, Integer> position = Pair.of(0, 0);
     @Nullable
@@ -208,7 +209,11 @@ public class Hero extends DescribedObject implements Strength {
     protected Result pickUpChest(
             Chest chest
     ) {
-        // TODO - Hero::pickUpChest
+        if (chest.isLocked()) {
+            if (this.inventory.get(Slot.KEY) == null) return Result.withFailure(Result.Failure.NOT_ALLOWED);
+            this.inventory.put(Slot.KEY, null);
+        }
+        this.points += chest.getScoreWorth();
         return Result.withSuccess();
     }
 
