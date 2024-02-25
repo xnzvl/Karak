@@ -202,14 +202,19 @@ public class Hero extends DescribedObject implements Strength {
         );
     }
 
-    private Result pickUpItem(  // TODO: visibility?
+    protected Result pickUpItem(
             Item item,
             Slot slot,
             Predicate<Slot> isSlotValid
     ) {
         if (!isSlotValid.test(slot)) return Result.withFailure(Result.Failure.INVALID_CHOICE);
-        // TODO: replace item - this only rewrites current inventory slot
+
+        Item itemToSwap = this.inventory.get(slot);
+        if (itemToSwap != null) {
+            this.getCurrentTile().setSubject(Either.fromRight(itemToSwap));
+        }
         this.inventory.put(slot, item);
+
         return Result.withSuccess();
     }
 
