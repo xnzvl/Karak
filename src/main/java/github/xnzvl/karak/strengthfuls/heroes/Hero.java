@@ -97,9 +97,11 @@ public class Hero extends DescribedObject implements Strength {
 
     // TODO: javadoc
     protected Hero(
+            String title,
+            String details,
             Params paramObject
     ) {
-        super(null, null);  // TODO: title + details
+        super(title, details);
 
         if (!paramObject.isComplete()) throw new IllegalArgumentException("paramObject isn't complete");
 
