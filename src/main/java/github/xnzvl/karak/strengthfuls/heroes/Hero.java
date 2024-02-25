@@ -95,6 +95,8 @@ public class Hero extends DescribedObject implements Strength {
     @Nullable
     private TurnState turnState = null;
 
+    // TODO: integrate turnState
+
     // TODO: javadoc
     protected Hero(
             String title,
