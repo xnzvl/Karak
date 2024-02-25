@@ -5,7 +5,7 @@ import github.xnzvl.karak.strengthfuls.heroes.Hero;
 
 public abstract class Spell extends DescribedObject {
     public enum Target {
-        OTHER_ONE,
+        OTHER_HERO,
         SELF;
     }
 

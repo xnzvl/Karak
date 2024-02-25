@@ -97,7 +97,7 @@ public class Hero extends DescribedObject implements Strength {
 
     // TODO: javadoc
     protected Hero(
-            Hero.Params paramObject
+            Params paramObject
     ) {
         super(null, null);  // TODO: title + details
 
@@ -119,6 +119,10 @@ public class Hero extends DescribedObject implements Strength {
 
     protected Slot pickInventorySlot() {
         return this.picker.pick(Picker.Context.INVENTORY_SLOT, Arrays.asList(Slot.values()));
+    }
+
+    protected Hero pickOtherHero() {
+        return this.picker.pick(Picker.Context.OTHER_HEROES, allHeroesSupplier.get());
     }
 
     protected Tile getCurrentTile() {
@@ -259,7 +263,34 @@ public class Hero extends DescribedObject implements Strength {
             Slot slot,
             Spell spell
     ) {
-        return Result.withSuccess();  // TODO: impl
+        assert this.turnState != null : "Hero isn't in a turn-state";
+
+        switch (spell.getType()) {
+            case OFFENSIVE: {
+                if (!this.turnState.isHeroFighting())
+                    return Result.withFailure(Result.Failure.NOT_ALLOWED);
+            }
+            case UTILITY: {
+                if (!this.turnState.isHeroWandering())
+                    return Result.withFailure(Result.Failure.NOT_ALLOWED);
+            }
+        }
+
+        spell.use(
+                switch (spell.getTarget()) {
+                    case SELF       -> this;
+                    case OTHER_HERO -> this.pickOtherHero();
+                }
+        );
+        this.discardSpell(slot);
+
+        return Result.withSuccess();
+    }
+
+    protected void discardSpell(
+            Slot slot
+    ) {
+        this.inventory.put(slot, null);
     }
 
     public int getStrength() {
