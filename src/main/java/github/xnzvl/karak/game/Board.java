@@ -18,23 +18,19 @@ import java.util.stream.Collectors;
  *
  * @author Jakub Nezval
  */
-public class Board {
-    private static final Board instance = new Board();
-
-    /**
-     * Method for obtaining singleton instance of this class.
-     *
-     * @return singleton instance of {@link Board}
-     */
-    public static Board getInstance() {
-        return instance;
-    }
-
+public abstract class Board {
     private final Map<Pair<Integer, Integer>, Tile> board = new HashMap<>();
 
     private Board() {
-        this.placeNewTile(TileFactory.createOrigin(), Pair.of(0,0));
+        this.board.put(Pair.of(0,0), TileFactory.createOrigin());
     }
+
+    /**
+     * Randomly generates a new {@link Tile}.
+     *
+     * @return new {@link Tile}
+     */
+    public abstract Tile newTile();
 
     /**
      * @param coordinates coordinates that should be associated with {@link Tile}
@@ -51,18 +47,15 @@ public class Board {
      * If coordinates are already occupied, does nothing and results with {@link Result#withFailure(Result.Failure)}
      * otherwise results with {@link Result#withSuccess()}
      *
-     * @param tile        new tile
      * @param coordinates coordinates where to place the tile
      * @return result
      * @see Result
      */
-    public Result placeNewTile(
-            Tile tile,
+    public Result placeNewTileAt(
             Pair<Integer, Integer> coordinates
     ) {
         if (this.board.containsKey(coordinates)) return Result.withFailure(Result.Failure.INVALID_CHOICE);
-
-        this.board.put(coordinates, tile);
+        this.board.put(coordinates, this.newTile());
         return Result.withSuccess();
     }
 
