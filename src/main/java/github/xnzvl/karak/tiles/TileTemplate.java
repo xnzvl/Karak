@@ -1,6 +1,8 @@
 package github.xnzvl.karak.tiles;
 
-public enum Configuration {
+public enum TileTemplate {
+    ORIGIN (Type.ROOM, Shape.X, Feature.FOUNTAIN),
+
     ROOM_X (Type.ROOM, Shape.X, null),
     ROOM_T (Type.ROOM, Shape.T, null),
     ROOM_L (Type.ROOM, Shape.L, null),
@@ -18,7 +20,7 @@ public enum Configuration {
     private final Shape shape;
     private final Feature feature;
 
-    Configuration(
+    TileTemplate(
             Type type,
             Shape shape,
             Feature feature

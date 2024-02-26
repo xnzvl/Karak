@@ -2,7 +2,7 @@ package github.xnzvl.karak.tiles.impl;
 
 import github.xnzvl.karak.items.Item;
 import github.xnzvl.karak.strengthfuls.monsters.Monster;
-import github.xnzvl.karak.tiles.Configuration;
+import github.xnzvl.karak.tiles.TileTemplate;
 import github.xnzvl.karak.tiles.Tile;
 import github.xnzvl.karak.tiles.Feature;
 import github.xnzvl.karak.tiles.Rotation;
@@ -22,90 +22,6 @@ import java.util.Collection;
  * @author Jakub Nezval
  */
 public class VariousTile implements Tile {
-    public static class Builder implements Buildable<VariousTile> {
-        private final Pair<Integer, Integer> coordinates;
-        private final Shape shape;
-        private final Type type;
-        private Rotation rotation = Rotation.NONE;
-        private @Nullable Feature feature = null;
-        private @Nullable Either<Monster, Item> subject = null;
-
-        public Builder(
-                Pair<Integer, Integer> coordinates,
-                Shape shape,
-                Type type
-        ) {
-            this.coordinates = coordinates;
-            this.shape = shape;
-            this.type = type;
-        }
-
-        public Builder(
-                Pair<Integer, Integer> coordinates,
-                Configuration configuration
-        ) {
-            this(
-                    coordinates,
-                    configuration.getShape(),
-                    configuration.getType()
-            );
-            this.addFeature(configuration.getFeature());
-        }
-
-        public Pair<Integer, Integer> getCoordinates() {
-            return coordinates;
-        }
-
-        public Rotation getRotation() {
-            return rotation;
-        }
-
-        public Shape getShape() {
-            return shape;
-        }
-
-        public Type getType() {
-            return this.type;
-        }
-
-        public @Nullable Feature getFeature() {
-            return feature;
-        }
-
-        public @Nullable Either<Monster, Item> getSubject() {
-            return subject;
-        }
-
-        public Builder setRotation(
-                Rotation rotation
-        ) {
-            this.rotation = rotation;
-            return this;
-        }
-
-        public Builder addFeature(
-                Feature feature
-        ) {
-            this.feature = feature;
-            return this;
-        }
-
-        public Builder addSubject(
-                Either<Monster, Item> subject
-        ) {
-            this.subject = subject;
-            return this;
-        }
-
-        public VariousTile build() {
-            if (this.type == Type.HALL && this.subject != null) {
-                throw new RuntimeException("Invalid Tile configuration"); // TODO: better exception
-            }
-
-            return new VariousTile(this);
-        }
-    }
-
     private final Pair<Integer, Integer> coordinates;
     private final Shape shape;
     private final Rotation rotation;
@@ -113,15 +29,30 @@ public class VariousTile implements Tile {
     private final @Nullable Feature feature;
     private @Nullable Either<Monster, Item> subject;
 
-    private VariousTile(
-            Builder builder
+    public VariousTile(
+            Pair<Integer, Integer> coordinates,
+            Rotation rotation,
+            Shape shape,
+            Type type,
+            @Nullable Feature feature
     ) {
-        this.coordinates = builder.coordinates;
-        this.shape       = builder.shape;
-        this.rotation    = builder.rotation;
-        this.type        = builder.type;
-        this.subject     = builder.subject;
-        this.feature     = builder.feature;
+        this.coordinates = coordinates;
+        this.rotation    = rotation;
+        this.shape   = shape;
+        this.type    = type;
+        this.feature = feature;
+    }
+
+    public VariousTile(
+            Pair<Integer, Integer> coordinates,
+            Rotation rotation,
+            TileTemplate template
+    ) {
+        this.coordinates = coordinates;
+        this.rotation    = rotation;
+        this.shape   = template.getShape();
+        this.type    = template.getType();
+        this.feature = template.getFeature();
     }
 
     /**
@@ -188,6 +119,12 @@ public class VariousTile implements Tile {
     public void setSubject(
             @Nullable Either<Monster, Item> subject
     ) {
+        if (subject != null) {
+            subject.consume(
+                    monster -> { assert this.type == Type.HALL : "Monster cannot occupy a hall-type tile"; },
+                    item    -> {}
+            );
+        }
         this.subject = subject;
     }
 
