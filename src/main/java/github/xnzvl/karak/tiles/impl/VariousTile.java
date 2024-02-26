@@ -2,6 +2,7 @@ package github.xnzvl.karak.tiles.impl;
 
 import github.xnzvl.karak.items.Item;
 import github.xnzvl.karak.strengthfuls.monsters.Monster;
+import github.xnzvl.karak.tiles.Configuration;
 import github.xnzvl.karak.tiles.Tile;
 import github.xnzvl.karak.tiles.Feature;
 import github.xnzvl.karak.tiles.Rotation;
@@ -37,6 +38,18 @@ public class VariousTile implements Tile {
             this.coordinates = coordinates;
             this.shape = shape;
             this.type = type;
+        }
+
+        public Builder(
+                Pair<Integer, Integer> coordinates,
+                Configuration configuration
+        ) {
+            this(
+                    coordinates,
+                    configuration.getShape(),
+                    configuration.getType()
+            );
+            this.addFeature(configuration.getFeature());
         }
 
         public Pair<Integer, Integer> getCoordinates() {
@@ -104,11 +117,11 @@ public class VariousTile implements Tile {
             Builder builder
     ) {
         this.coordinates = builder.coordinates;
-        this.shape       = builder.getShape();
-        this.rotation    = builder.getRotation();
-        this.type        = builder.getType();
-        this.subject     = builder.getSubject();
-        this.feature     = builder.getFeature();
+        this.shape       = builder.shape;
+        this.rotation    = builder.rotation;
+        this.type        = builder.type;
+        this.subject     = builder.subject;
+        this.feature     = builder.feature;
     }
 
     /**

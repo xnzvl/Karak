@@ -1,6 +1,9 @@
 package github.xnzvl.karak.game;
 
+import github.xnzvl.karak.strengthfuls.monsters.Monster;
+import github.xnzvl.karak.tiles.Configuration;
 import github.xnzvl.karak.tiles.Feature;
+import github.xnzvl.karak.tiles.Rotation;
 import github.xnzvl.karak.tiles.Tile;
 import github.xnzvl.karak.tiles.impl.TileFactory;
 import github.xnzvl.karak.utils.Pair;
@@ -25,12 +28,12 @@ public abstract class Board {
         this.board.put(Pair.of(0,0), TileFactory.createOrigin());
     }
 
-    /**
-     * Randomly generates a new {@link Tile}.
-     *
-     * @return new {@link Tile}
-     */
-    public abstract Tile newTile();
+    // TODO: javadoc
+    public abstract Configuration newTileConfiguration();
+    public abstract void placeNewMonsterAt(
+            Pair<Integer, Integer> coordinates,
+            Monster monster
+    );
 
     /**
      * @param coordinates coordinates that should be associated with {@link Tile}
@@ -48,14 +51,21 @@ public abstract class Board {
      * otherwise results with {@link Result#withSuccess()}
      *
      * @param coordinates coordinates where to place the tile
+     * TODO: other params
      * @return result
      * @see Result
      */
     public Result placeNewTileAt(
-            Pair<Integer, Integer> coordinates
+            Pair<Integer, Integer> coordinates,
+            Configuration configuration,
+            Rotation rotation
     ) {
         if (this.board.containsKey(coordinates)) return Result.withFailure(Result.Failure.INVALID_CHOICE);
-        this.board.put(coordinates, this.newTile());
+        this.board.put(
+                coordinates, TileFactory.createFromConfiguration(
+                        coordinates, configuration, rotation
+                )
+        );
         return Result.withSuccess();
     }
 

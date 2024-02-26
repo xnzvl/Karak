@@ -5,12 +5,14 @@ public enum Configuration {
     ROOM_T (Type.ROOM, Shape.T, null),
     ROOM_L (Type.ROOM, Shape.L, null),
     ROOM_I (Type.ROOM, Shape.I, null),
+
     HALL_X (Type.HALL, Shape.X, null),
     HALL_T (Type.HALL, Shape.T, null),
     HALL_L (Type.HALL, Shape.L, null),
     HALL_I (Type.HALL, Shape.I, null),
+
     FOUNTAIN_L (Type.HALL, Shape.L, Feature.FOUNTAIN),
-    PORTAL_I (Type.HALL, Shape.I, Feature.PORTAL);
+    PORTAL_I   (Type.HALL, Shape.I, Feature.PORTAL);
 
     private final Type type;
     private final Shape shape;
@@ -27,14 +29,14 @@ public enum Configuration {
     }
 
     public Type getType() {
-        return type;
+        return this.type;
     }
 
     public Shape getShape() {
-        return shape;
+        return this.shape;
     }
 
     public Feature getFeature() {
-        return feature;
+        return this.feature;
     }
 }
