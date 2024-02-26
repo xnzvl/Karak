@@ -1,9 +1,7 @@
 package github.xnzvl.karak.game;
 
-import github.xnzvl.karak.strengthfuls.monsters.Monster;
-import github.xnzvl.karak.tiles.Configuration;
+import github.xnzvl.karak.tiles.TileTemplate;
 import github.xnzvl.karak.tiles.Feature;
-import github.xnzvl.karak.tiles.Rotation;
 import github.xnzvl.karak.tiles.Tile;
 import github.xnzvl.karak.tiles.impl.TileFactory;
 import github.xnzvl.karak.utils.Pair;
@@ -11,6 +9,7 @@ import github.xnzvl.karak.utils.Result;
 
 import org.jetbrains.annotations.Nullable;
 
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
@@ -28,12 +27,12 @@ public abstract class Board {
         this.board.put(Pair.of(0,0), TileFactory.createOrigin());
     }
 
+    public Set<Pair<Integer, Integer>> getOccupiedCoordinates() {
+        return Collections.unmodifiableSet(this.board.keySet());
+    }
+
     // TODO: javadoc
-    public abstract Configuration newTileConfiguration();
-    public abstract void placeNewMonsterAt(
-            Pair<Integer, Integer> coordinates,
-            Monster monster
-    );
+    public abstract TileTemplate getNextTileTemplate();
 
     /**
      * @param coordinates coordinates that should be associated with {@link Tile}
@@ -45,27 +44,22 @@ public abstract class Board {
         return this.board.get(coordinates);
     }
 
+    // TODO: fix javadoc
     /**
      * Places new {@link Tile} at coordinates.
      * If coordinates are already occupied, does nothing and results with {@link Result#withFailure(Result.Failure)}
      * otherwise results with {@link Result#withSuccess()}
      *
      * @param coordinates coordinates where to place the tile
-     * TODO: other params
      * @return result
      * @see Result
      */
     public Result placeNewTileAt(
             Pair<Integer, Integer> coordinates,
-            Configuration configuration,
-            Rotation rotation
+            Tile tile
     ) {
         if (this.board.containsKey(coordinates)) return Result.withFailure(Result.Failure.INVALID_CHOICE);
-        this.board.put(
-                coordinates, TileFactory.createFromConfiguration(
-                        coordinates, configuration, rotation
-                )
-        );
+        this.board.put(coordinates, tile);
         return Result.withSuccess();
     }
 
