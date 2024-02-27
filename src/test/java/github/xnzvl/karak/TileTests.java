@@ -31,9 +31,11 @@ class TileTests {
         List<Arguments> configs = new ArrayList<>(
                 variousCoords.size() * Shape.values().length * Rotation.values().length
         );
-        for (var tileShape : Shape.values()) {
+        for (var coords : TileTests.variousCoords) {
             for (var template : TileTemplate.values()) {
-                configs.add(Arguments.of(template, tileShape));
+                for (var rotation : Rotation.values()) {
+                    configs.add(Arguments.of(coords, template, rotation));
+                }
             }
         }
         return configs.stream();
@@ -60,9 +62,10 @@ class TileTests {
     @MethodSource("tileConfigurations")
     void getAccessibleCoordinates_allConfigurations_isCorrect(
             Pair<Integer, Integer> coordinates,
-            TileTemplate template
+            TileTemplate template,
+            Rotation rotation
     ) {
-        Tile tile = new VariousTile(coordinates, template);
+        Tile tile = new VariousTile(coordinates, template, rotation);
 
         var expected = template
                 .getShape()
