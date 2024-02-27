@@ -23,59 +23,38 @@ import java.util.Collection;
  */
 public class VariousTile implements Tile {
     private final Pair<Integer, Integer> coordinates;
-    private final Shape shape;
-    private final Type type;
-    private final @Nullable Feature feature;
+    private final TileTemplate template;
+
     private @Nullable Either<Monster, Item> subject;
-
     private Rotation rotation;
-
-    public VariousTile(
-            Pair<Integer, Integer> coordinates,
-            Shape shape,
-            Type type,
-            @Nullable Feature feature
-    ) {
-        this.coordinates = coordinates;
-        this.shape   = shape;
-        this.type    = type;
-        this.feature = feature;
-    }
-
-    public VariousTile(
-            Pair<Integer, Integer> coordinates,
-            Shape shape,
-            Type type
-    ) {
-        this(
-                coordinates,
-                shape,
-                type,
-                null
-        );
-    }
 
     public VariousTile(
             Pair<Integer, Integer> coordinates,
             TileTemplate template
     ) {
-        this(
-                coordinates,
-                template.getShape(),
-                template.getType(),
-                template.getFeature()
-        );
+        this.coordinates = coordinates;
+        this.template = template;
+    }
+
+    public VariousTile(
+            Pair<Integer, Integer> coordinates,
+            TileTemplate template,
+            Rotation rotation
+    ) {
+        this(coordinates, template);
+        this.rotation = rotation;
     }
 
     public boolean isConfigured() {
         return this.rotation != null;
     }
 
+    @Override
     public Result setConditionalRotation(
             Pair<Integer, Integer> reachableFrom,
             Rotation rotation
     ) {
-        this.rotation = rotation;
+        this.rotation = rotation;  // TODO: error if already configured
 
         if (this.getAccessibleCoordinates().contains(reachableFrom)) return Result.withSuccess();
 
@@ -109,7 +88,10 @@ public class VariousTile implements Tile {
 
     @Override
     public Collection<Pair<Integer, Integer>> getAccessibleCoordinates() {
-        return this.shape.getDoorsTo().stream()
+        return this.template
+                .getShape()
+                .getDoorsTo()
+                .stream()
                 .map(directions -> clockwiseShift(directions, this.rotation.getNumberOfShifts()))
                 .map(coords -> Pair.of(
                         coords.xValue() + this.coordinates.xValue(),
@@ -130,12 +112,12 @@ public class VariousTile implements Tile {
 
     @Override
     public Shape getShape() {
-        return this.shape;
+        return this.template.getShape();
     }
 
     @Override
     public Type getType() {
-        return this.type;
+        return this.template.getType();
     }
 
     @Override
@@ -149,7 +131,9 @@ public class VariousTile implements Tile {
     ) {
         if (subject != null) {
             subject.consume(
-                    monster -> { assert this.type == Type.HALL : "Monster cannot occupy a hall-type tile"; },
+                    monster -> {
+                        assert this.template.getType() == Type.HALL : "Monster cannot occupy a hall-type tile";
+                    },
                     item    -> {}
             );
         }
@@ -158,6 +142,6 @@ public class VariousTile implements Tile {
 
     @Override
     public @Nullable Feature getFeature() {
-        return this.feature;
+        return this.template.getFeature();
     }
 }

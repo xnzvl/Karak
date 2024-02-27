@@ -4,6 +4,7 @@ import github.xnzvl.karak.items.Item;
 import github.xnzvl.karak.strengthfuls.monsters.Monster;
 import github.xnzvl.karak.utils.Either;
 import github.xnzvl.karak.utils.Pair;
+import github.xnzvl.karak.utils.Result;
 
 import org.jetbrains.annotations.Nullable;
 
@@ -19,6 +20,8 @@ public interface Tile {
     Shape getShape();
     Rotation getRotation();
     Type getType();
+
+    Result setConditionalRotation(Pair<Integer, Integer> reachableFrom, Rotation rotation);
 
     @Nullable Feature getFeature();
     @Nullable Either<Monster, Item> getSubject();

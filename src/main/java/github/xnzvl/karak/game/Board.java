@@ -1,9 +1,10 @@
 package github.xnzvl.karak.game;
 
+import github.xnzvl.karak.tiles.Rotation;
 import github.xnzvl.karak.tiles.TileTemplate;
 import github.xnzvl.karak.tiles.Feature;
 import github.xnzvl.karak.tiles.Tile;
-import github.xnzvl.karak.tiles.impl.TileFactory;
+import github.xnzvl.karak.tiles.impl.VariousTile;
 import github.xnzvl.karak.utils.Pair;
 import github.xnzvl.karak.utils.Result;
 
@@ -24,7 +25,8 @@ public abstract class Board {
     private final Map<Pair<Integer, Integer>, Tile> board = new HashMap<>();
 
     private Board() {
-        this.board.put(Pair.of(0,0), TileFactory.createOrigin());
+        var originCoords = Pair.of(0,0);
+        this.board.put(originCoords, new VariousTile(originCoords, TileTemplate.ORIGIN, Rotation.NONE));
     }
 
     public Set<Pair<Integer, Integer>> getOccupiedCoordinates() {
