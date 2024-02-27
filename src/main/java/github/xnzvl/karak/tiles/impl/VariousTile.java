@@ -8,9 +8,9 @@ import github.xnzvl.karak.tiles.Feature;
 import github.xnzvl.karak.tiles.Rotation;
 import github.xnzvl.karak.tiles.Shape;
 import github.xnzvl.karak.tiles.Type;
-import github.xnzvl.karak.utils.Buildable;
 import github.xnzvl.karak.utils.Either;
 import github.xnzvl.karak.utils.Pair;
+import github.xnzvl.karak.utils.Result;
 
 import org.jetbrains.annotations.Nullable;
 
@@ -24,20 +24,19 @@ import java.util.Collection;
 public class VariousTile implements Tile {
     private final Pair<Integer, Integer> coordinates;
     private final Shape shape;
-    private final Rotation rotation;
     private final Type type;
     private final @Nullable Feature feature;
     private @Nullable Either<Monster, Item> subject;
 
+    private Rotation rotation;
+
     public VariousTile(
             Pair<Integer, Integer> coordinates,
-            Rotation rotation,
             Shape shape,
             Type type,
             @Nullable Feature feature
     ) {
         this.coordinates = coordinates;
-        this.rotation    = rotation;
         this.shape   = shape;
         this.type    = type;
         this.feature = feature;
@@ -45,14 +44,43 @@ public class VariousTile implements Tile {
 
     public VariousTile(
             Pair<Integer, Integer> coordinates,
-            Rotation rotation,
+            Shape shape,
+            Type type
+    ) {
+        this(
+                coordinates,
+                shape,
+                type,
+                null
+        );
+    }
+
+    public VariousTile(
+            Pair<Integer, Integer> coordinates,
             TileTemplate template
     ) {
-        this.coordinates = coordinates;
-        this.rotation    = rotation;
-        this.shape   = template.getShape();
-        this.type    = template.getType();
-        this.feature = template.getFeature();
+        this(
+                coordinates,
+                template.getShape(),
+                template.getType(),
+                template.getFeature()
+        );
+    }
+
+    public boolean isConfigured() {
+        return this.rotation != null;
+    }
+
+    public Result setConditionalRotation(
+            Pair<Integer, Integer> reachableFrom,
+            Rotation rotation
+    ) {
+        this.rotation = rotation;
+
+        if (this.getAccessibleCoordinates().contains(reachableFrom)) return Result.withSuccess();
+
+        this.rotation = null;
+        return Result.withFailure(Result.Failure.INVALID_CHOICE);
     }
 
     /**
