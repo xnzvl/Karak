@@ -1,6 +1,7 @@
 package github.xnzvl.karak;
 
-import github.xnzvl.karak.tiles.Type;
+import github.xnzvl.karak.tiles.Tile;
+import github.xnzvl.karak.tiles.TileTemplate;
 import github.xnzvl.karak.tiles.impl.VariousTile;
 import github.xnzvl.karak.tiles.Rotation;
 import github.xnzvl.karak.tiles.Shape;
@@ -17,7 +18,7 @@ import java.util.stream.Stream;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-class HallTests {
+class TileTests {
     private static final List<Pair<Integer, Integer>> variousCoords = List.of(
             Pair.of(0,0),
             Pair.of(3,7),
@@ -31,10 +32,8 @@ class HallTests {
                 variousCoords.size() * Shape.values().length * Rotation.values().length
         );
         for (var tileShape : Shape.values()) {
-            for (var rotation : Rotation.values()) {
-                for (var coords : variousCoords) {
-                    configs.add(Arguments.of(coords, tileShape, rotation));
-                }
+            for (var template : TileTemplate.values()) {
+                configs.add(Arguments.of(template, tileShape));
             }
         }
         return configs.stream();
@@ -61,16 +60,20 @@ class HallTests {
     @MethodSource("tileConfigurations")
     void getAccessibleCoordinates_allConfigurations_isCorrect(
             Pair<Integer, Integer> coordinates,
-            Shape shape,
-            Rotation rotation
+            TileTemplate template
     ) {
-        VariousTile hall = new VariousTile
-                .Builder(coordinates, shape, Type.HALL)
-                .setRotation(rotation)
-                .build();
+        Tile tile = new VariousTile(coordinates, template);
 
-        var expected = shape.getDoorsTo().stream()
-                .map(directions -> clockwiseShift(directions, rotation.getNumberOfShifts()))
+        var expected = template
+                .getShape()
+                .getDoorsTo()
+                .stream()
+                .map(
+                        directions -> clockwiseShift(
+                                directions,
+                                tile.getRotation().getNumberOfShifts()
+                        )
+                )
                 .map(coords -> Pair.of(
                         coordinates.xValue() + coords.xValue(),
                         coordinates.yValue() + coords.yValue())
@@ -79,7 +82,7 @@ class HallTests {
 
         assertEquals(
                 new HashSet<>(expected),
-                new HashSet<>(hall.getAccessibleCoordinates())
+                new HashSet<>(tile.getAccessibleCoordinates())
         );
     }
 }
