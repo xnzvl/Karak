@@ -1,6 +1,6 @@
 package github.xnzvl.karak.board;
 
-public enum TileTemplate {
+public enum TileTemplate {  // TODO: make templates for each tile (square, etc.)
     ORIGIN (Tile.Type.ROOM, Shape.X, Tile.Feature.FOUNTAIN),
 
     ROOM_X (Tile.Type.ROOM, Shape.X, null),

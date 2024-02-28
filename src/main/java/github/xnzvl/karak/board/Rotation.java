@@ -5,7 +5,7 @@ package github.xnzvl.karak.board;
  *
  * @author Jakub Nezval
  */
-public enum Rotation {
+public enum Rotation {  // TODO: turn into class
     NONE          (0),
     QUARTER       (1),
     HALF          (2),

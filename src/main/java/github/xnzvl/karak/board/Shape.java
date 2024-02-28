@@ -10,7 +10,7 @@ import java.util.List;
  *
  * @author Jakub Nezval
  */
-public enum Shape {
+public enum Shape {  // TODO: turn into class
     I (List.of(Pair.of(0, 1), Pair.of(0, -1))),
     L (List.of(Pair.of(0, 1), Pair.of(1, 0))),
     T (List.of(Pair.of(0, 1), Pair.of(1, 0), Pair.of(0, -1))),
