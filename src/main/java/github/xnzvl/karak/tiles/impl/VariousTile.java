@@ -54,8 +54,9 @@ public class VariousTile implements Tile {
             Pair<Integer, Integer> reachableFrom,
             Rotation rotation
     ) {
-        this.rotation = rotation;  // TODO: error if already configured
+        if (this.rotation != null) return Result.withFailure(Result.Failure.NOT_ALLOWED);
 
+        this.rotation = rotation;
         if (this.getAccessibleCoordinates().contains(reachableFrom)) return Result.withSuccess();
 
         this.rotation = null;
