@@ -1,7 +1,7 @@
 package github.xnzvl.karak.strengthfuls.heroes;
 
 import github.xnzvl.karak.description.DescribedObject;
-import github.xnzvl.karak.board.Board;
+import github.xnzvl.karak.board.impl.square.Board;
 import github.xnzvl.karak.items.Item;
 import github.xnzvl.karak.items.Key;
 import github.xnzvl.karak.items.chests.Chest;
@@ -10,7 +10,6 @@ import github.xnzvl.karak.items.weapons.Weapon;
 import github.xnzvl.karak.players.Picker;
 import github.xnzvl.karak.strengthfuls.Strength;
 import github.xnzvl.karak.strengthfuls.monsters.Monster;
-import github.xnzvl.karak.board.Feature;
 import github.xnzvl.karak.board.Tile;
 import github.xnzvl.karak.utils.Either;
 import github.xnzvl.karak.utils.Holder;
@@ -180,7 +179,7 @@ public class Hero extends DescribedObject implements Strength {
     }
 
     public Result heal() {
-        if (!this.board.getTilesWith(Feature.FOUNTAIN).contains(this.position)) {
+        if (!this.board.getTilesWith(Tile.Feature.FOUNTAIN).contains(this.position)) {
             return Result.withFailure(Result.Failure.NOT_ALLOWED);
         }
 

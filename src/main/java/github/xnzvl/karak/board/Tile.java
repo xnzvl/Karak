@@ -15,22 +15,32 @@ import java.util.Collection;
  *
  * @author Jakub Nezval
  */
-public interface Tile {
-    Pair<Integer, Integer> getCoordinates();
-    Shape getShape();
-    Rotation getRotation();
-    Type getType();
+public abstract class Tile {
+    public enum Feature {
+        FOUNTAIN,
+        PORTAL;
+    }
 
-    Result setConditionalRotation(Pair<Integer, Integer> reachableFrom, Rotation rotation);
+    public enum Type {
+        ROOM,
+        HALL;
+    }
 
-    @Nullable Feature getFeature();
-    @Nullable Either<Monster, Item> getSubject();
+    public abstract Pair<Integer, Integer> getCoordinates();
+    public abstract Shape getShape();
+    public abstract Rotation getRotation();
+    public abstract Type getType();
 
-    void setSubject(@Nullable Either<Monster, Item> roomSubject);
+    public abstract Result setConditionalRotation(Pair<Integer, Integer> reachableFrom, Rotation rotation);
+
+    public abstract @Nullable Feature getFeature();
+    public abstract @Nullable Either<Monster, Item> getSubject();
+
+    public abstract void setSubject(@Nullable Either<Monster, Item> roomSubject);
 
     /**
      * @return {@link Collection} of coordinates that are reachable from this {@link Tile}
      * @see Pair
      */
-    Collection<Pair<Integer, Integer>> getAccessibleCoordinates();
+    public abstract Collection<Pair<Integer, Integer>> getAccessibleCoordinates();
 }

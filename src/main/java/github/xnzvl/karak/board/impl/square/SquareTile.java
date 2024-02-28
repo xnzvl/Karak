@@ -1,13 +1,11 @@
-package github.xnzvl.karak.board.impl;
+package github.xnzvl.karak.board.impl.square;
 
 import github.xnzvl.karak.items.Item;
 import github.xnzvl.karak.strengthfuls.monsters.Monster;
 import github.xnzvl.karak.board.TileTemplate;
 import github.xnzvl.karak.board.Tile;
-import github.xnzvl.karak.board.Feature;
 import github.xnzvl.karak.board.Rotation;
 import github.xnzvl.karak.board.Shape;
-import github.xnzvl.karak.board.Type;
 import github.xnzvl.karak.utils.Either;
 import github.xnzvl.karak.utils.Pair;
 import github.xnzvl.karak.utils.Result;
@@ -21,14 +19,14 @@ import java.util.Collection;
  *
  * @author Jakub Nezval
  */
-public class VariousTile implements Tile {
+public class SquareTile extends Tile {
     private final Pair<Integer, Integer> coordinates;
     private final TileTemplate template;
 
     private @Nullable Either<Monster, Item> subject;
     private Rotation rotation;
 
-    public VariousTile(
+    public SquareTile(
             Pair<Integer, Integer> coordinates,
             TileTemplate template
     ) {
@@ -36,7 +34,7 @@ public class VariousTile implements Tile {
         this.template = template;
     }
 
-    public VariousTile(
+    public SquareTile(
             Pair<Integer, Integer> coordinates,
             TileTemplate template,
             Rotation rotation

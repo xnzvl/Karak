@@ -1,36 +1,36 @@
 package github.xnzvl.karak.board;
 
 public enum TileTemplate {
-    ORIGIN (Type.ROOM, Shape.X, Feature.FOUNTAIN),
+    ORIGIN (Tile.Type.ROOM, Shape.X, Tile.Feature.FOUNTAIN),
 
-    ROOM_X (Type.ROOM, Shape.X, null),
-    ROOM_T (Type.ROOM, Shape.T, null),
-    ROOM_L (Type.ROOM, Shape.L, null),
-    ROOM_I (Type.ROOM, Shape.I, null),
+    ROOM_X (Tile.Type.ROOM, Shape.X, null),
+    ROOM_T (Tile.Type.ROOM, Shape.T, null),
+    ROOM_L (Tile.Type.ROOM, Shape.L, null),
+    ROOM_I (Tile.Type.ROOM, Shape.I, null),
 
-    HALL_X (Type.HALL, Shape.X, null),
-    HALL_T (Type.HALL, Shape.T, null),
-    HALL_L (Type.HALL, Shape.L, null),
-    HALL_I (Type.HALL, Shape.I, null),
+    HALL_X (Tile.Type.HALL, Shape.X, null),
+    HALL_T (Tile.Type.HALL, Shape.T, null),
+    HALL_L (Tile.Type.HALL, Shape.L, null),
+    HALL_I (Tile.Type.HALL, Shape.I, null),
 
-    FOUNTAIN_L (Type.HALL, Shape.L, Feature.FOUNTAIN),
-    PORTAL_I   (Type.HALL, Shape.I, Feature.PORTAL);
+    FOUNTAIN_L (Tile.Type.HALL, Shape.L, Tile.Feature.FOUNTAIN),
+    PORTAL_I   (Tile.Type.HALL, Shape.I, Tile.Feature.PORTAL);
 
-    private final Type type;
+    private final Tile.Type type;
     private final Shape shape;
-    private final Feature feature;
+    private final Tile.Feature feature;
 
     TileTemplate(
-            Type type,
+            Tile.Type type,
             Shape shape,
-            Feature feature
+            Tile.Feature feature
     ) {
         this.type = type;
         this.shape = shape;
         this.feature = feature;
     }
 
-    public Type getType() {
+    public Tile.Type getType() {
         return this.type;
     }
 
@@ -38,7 +38,7 @@ public enum TileTemplate {
         return this.shape;
     }
 
-    public Feature getFeature() {
+    public Tile.Feature getFeature() {
         return this.feature;
     }
 }

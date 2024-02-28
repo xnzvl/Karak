@@ -2,7 +2,7 @@ package github.xnzvl.karak;
 
 import github.xnzvl.karak.board.Tile;
 import github.xnzvl.karak.board.TileTemplate;
-import github.xnzvl.karak.board.impl.VariousTile;
+import github.xnzvl.karak.board.impl.square.SquareTile;
 import github.xnzvl.karak.board.Rotation;
 import github.xnzvl.karak.board.Shape;
 import github.xnzvl.karak.utils.Pair;
@@ -65,7 +65,7 @@ class TileTests {
             TileTemplate template,
             Rotation rotation
     ) {
-        Tile tile = new VariousTile(coordinates, template, rotation);
+        Tile tile = new SquareTile(coordinates, template, rotation);
 
         var expected = template
                 .getShape()

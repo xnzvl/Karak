@@ -1,10 +1,8 @@
-package github.xnzvl.karak.board;
+package github.xnzvl.karak.board.impl.square;
 
 import github.xnzvl.karak.board.Rotation;
-import github.xnzvl.karak.board.TileTemplate;
-import github.xnzvl.karak.board.Feature;
 import github.xnzvl.karak.board.Tile;
-import github.xnzvl.karak.board.impl.VariousTile;
+import github.xnzvl.karak.board.TileTemplate;
 import github.xnzvl.karak.utils.Pair;
 import github.xnzvl.karak.utils.Result;
 
@@ -21,20 +19,22 @@ import java.util.stream.Collectors;
  *
  * @author Jakub Nezval
  */
-public abstract class Board {
+public class Board {  // TODO: rename to SquareBoard and create a Board interface
     private final Map<Pair<Integer, Integer>, Tile> board = new HashMap<>();
 
     private Board() {
         var originCoords = Pair.of(0,0);
-        this.board.put(originCoords, new VariousTile(originCoords, TileTemplate.ORIGIN, Rotation.NONE));
+        this.board.put(originCoords, new SquareTile(originCoords, TileTemplate.ORIGIN, Rotation.NONE));
     }
 
     public Set<Pair<Integer, Integer>> getOccupiedCoordinates() {
         return Collections.unmodifiableSet(this.board.keySet());
     }
 
-    // TODO: javadoc
-    public abstract TileTemplate getNextTileTemplate();
+    public TileTemplate getNextTileTemplate() {
+        // TODO: implementation
+        return null;
+    }
 
     /**
      * @param coordinates coordinates that should be associated with {@link Tile}
@@ -67,13 +67,13 @@ public abstract class Board {
 
     /**
      * Obtain coordinates of existing tiles (at the moment of calling this method)
-     * that have the desired {@link Feature}.
+     * that have the desired {@link Tile.Feature}.
      *
-     * @param feature looking for tiles with this {@link Feature}
+     * @param feature looking for tiles with this {@link Tile.Feature}
      * @return unmodifiable {@link Set} of coordinates with the desired {@link Tile}s
      */
     public Set<Pair<Integer, Integer>> getTilesWith(
-            Feature feature
+            Tile.Feature feature
     ) {
         return this.board.keySet()
                 .stream()
