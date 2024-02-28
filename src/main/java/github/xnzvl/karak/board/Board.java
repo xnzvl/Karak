@@ -1,10 +1,10 @@
-package github.xnzvl.karak.game;
+package github.xnzvl.karak.board;
 
-import github.xnzvl.karak.tiles.Rotation;
-import github.xnzvl.karak.tiles.TileTemplate;
-import github.xnzvl.karak.tiles.Feature;
-import github.xnzvl.karak.tiles.Tile;
-import github.xnzvl.karak.tiles.impl.VariousTile;
+import github.xnzvl.karak.board.Rotation;
+import github.xnzvl.karak.board.TileTemplate;
+import github.xnzvl.karak.board.Feature;
+import github.xnzvl.karak.board.Tile;
+import github.xnzvl.karak.board.impl.VariousTile;
 import github.xnzvl.karak.utils.Pair;
 import github.xnzvl.karak.utils.Result;
 

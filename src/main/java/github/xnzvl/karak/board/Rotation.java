@@ -1,4 +1,4 @@
-package github.xnzvl.karak.tiles;
+package github.xnzvl.karak.board;
 
 /**
  * Enumeration for number of rotations that can {@link Tile} have.

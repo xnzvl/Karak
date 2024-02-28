@@ -1,4 +1,4 @@
-package github.xnzvl.karak.tiles;
+package github.xnzvl.karak.board;
 
 public enum TileTemplate {
     ORIGIN (Type.ROOM, Shape.X, Feature.FOUNTAIN),

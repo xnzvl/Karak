@@ -1,4 +1,4 @@
-package github.xnzvl.karak.tiles;
+package github.xnzvl.karak.board;
 
 import github.xnzvl.karak.utils.Pair;
 

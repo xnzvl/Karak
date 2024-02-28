@@ -1,4 +1,4 @@
-package github.xnzvl.karak.tiles;
+package github.xnzvl.karak.board;
 
 public enum Type {
     ROOM,

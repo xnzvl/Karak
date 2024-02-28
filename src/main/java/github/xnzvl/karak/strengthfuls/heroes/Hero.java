@@ -1,7 +1,7 @@
 package github.xnzvl.karak.strengthfuls.heroes;
 
 import github.xnzvl.karak.description.DescribedObject;
-import github.xnzvl.karak.game.Board;
+import github.xnzvl.karak.board.Board;
 import github.xnzvl.karak.items.Item;
 import github.xnzvl.karak.items.Key;
 import github.xnzvl.karak.items.chests.Chest;
@@ -10,8 +10,8 @@ import github.xnzvl.karak.items.weapons.Weapon;
 import github.xnzvl.karak.players.Picker;
 import github.xnzvl.karak.strengthfuls.Strength;
 import github.xnzvl.karak.strengthfuls.monsters.Monster;
-import github.xnzvl.karak.tiles.Feature;
-import github.xnzvl.karak.tiles.Tile;
+import github.xnzvl.karak.board.Feature;
+import github.xnzvl.karak.board.Tile;
 import github.xnzvl.karak.utils.Either;
 import github.xnzvl.karak.utils.Holder;
 import github.xnzvl.karak.utils.MapUtils;

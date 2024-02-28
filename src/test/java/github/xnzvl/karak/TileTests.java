@@ -1,10 +1,10 @@
 package github.xnzvl.karak;
 
-import github.xnzvl.karak.tiles.Tile;
-import github.xnzvl.karak.tiles.TileTemplate;
-import github.xnzvl.karak.tiles.impl.VariousTile;
-import github.xnzvl.karak.tiles.Rotation;
-import github.xnzvl.karak.tiles.Shape;
+import github.xnzvl.karak.board.Tile;
+import github.xnzvl.karak.board.TileTemplate;
+import github.xnzvl.karak.board.impl.VariousTile;
+import github.xnzvl.karak.board.Rotation;
+import github.xnzvl.karak.board.Shape;
 import github.xnzvl.karak.utils.Pair;
 
 import org.junit.jupiter.params.ParameterizedTest;

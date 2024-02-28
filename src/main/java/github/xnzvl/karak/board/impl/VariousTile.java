@@ -1,13 +1,13 @@
-package github.xnzvl.karak.tiles.impl;
+package github.xnzvl.karak.board.impl;
 
 import github.xnzvl.karak.items.Item;
 import github.xnzvl.karak.strengthfuls.monsters.Monster;
-import github.xnzvl.karak.tiles.TileTemplate;
-import github.xnzvl.karak.tiles.Tile;
-import github.xnzvl.karak.tiles.Feature;
-import github.xnzvl.karak.tiles.Rotation;
-import github.xnzvl.karak.tiles.Shape;
-import github.xnzvl.karak.tiles.Type;
+import github.xnzvl.karak.board.TileTemplate;
+import github.xnzvl.karak.board.Tile;
+import github.xnzvl.karak.board.Feature;
+import github.xnzvl.karak.board.Rotation;
+import github.xnzvl.karak.board.Shape;
+import github.xnzvl.karak.board.Type;
 import github.xnzvl.karak.utils.Either;
 import github.xnzvl.karak.utils.Pair;
 import github.xnzvl.karak.utils.Result;
