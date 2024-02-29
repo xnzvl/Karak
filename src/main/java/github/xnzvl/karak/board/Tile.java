@@ -19,17 +19,31 @@ import java.util.Set;
 public abstract class Tile {
     /**
      * Enumeration of features that can a {@link Tile} have.
+     * Features influence the importance of a {@link Tile} in a game - brings additional possibilities to the table.
      */
     public enum Feature {
+        /**
+         * Provides healing opportunity.
+         */
         FOUNTAIN,
+        /**
+         * Provides additional option of movement - to any other {@link Tile} with this feature.
+         */
         PORTAL;
     }
 
     /**
      * Enumeration of types that can a {@link Tile} have.
+     * Type dictates whether can a {@link Monster} spawn on the {@link Tile}.
      */
     public enum Type {
+        /**
+         * {@link Monster}s spawn here on discovering the {@link Tile}.
+         */
         ROOM,
+        /**
+         * {@link Monster}s never spawn here.
+         */
         HALL;
     }
 
