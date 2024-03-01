@@ -12,17 +12,17 @@ import java.util.Collection;
 import java.util.Set;
 
 /**
- * Abstract class that represents a game tile.
+ * Game tile abstraction.
  *
  * @see Board
  * @author Jakub Nezval
  */
-public abstract class Tile {
+public interface Tile {
     /**
      * Enumeration of features that can a {@link Tile} have.
      * Features influence the importance of a {@link Tile} in a game - brings additional possibilities to the table.
      */
-    public enum Feature {
+    enum Feature {
         /**
          * Provides healing opportunity.
          */
@@ -37,7 +37,7 @@ public abstract class Tile {
      * Enumeration of types that can a {@link Tile} have.
      * Type dictates whether can a {@link Monster} spawn on the {@link Tile}.
      */
-    public enum Type {
+    enum Type {
         /**
          * {@link Monster}s spawn here on discovering the {@link Tile}.
          */
@@ -51,7 +51,7 @@ public abstract class Tile {
     /**
      * Interface for representing a shape.
      */
-    public interface Shape {
+    interface Shape {
         /**
          * @return {@link Collection} of reachable coordinates if the {@link Tile} was on [0, 0] coordinates
          * and {@link Tile#getNumberOfShifts()} = 0.
@@ -59,7 +59,7 @@ public abstract class Tile {
         Collection<Pair<Integer, Integer>> getDefaultReachableCoordinates();
     }
 
-    public abstract Pair<Integer, Integer> getCoordinates();
+    Pair<Integer, Integer> getCoordinates();
 
     /**
      * Together with {@link Tile.Type} forms "appearance" of the {@link Tile}.
@@ -69,7 +69,7 @@ public abstract class Tile {
      * @see Tile#getType()
      * @see Tile.Shape
      */
-    public abstract Tile.Shape getShape();
+    Tile.Shape getShape();
 
     /**
      * Together with {@link Tile.Type} forms "appearance" of the {@link Tile}.
@@ -79,7 +79,7 @@ public abstract class Tile {
      * @see Tile#getShape()
      * @see Tile.Type
      */
-    public abstract Tile.Type getType();
+    Tile.Type getType();
 
     /**
      * Gets number of clockwise-shifts done on this {@link Tile}.
@@ -88,18 +88,18 @@ public abstract class Tile {
      * @return how many times the {@link Tile} was shifted clock-wise
      * @see Tile#getMaxNumberOfShifts()
      */
-    public abstract int getNumberOfShifts();
+    int getNumberOfShifts();
 
     /**
      * @return maximum number of clock-wise shifts possible for this {@link Tile}
      * @see Tile#getNumberOfShifts()
      */
-    public abstract int getMaxNumberOfShifts();
+    int getMaxNumberOfShifts();
 
     /**
      * @return {@link Set} of coordinates that are directly reachable from this {@link Tile}
      */
-    public abstract Set<Pair<Integer, Integer>> getAccessibleCoordinates();
+    Set<Pair<Integer, Integer>> getAccessibleCoordinates();
 
     /**
      * Tries to configure the {@link Tile}. However, the desired `numberOfShifts` might cause an invalid situation.
@@ -110,16 +110,16 @@ public abstract class Tile {
      * @return result
      * @see Result
      */
-    public abstract Result setConditionalRotation(Pair<Integer, Integer> reachableFrom, int numberOfShifts);
+    Result setConditionalRotation(Pair<Integer, Integer> reachableFrom, int numberOfShifts);
 
-    public abstract @Nullable Tile.Feature getFeature();
+    @Nullable Tile.Feature getFeature();
 
-    public abstract @Nullable Either<Monster, Item> getSubject();
-    public abstract void setSubject(@Nullable Either<Monster, Item> roomSubject);
+    @Nullable Either<Monster, Item> getSubject();
+    void setSubject(@Nullable Either<Monster, Item> roomSubject);
 
     /**
      * @return whether the {@link Tile} was rotated - is ready to be put on a {@link Board}
      * @see Board#placeNewTileAt(Pair, Tile)
      */
-    public abstract boolean isConfigured();
+    boolean isConfigured();
 }

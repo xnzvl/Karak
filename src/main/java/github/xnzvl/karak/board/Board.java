@@ -8,7 +8,7 @@ import org.jetbrains.annotations.Nullable;
 import java.util.Set;
 
 /**
- * Interface representing a game board of {@link Tile}s.
+ * Game board of {@link Tile}s abstraction.
  *
  * @author Jakub Nezval
  */
