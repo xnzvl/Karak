@@ -8,6 +8,7 @@ import github.xnzvl.karak.utils.Result;
 
 import org.jetbrains.annotations.Nullable;
 
+import java.util.Collection;
 import java.util.Set;
 
 /**
@@ -47,6 +48,17 @@ public abstract class Tile {
         HALL;
     }
 
+    /**
+     * Interface for representing a shape.
+     */
+    public interface Shape {
+        /**
+         * @return {@link Collection} of reachable coordinates if the {@link Tile} was on [0, 0] coordinates
+         * and {@link Tile#getNumberOfShifts()} = 0.
+         */
+        Collection<Pair<Integer, Integer>> getDefaultReachableCoordinates();
+    }
+
     public abstract Pair<Integer, Integer> getCoordinates();
 
     /**
@@ -57,7 +69,7 @@ public abstract class Tile {
      * @see Tile#getType()
      * @see Tile.Shape
      */
-    public abstract Shape getShape();  // TODO: Shape maybe should be an inner class of Tile
+    public abstract Tile.Shape getShape();
 
     /**
      * Together with {@link Tile.Type} forms "appearance" of the {@link Tile}.
@@ -67,10 +79,14 @@ public abstract class Tile {
      * @see Tile#getShape()
      * @see Tile.Type
      */
-    public abstract Type getType();
+    public abstract Tile.Type getType();
 
     /**
+     * Gets number of clockwise-shifts done on this {@link Tile}.
+     * Returned value is always lower than {@link Tile#getMaxNumberOfShifts()}.
+     *
      * @return how many times the {@link Tile} was shifted clock-wise
+     * @see Tile#getMaxNumberOfShifts()
      */
     public abstract int getNumberOfShifts();
 
@@ -96,7 +112,7 @@ public abstract class Tile {
      */
     public abstract Result setConditionalRotation(Pair<Integer, Integer> reachableFrom, int numberOfShifts);
 
-    public abstract @Nullable Feature getFeature();
+    public abstract @Nullable Tile.Feature getFeature();
 
     public abstract @Nullable Either<Monster, Item> getSubject();
     public abstract void setSubject(@Nullable Either<Monster, Item> roomSubject);
