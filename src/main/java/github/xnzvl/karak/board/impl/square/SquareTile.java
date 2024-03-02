@@ -1,69 +1,40 @@
 package github.xnzvl.karak.board.impl.square;
 
-import github.xnzvl.karak.board.Tile;
-import github.xnzvl.karak.items.Item;
-import github.xnzvl.karak.strengthfuls.monsters.Monster;
-import github.xnzvl.karak.utils.Either;
+import github.xnzvl.karak.board.GeneralTile;
 import github.xnzvl.karak.utils.Pair;
-import github.xnzvl.karak.utils.Result;
 
-import org.jetbrains.annotations.Nullable;
+public class SquareTile extends GeneralTile {
+    private final static int MAXIMUM_NUMBER_OF_SHIFTS = 4;
 
-import java.util.Set;
-
-public class SquareTile implements Tile {
-    @Override
-    public Pair<Integer, Integer> getCoordinates() {
-        return null;
+    public SquareTile(
+            Pair<Integer, Integer> coordinates,
+            Shape shape,
+            Type type,
+            Feature feature
+    ) {
+        super(coordinates, shape, type, feature);
     }
 
     @Override
-    public Shape getShape() {
-        return null;
-    }
+    protected Pair<Integer, Integer> clockwiseShift(
+            Pair<Integer, Integer> coordinates,
+            int numberOfShifts
+    ) {
+        int x = coordinates.xValue();
+        int y = coordinates.yValue();
+        int tmp;
 
-    @Override
-    public Type getType() {
-        return null;
-    }
+        for (int i = 0; i < numberOfShifts; i++) {
+            tmp = x;
+            x = y;
+            y = -tmp;
+        }
 
-    @Override
-    public int getNumberOfShifts() {
-        return 0;
+        return Pair.of(x, y);
     }
 
     @Override
     public int getMaxNumberOfShifts() {
-        return 0;
-    }
-
-    @Override
-    public Set<Pair<Integer, Integer>> getAccessibleCoordinates() {
-        return null;
-    }
-
-    @Override
-    public Result setConditionalRotation(Pair<Integer, Integer> reachableFrom, int numberOfShifts) {
-        return null;
-    }
-
-    @Override
-    public @Nullable Tile.Feature getFeature() {
-        return null;
-    }
-
-    @Override
-    public @Nullable Either<Monster, Item> getSubject() {
-        return null;
-    }
-
-    @Override
-    public void setSubject(@Nullable Either<Monster, Item> roomSubject) {
-
-    }
-
-    @Override
-    public boolean isConfigured() {
-        return false;
+        return MAXIMUM_NUMBER_OF_SHIFTS;
     }
 }

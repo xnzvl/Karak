@@ -84,6 +84,7 @@ public interface Tile {
     /**
      * Gets number of clockwise-shifts done on this {@link Tile}.
      * Returned value is always lower than {@link Tile#getMaxNumberOfShifts()}.
+     * If the {@link Tile} is not {@link Tile#isConfigured()} then 0 is used by default.
      *
      * @return how many times the {@link Tile} was shifted clock-wise
      * @see Tile#getMaxNumberOfShifts()
@@ -106,20 +107,20 @@ public interface Tile {
      * In that case results with a failure.
      *
      * @param reachableFrom coordinates from which the {@link Tile} must be reachable
-     * @param numberOfShifts desired rotation
+     * @param numberOfShifts desired rotation (always lower that {@link Tile#getMaxNumberOfShifts()})
      * @return result
      * @see Result
      */
     Result setConditionalRotation(Pair<Integer, Integer> reachableFrom, int numberOfShifts);
-
-    @Nullable Tile.Feature getFeature();
-
-    @Nullable Either<Monster, Item> getSubject();
-    void setSubject(@Nullable Either<Monster, Item> roomSubject);
 
     /**
      * @return whether the {@link Tile} was rotated - is ready to be put on a {@link Board}
      * @see Board#placeNewTileAt(Pair, Tile)
      */
     boolean isConfigured();
+
+    @Nullable Tile.Feature getFeature();
+
+    @Nullable Either<Monster, Item> getSubject();
+    void setSubject(@Nullable Either<Monster, Item> roomSubject);
 }
