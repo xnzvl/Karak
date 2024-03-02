@@ -11,7 +11,7 @@ import org.jetbrains.annotations.Nullable;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-public abstract class GeneralTile implements Tile {
+public abstract class GeneralTile implements Tile {  // TODO: javadoc
     private final Pair<Integer, Integer> coordinates;
     private final Tile.Shape shape;
     private final Tile.Type type;
@@ -22,7 +22,7 @@ public abstract class GeneralTile implements Tile {
     @Nullable
     private Either<Monster, Item> subject;
 
-    public GeneralTile(
+    public GeneralTile(  // TODO: javadoc
             Pair<Integer, Integer> coordinates,
             Tile.Shape shape,
             Tile.Type type,

@@ -5,7 +5,7 @@ import github.xnzvl.karak.utils.Result;
 
 import org.jetbrains.annotations.Nullable;
 
-import java.util.Set;
+import java.util.Collection;
 
 /**
  * Game board of {@link Tile}s abstraction.
@@ -14,9 +14,9 @@ import java.util.Set;
  */
 public interface Board {
     /**
-     * @return {@link Set} of coordinates that currently contain a {@link Tile}
+     * @return {@link Collection} of coordinates that currently contain a {@link Tile}
      */
-    Set<Pair<Integer, Integer>> getActiveCoordinates();
+    Collection<Pair<Integer, Integer>> getActiveCoordinates();
 
     /**
      * Tries to place a {@link Tile} at given coordinates. Result of the attempt is returned.
@@ -31,7 +31,7 @@ public interface Board {
      * @return new unconfigured {@link Tile} instance
      * @see Tile#isConfigured()
      */
-    Tile getNextTile();  // TODO: Tile interface dependency
+    Tile getNextTile();
 
     /**
      * @param coordinates target coordinates
@@ -41,7 +41,7 @@ public interface Board {
 
     /**
      * @param feature desired {@link Tile.Feature}
-     * @return {@link Set} of {@link Tile}s with the desired {@link Tile.Feature}
+     * @return {@link Collection} of {@link Tile}s with the desired {@link Tile.Feature}
      */
-    Set<Pair<Integer, Integer>> getTilesWith(Tile.Feature feature);
+    Collection<Pair<Integer, Integer>> getTilesWith(Tile.Feature feature);
 }

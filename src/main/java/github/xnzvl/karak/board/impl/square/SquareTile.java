@@ -3,10 +3,10 @@ package github.xnzvl.karak.board.impl.square;
 import github.xnzvl.karak.board.GeneralTile;
 import github.xnzvl.karak.utils.Pair;
 
-public class SquareTile extends GeneralTile {
+public class SquareTile extends GeneralTile {  // TODO: javadoc
     private final static int MAXIMUM_NUMBER_OF_SHIFTS = 4;
 
-    public SquareTile(
+    public SquareTile(  // TODO: javadoc
             Pair<Integer, Integer> coordinates,
             Shape shape,
             Type type,
