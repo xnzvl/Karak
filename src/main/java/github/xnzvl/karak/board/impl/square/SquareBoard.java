@@ -38,11 +38,6 @@ public class SquareBoard implements Board {
     }
 
     @Override
-    public Tile getNextTile() {
-        return null;  // TODO: create random new SquareTile
-    }
-
-    @Override
     public @Nullable Tile getTileAt(
             Pair<Integer, Integer> coordinates
     ) {

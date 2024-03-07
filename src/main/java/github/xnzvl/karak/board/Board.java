@@ -28,12 +28,6 @@ public interface Board {
     Result placeNewTileAt(Pair<Integer, Integer> coordinates, Tile tile);
 
     /**
-     * @return new unconfigured {@link Tile} instance
-     * @see Tile#isConfigured()
-     */
-    Tile getNextTile();
-
-    /**
      * @param coordinates target coordinates
      * @return {@link Tile} on the given coordinates
      */
