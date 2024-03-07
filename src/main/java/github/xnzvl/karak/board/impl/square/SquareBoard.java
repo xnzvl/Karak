@@ -31,6 +31,8 @@ public class SquareBoard implements Board {
             Pair<Integer, Integer> coordinates,
             Tile tile
     ) {
+        assert tile.isConfigured() : "Attempt to place unconfigured tile on board";
+
         if (this.board.containsKey(coordinates)) return Result.withFailure(Result.Failure.INVALID_CHOICE);
 
         this.board.put(coordinates, tile);

@@ -20,6 +20,7 @@ public interface Board {
 
     /**
      * Tries to place a {@link Tile} at given coordinates. Result of the attempt is returned.
+     * The {@link Tile} must be configured according to {@link Tile#isConfigured()}.
      *
      * @param coordinates target coordinates
      * @param tile new {@link Tile}
