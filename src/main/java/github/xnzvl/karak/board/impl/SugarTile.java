@@ -1,5 +1,6 @@
-package github.xnzvl.karak.board;
+package github.xnzvl.karak.board.impl;
 
+import github.xnzvl.karak.board.Tile;
 import github.xnzvl.karak.items.Item;
 import github.xnzvl.karak.strengthfuls.monsters.Monster;
 import github.xnzvl.karak.utils.Either;
@@ -11,7 +12,7 @@ import org.jetbrains.annotations.Nullable;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-public abstract class GeneralTile implements Tile {  // TODO: javadoc
+public abstract class SugarTile implements Tile {  // TODO: javadoc
     private final Pair<Integer, Integer> coordinates;
     private final Tile.Shape shape;
     private final Tile.Type type;
@@ -22,7 +23,7 @@ public abstract class GeneralTile implements Tile {  // TODO: javadoc
     @Nullable
     private Either<Monster, Item> subject;
 
-    public GeneralTile(  // TODO: javadoc
+    public SugarTile(  // TODO: javadoc
             Pair<Integer, Integer> coordinates,
             Tile.Shape shape,
             Tile.Type type,
@@ -46,6 +47,7 @@ public abstract class GeneralTile implements Tile {  // TODO: javadoc
             int numberOfShifts
     );
 
+    // TODO: javadoc
     protected int safeGetNumberOfShifts() {
         return this.numberOfShifts == null ? 0 : numberOfShifts;
     }

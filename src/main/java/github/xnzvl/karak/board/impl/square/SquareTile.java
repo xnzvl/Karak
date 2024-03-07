@@ -1,9 +1,9 @@
 package github.xnzvl.karak.board.impl.square;
 
-import github.xnzvl.karak.board.GeneralTile;
+import github.xnzvl.karak.board.impl.SugarTile;
 import github.xnzvl.karak.utils.Pair;
 
-public class SquareTile extends GeneralTile {  // TODO: javadoc
+public class SquareTile extends SugarTile {  // TODO: javadoc
     private final static int MAXIMUM_NUMBER_OF_SHIFTS = 4;
 
     public SquareTile(  // TODO: javadoc
