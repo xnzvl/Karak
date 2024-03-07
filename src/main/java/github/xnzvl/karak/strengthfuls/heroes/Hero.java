@@ -1,7 +1,8 @@
 package github.xnzvl.karak.strengthfuls.heroes;
 
+import github.xnzvl.karak.board.Board;
+import github.xnzvl.karak.board.TileSpawner;
 import github.xnzvl.karak.description.DescribedObject;
-import github.xnzvl.karak.board.impl.square.Board;
 import github.xnzvl.karak.items.Item;
 import github.xnzvl.karak.items.Key;
 import github.xnzvl.karak.items.chests.Chest;
@@ -32,6 +33,7 @@ public class Hero extends DescribedObject implements Strength {
         private Board board;
         private Holder<Hero> curseHolder;
         private Picker picker;
+        private TileSpawner tileSpawner;
 
         public Params setAllHeroesSupplier(
                 Supplier<List<Hero>> allHeroesSupplier
@@ -61,11 +63,19 @@ public class Hero extends DescribedObject implements Strength {
             return this;
         }
 
+        public Params setTileSpawner(
+                TileSpawner tileSpawner
+        ) {
+            this.tileSpawner = tileSpawner;
+            return this;
+        }
+
         public boolean isComplete() {
             return this.allHeroesSupplier != null
                     & this.board != null
                     & this.curseHolder != null
-                    & this.picker != null;
+                    & this.picker != null
+                    & this.tileSpawner != null;
         }
 
         public Params copy() {
@@ -73,7 +83,8 @@ public class Hero extends DescribedObject implements Strength {
                 .setAllHeroesSupplier(this.allHeroesSupplier)
                 .setBoard(this.board)
                 .setCurseHolder(this.curseHolder)
-                .setPicker(this.picker);
+                .setPicker(this.picker)
+                .setTileSpawner(this.tileSpawner);
         }
     }
 
@@ -87,6 +98,7 @@ public class Hero extends DescribedObject implements Strength {
             Arrays.asList(Slot.values()), null
     );
     private final Picker picker;
+    private final TileSpawner tileSpawner;
 
     private float points = 0;
     private int hitPoints = MAX_HIT_POINTS;
@@ -110,6 +122,7 @@ public class Hero extends DescribedObject implements Strength {
         this.board = paramObject.board;
         this.curseHolder = paramObject.curseHolder;
         this.picker = paramObject.picker;
+        this.tileSpawner = paramObject.tileSpawner;
     }
 
     public void startTurn() {
@@ -324,10 +337,10 @@ public class Hero extends DescribedObject implements Strength {
     }
 
     @Override
-    public boolean equals(
+    public boolean equals(  // TODO: do I need these?
             Object o
     ) {
-        if (this == o) return true;
+        if (this == o) return true;  // this should suffice
         if (o == null || getClass() != o.getClass()) return false;
         Hero hero = (Hero) o;
         return Objects.equals(this.getTitle(), hero.getTitle());
