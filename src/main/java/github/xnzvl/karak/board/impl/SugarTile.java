@@ -75,7 +75,7 @@ public abstract class SugarTile implements Tile {  // TODO: javadoc
             Pair<Integer, Integer> reachableFrom,
             int numberOfShifts
     ) {
-        assert numberOfShifts < this.getMaxNumberOfShifts() : "Input guarantee violated";
+        assert numberOfShifts < this.getMaxNumberOfShifts() : "number of shifts >= max number of shifts";
 
         if (this.numberOfShifts != null) return Result.withFailure(Result.Failure.NOT_ALLOWED);
 
