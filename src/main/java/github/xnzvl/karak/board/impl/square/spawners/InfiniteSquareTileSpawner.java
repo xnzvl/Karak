@@ -1,4 +1,4 @@
-package github.xnzvl.karak.board.impl.square;
+package github.xnzvl.karak.board.impl.square.spawners;
 
 import github.xnzvl.karak.board.Tile;
 import github.xnzvl.karak.board.TileSpawner;
