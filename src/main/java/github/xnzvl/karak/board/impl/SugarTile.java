@@ -2,7 +2,7 @@ package github.xnzvl.karak.board.impl;
 
 import github.xnzvl.karak.board.Tile;
 import github.xnzvl.karak.items.Item;
-import github.xnzvl.karak.strengthfuls.monsters.Monster;
+import github.xnzvl.karak.strengthfuls.Monster;
 import github.xnzvl.karak.utils.Either;
 import github.xnzvl.karak.utils.Pair;
 import github.xnzvl.karak.utils.Result;

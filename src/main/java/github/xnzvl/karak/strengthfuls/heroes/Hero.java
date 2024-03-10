@@ -10,7 +10,7 @@ import github.xnzvl.karak.items.spells.Spell;
 import github.xnzvl.karak.items.weapons.Weapon;
 import github.xnzvl.karak.players.Picker;
 import github.xnzvl.karak.strengthfuls.Strength;
-import github.xnzvl.karak.strengthfuls.monsters.Monster;
+import github.xnzvl.karak.strengthfuls.Monster;
 import github.xnzvl.karak.board.Tile;
 import github.xnzvl.karak.utils.Either;
 import github.xnzvl.karak.utils.Holder;
