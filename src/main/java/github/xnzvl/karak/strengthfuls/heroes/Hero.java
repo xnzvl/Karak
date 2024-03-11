@@ -6,7 +6,7 @@ import github.xnzvl.karak.description.DescribedObject;
 import github.xnzvl.karak.items.Item;
 import github.xnzvl.karak.items.Key;
 import github.xnzvl.karak.items.Weapon;
-import github.xnzvl.karak.items.chests.Chest;
+import github.xnzvl.karak.items.Chest;
 import github.xnzvl.karak.items.spells.Spell;
 import github.xnzvl.karak.players.Picker;
 import github.xnzvl.karak.strengthfuls.Strength;
