@@ -6,10 +6,10 @@ import github.xnzvl.karak.utils.Either;
 import github.xnzvl.karak.utils.Pair;
 import github.xnzvl.karak.utils.Result;
 
-import org.jetbrains.annotations.Nullable;
-
 import java.util.Collection;
 import java.util.Set;
+
+import org.jetbrains.annotations.Nullable;
 
 /**
  * Game tile abstraction.

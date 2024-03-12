@@ -2,9 +2,9 @@ package github.xnzvl.karak.players;
 
 import github.xnzvl.karak.strengthfuls.heroes.Hero;
 
-import org.jetbrains.annotations.Nullable;
-
 import java.util.function.Function;
+
+import org.jetbrains.annotations.Nullable;
 
 /**
  * Class representing a player.

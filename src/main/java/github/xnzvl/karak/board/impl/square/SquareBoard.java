@@ -5,13 +5,13 @@ import github.xnzvl.karak.board.Tile;
 import github.xnzvl.karak.utils.Pair;
 import github.xnzvl.karak.utils.Result;
 
-import org.jetbrains.annotations.Nullable;
-
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
+
+import org.jetbrains.annotations.Nullable;
 
 public class SquareBoard implements Board {
     private final Map<Pair<Integer, Integer>, Tile> board = new HashMap<>();

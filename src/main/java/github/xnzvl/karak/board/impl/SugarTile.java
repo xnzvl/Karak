@@ -7,10 +7,10 @@ import github.xnzvl.karak.utils.Either;
 import github.xnzvl.karak.utils.Pair;
 import github.xnzvl.karak.utils.Result;
 
-import org.jetbrains.annotations.Nullable;
-
 import java.util.Set;
 import java.util.stream.Collectors;
+
+import org.jetbrains.annotations.Nullable;
 
 public abstract class SugarTile implements Tile {  // TODO: javadoc
     private final Pair<Integer, Integer> coordinates;
