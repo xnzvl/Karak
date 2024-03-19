@@ -1,8 +1,5 @@
 package github.xnzvl.karak.items;
 
-import github.xnzvl.karak.items.chests.Chest;
-import github.xnzvl.karak.items.spells.Spell;
-import github.xnzvl.karak.items.weapons.Weapon;
 import github.xnzvl.karak.utils.Either;
 
 import java.util.function.Consumer;

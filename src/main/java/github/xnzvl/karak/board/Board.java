@@ -3,9 +3,9 @@ package github.xnzvl.karak.board;
 import github.xnzvl.karak.utils.Pair;
 import github.xnzvl.karak.utils.Result;
 
-import org.jetbrains.annotations.Nullable;
-
 import java.util.Collection;
+
+import org.jetbrains.annotations.Nullable;
 
 /**
  * Game board of {@link Tile}s abstraction.

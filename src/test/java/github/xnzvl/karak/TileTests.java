@@ -1,12 +1,11 @@
 package github.xnzvl.karak;
 
+import github.xnzvl.karak.board.Rotation;
+import github.xnzvl.karak.board.Shape;
 import github.xnzvl.karak.board.Tile;
 import github.xnzvl.karak.board.TileTemplate;
 import github.xnzvl.karak.board.impl.square.SquareTile;
-import github.xnzvl.karak.board.Rotation;
-import github.xnzvl.karak.board.Shape;
 import github.xnzvl.karak.utils.Pair;
-
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;

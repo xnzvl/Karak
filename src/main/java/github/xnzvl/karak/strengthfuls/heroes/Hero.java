@@ -1,24 +1,22 @@
 package github.xnzvl.karak.strengthfuls.heroes;
 
 import github.xnzvl.karak.board.Board;
+import github.xnzvl.karak.board.Tile;
 import github.xnzvl.karak.board.TileSpawner;
 import github.xnzvl.karak.description.DescribedObject;
+import github.xnzvl.karak.items.Chest;
 import github.xnzvl.karak.items.Item;
 import github.xnzvl.karak.items.Key;
-import github.xnzvl.karak.items.chests.Chest;
-import github.xnzvl.karak.items.spells.Spell;
-import github.xnzvl.karak.items.weapons.Weapon;
+import github.xnzvl.karak.items.Spell;
+import github.xnzvl.karak.items.Weapon;
 import github.xnzvl.karak.players.Picker;
+import github.xnzvl.karak.strengthfuls.Monster;
 import github.xnzvl.karak.strengthfuls.Strength;
-import github.xnzvl.karak.strengthfuls.monsters.Monster;
-import github.xnzvl.karak.board.Tile;
 import github.xnzvl.karak.utils.Either;
 import github.xnzvl.karak.utils.Holder;
 import github.xnzvl.karak.utils.MapUtils;
 import github.xnzvl.karak.utils.Pair;
 import github.xnzvl.karak.utils.Result;
-
-import org.jetbrains.annotations.Nullable;
 
 import java.util.Arrays;
 import java.util.List;
@@ -26,6 +24,8 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.function.Predicate;
 import java.util.function.Supplier;
+
+import org.jetbrains.annotations.Nullable;
 
 public class Hero extends DescribedObject implements Strength {
     public static class Params {
@@ -280,6 +280,12 @@ public class Hero extends DescribedObject implements Strength {
         return Result.withSuccess();
     }
 
+    protected void consumeEffect(
+            Spell.Effect effect
+    ) {
+        // TODO: consumeEffect impl
+    }
+
     protected Result useSpell(
             Slot slot,
             Spell spell
@@ -297,12 +303,7 @@ public class Hero extends DescribedObject implements Strength {
             }
         }
 
-        spell.use(
-                switch (spell.getTarget()) {
-                    case SELF       -> this;
-                    case OTHER_HERO -> this.pickOtherHero();
-                }
-        );
+        spell.getEffects().forEach(this::consumeEffect);
         this.discardSpell(slot);
 
         return Result.withSuccess();
@@ -337,7 +338,7 @@ public class Hero extends DescribedObject implements Strength {
     }
 
     @Override
-    public boolean equals(  // TODO: do I need these?
+    public boolean equals(  // TODO: do I need these? I kinda need only == equality
             Object o
     ) {
         if (this == o) return true;  // this should suffice
