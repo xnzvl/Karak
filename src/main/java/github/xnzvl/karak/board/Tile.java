@@ -72,7 +72,7 @@ public interface Tile {
     Tile.Shape getShape();
 
     /**
-     * Together with {@link Tile.Type} forms "appearance" of the {@link Tile}.
+     * Together with {@link Tile.Shape} forms "appearance" of the {@link Tile}.
      * It also dictates whether a {@link Monster} can spawn on the {@link Tile}.
      *
      * @return type
@@ -99,6 +99,7 @@ public interface Tile {
 
     /**
      * @return {@link Set} of coordinates that are directly reachable from this {@link Tile}
+     *         (unmodifiable)
      */
     Set<Pair<Integer, Integer>> getAccessibleCoordinates();
 
