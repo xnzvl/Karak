@@ -6,8 +6,7 @@ import github.xnzvl.karak.utils.Pair;
 import java.util.Collection;
 import java.util.List;
 
-// TODO: javadoc - SquareShape
-public enum SquareShape implements Tile.Shape {
+public enum SquareLayout implements Tile.Layout { // TODO: javadoc
     X (
             List.of(
                     Pair.of(0, 1),
@@ -38,7 +37,7 @@ public enum SquareShape implements Tile.Shape {
 
     private final Collection<Pair<Integer, Integer>> reachableDirections;
 
-    SquareShape(
+    SquareLayout(
             Collection<Pair<Integer, Integer>> reachableDirections
     ) {
         this.reachableDirections = reachableDirections;

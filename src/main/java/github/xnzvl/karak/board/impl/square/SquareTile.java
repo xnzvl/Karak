@@ -1,18 +1,18 @@
 package github.xnzvl.karak.board.impl.square;
 
-import github.xnzvl.karak.board.impl.SugarTile;
+import github.xnzvl.karak.board.impl.AnyTile;
 import github.xnzvl.karak.utils.Pair;
 
-public class SquareTile extends SugarTile {  // TODO: javadoc
-    private final static int MAXIMUM_NUMBER_OF_SHIFTS = 4;
+import org.jetbrains.annotations.Nullable;
 
+public class SquareTile extends AnyTile {  // TODO: javadoc
     public SquareTile(  // TODO: javadoc
             Pair<Integer, Integer> coordinates,
-            Shape shape,
+            Layout layout,
             Type type,
-            Feature feature
+            @Nullable Feature feature
     ) {
-        super(coordinates, shape, type, feature);
+        super(coordinates, layout, type, feature, Shape.SQUARE);
     }
 
     @Override
@@ -31,10 +31,5 @@ public class SquareTile extends SugarTile {  // TODO: javadoc
         }
 
         return Pair.of(x, y);
-    }
-
-    @Override
-    public int getMaxNumberOfShifts() {
-        return MAXIMUM_NUMBER_OF_SHIFTS;
     }
 }

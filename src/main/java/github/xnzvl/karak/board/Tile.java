@@ -51,7 +51,7 @@ public interface Tile {
     /**
      * Interface for representing a shape.
      */
-    interface Shape {
+    interface Layout {
         /**
          * @return {@link Collection} of reachable coordinates if the {@link Tile} was on [0, 0] coordinates
          * and {@link Tile#getNumberOfShifts()} = 0.
@@ -59,7 +59,36 @@ public interface Tile {
         Collection<Pair<Integer, Integer>> getDefaultReachableCoordinates();
     }
 
+    enum Shape {  // TODO: javadoc
+        SQUARE (4);
+
+        private final int maxNumberOfShifts;
+
+        Shape(
+                int maxNumberOfShifts
+        ) {
+            this.maxNumberOfShifts = maxNumberOfShifts;
+        }
+
+        // TODO: javadoc
+        public int getMaxNumberOfShifts() {
+            return maxNumberOfShifts;
+        }
+    }
+
     Pair<Integer, Integer> getCoordinates();
+
+    @Nullable Tile.Feature getFeature();
+
+    /**
+     * Together with {@link Layout} forms "appearance" of the {@link Tile}.
+     * It also dictates whether a {@link Monster} can spawn on the {@link Tile}.
+     *
+     * @return type
+     * @see Tile#getLayout()
+     * @see Tile.Type
+     */
+    Tile.Type getType();
 
     /**
      * Together with {@link Tile.Type} forms "appearance" of the {@link Tile}.
@@ -67,19 +96,11 @@ public interface Tile {
      *
      * @return shape
      * @see Tile#getType()
-     * @see Tile.Shape
+     * @see Layout
      */
-    Tile.Shape getShape();
+    Tile.Layout getLayout();
 
-    /**
-     * Together with {@link Tile.Shape} forms "appearance" of the {@link Tile}.
-     * It also dictates whether a {@link Monster} can spawn on the {@link Tile}.
-     *
-     * @return type
-     * @see Tile#getShape()
-     * @see Tile.Type
-     */
-    Tile.Type getType();
+    Tile.Shape getShape();
 
     /**
      * Gets number of clockwise-shifts done on this {@link Tile}.
@@ -119,8 +140,6 @@ public interface Tile {
      * @see Board#placeNewTileAt(Pair, Tile)
      */
     boolean isConfigured();
-
-    @Nullable Tile.Feature getFeature();
 
     @Nullable Either<Monster, Item> getSubject();
     void setSubject(@Nullable Either<Monster, Item> roomSubject);

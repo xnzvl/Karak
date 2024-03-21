@@ -12,10 +12,12 @@ import java.util.stream.Collectors;
 
 import org.jetbrains.annotations.Nullable;
 
-public abstract class SugarTile implements Tile {  // TODO: javadoc
+public abstract class AnyTile implements Tile {  // TODO: javadoc
     private final Pair<Integer, Integer> coordinates;
-    private final Tile.Shape shape;
+    private final Layout layout;
     private final Tile.Type type;
+    private final Tile.Shape shape;
+    @Nullable
     private final Tile.Feature feature;
 
     @Nullable
@@ -23,16 +25,18 @@ public abstract class SugarTile implements Tile {  // TODO: javadoc
     @Nullable
     private Either<Monster, Item> subject;
 
-    public SugarTile(  // TODO: javadoc
-            Pair<Integer, Integer> coordinates,
-            Tile.Shape shape,
-            Tile.Type type,
-            Tile.Feature feature
+    public AnyTile(  // TODO: javadoc
+                     Pair<Integer, Integer> coordinates,
+                     Layout layout,
+                     Tile.Type type,
+                     @Nullable Tile.Feature feature,
+                     Tile.Shape shape
     ) {
         this.coordinates = coordinates;
-        this.shape = shape;
+        this.layout = layout;
         this.type = type;
         this.feature = feature;
+        this.shape = shape;
     }
 
     /**
@@ -58,8 +62,13 @@ public abstract class SugarTile implements Tile {  // TODO: javadoc
     }
 
     @Override
+    public int getMaxNumberOfShifts() {
+        return this.shape.getMaxNumberOfShifts();
+    }
+
+    @Override
     public Set<Pair<Integer, Integer>> getAccessibleCoordinates() {
-        return this.getShape()
+        return this.getLayout()
                 .getDefaultReachableCoordinates()
                 .stream()
                 .map(reachable -> clockwiseShift(reachable, this.safeGetNumberOfShifts()))
@@ -92,13 +101,18 @@ public abstract class SugarTile implements Tile {  // TODO: javadoc
     }
 
     @Override
-    public Shape getShape() {
-        return this.shape;
+    public Type getType() {
+        return this.type;
     }
 
     @Override
-    public Type getType() {
-        return this.type;
+    public Layout getLayout() {
+        return this.layout;
+    }
+
+    @Override
+    public Shape getShape() {
+        return this.shape;
     }
 
     @Override

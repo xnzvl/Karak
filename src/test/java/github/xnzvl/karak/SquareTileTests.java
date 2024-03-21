@@ -1,23 +1,22 @@
 package github.xnzvl.karak;
 
-import github.xnzvl.karak.board.Rotation;
-import github.xnzvl.karak.board.Shape;
 import github.xnzvl.karak.board.Tile;
-import github.xnzvl.karak.board.TileTemplate;
+import github.xnzvl.karak.board.impl.square.SquareShape;
 import github.xnzvl.karak.board.impl.square.SquareTile;
 import github.xnzvl.karak.utils.Pair;
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.Arguments;
-import org.junit.jupiter.params.provider.MethodSource;
 
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.stream.Stream;
 
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-class TileTests {
+class SquareTileTests {
     private static final List<Pair<Integer, Integer>> variousCoords = List.of(
             Pair.of(0,0),
             Pair.of(3,7),
@@ -27,16 +26,20 @@ class TileTests {
     );
 
     private static Stream<Arguments> tileConfigurations() {
+        int maxNumberOfShifts = 4;
+
         List<Arguments> configs = new ArrayList<>(
-                variousCoords.size() * Shape.values().length * Rotation.values().length
+                variousCoords.size() * SquareShape.values().length * maxNumberOfShifts
         );
-        for (var coords : TileTests.variousCoords) {
-            for (var template : TileTemplate.values()) {
-                for (var rotation : Rotation.values()) {
-                    configs.add(Arguments.of(coords, template, rotation));
+
+        for (var coords : SquareTileTests.variousCoords) {
+            for (var shape : SquareShape.values()) {
+                for (int shifts = 0; shifts < maxNumberOfShifts; shifts++) {
+                    configs.add(Arguments.of(coords, shape, shifts));
                 }
             }
         }
+
         return configs.stream();
     }
 
@@ -61,19 +64,19 @@ class TileTests {
     @MethodSource("tileConfigurations")
     void getAccessibleCoordinates_allConfigurations_isCorrect(
             Pair<Integer, Integer> coordinates,
-            TileTemplate template,
-            Rotation rotation
+            Tile.Shape shape,
+            int numberOfShifts
     ) {
-        Tile tile = new SquareTile(coordinates, template, rotation);
+        Tile tile = new SquareTile(coordinates, shape, Tile.Type.HALL, null);
 
-        var expected = template
+        var expected = tile
                 .getShape()
-                .getDoorsTo()
+                .getDefaultReachableCoordinates()
                 .stream()
                 .map(
                         directions -> clockwiseShift(
                                 directions,
-                                tile.getRotation().getNumberOfShifts()
+                                tile.getNumberOfShifts()
                         )
                 )
                 .map(coords -> Pair.of(
