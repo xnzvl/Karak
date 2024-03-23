@@ -36,4 +36,8 @@ public class Result {
     public Result.Failure getFailure() {
         return failure;
     }
+
+    public boolean isSuccess() {
+        return this.failure == null;
+    }
 }
