@@ -1,7 +1,7 @@
 package github.xnzvl.karak;
 
 import github.xnzvl.karak.board.Tile;
-import github.xnzvl.karak.board.impl.square.SquareShape;
+import github.xnzvl.karak.board.impl.square.SquareLayout;
 import github.xnzvl.karak.board.impl.square.SquareTile;
 import github.xnzvl.karak.utils.Pair;
 
@@ -15,6 +15,8 @@ import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class SquareTileTests {
     private static final List<Pair<Integer, Integer>> variousCoords = List.of(
@@ -26,14 +28,14 @@ class SquareTileTests {
     );
 
     private static Stream<Arguments> tileConfigurations() {
-        int maxNumberOfShifts = 4;
+        int maxNumberOfShifts = Tile.Shape.SQUARE.getMaxNumberOfShifts();
 
         List<Arguments> configs = new ArrayList<>(
-                variousCoords.size() * SquareShape.values().length * maxNumberOfShifts
+                variousCoords.size() * SquareLayout.values().length * maxNumberOfShifts
         );
 
         for (var coords : SquareTileTests.variousCoords) {
-            for (var shape : SquareShape.values()) {
+            for (var shape : SquareLayout.values()) {
                 for (int shifts = 0; shifts < maxNumberOfShifts; shifts++) {
                     configs.add(Arguments.of(coords, shape, shifts));
                 }
@@ -64,19 +66,19 @@ class SquareTileTests {
     @MethodSource("tileConfigurations")
     void getAccessibleCoordinates_allConfigurations_isCorrect(
             Pair<Integer, Integer> coordinates,
-            Tile.Shape shape,
+            Tile.Layout layout,
             int numberOfShifts
     ) {
-        Tile tile = new SquareTile(coordinates, shape, Tile.Type.HALL, null);
+        Tile tile = new SquareTile(coordinates, layout, Tile.Type.HALL, null);
 
         var expected = tile
-                .getShape()
+                .getLayout()
                 .getDefaultReachableCoordinates()
                 .stream()
                 .map(
                         directions -> clockwiseShift(
                                 directions,
-                                tile.getNumberOfShifts()
+                                numberOfShifts
                         )
                 )
                 .map(coords -> Pair.of(
@@ -84,6 +86,10 @@ class SquareTileTests {
                         coordinates.yValue() + coords.yValue())
                 )
                 .toList();
+        assertFalse(expected.isEmpty());
+
+        var r = tile.setConditionalRotation(expected.getFirst(), numberOfShifts);
+        assertTrue(r.isSuccess());
 
         assertEquals(
                 new HashSet<>(expected),
